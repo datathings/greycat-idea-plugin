@@ -1,0 +1,35 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+  <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+  <id>io.greycat.greycat-plugin</id>
+
+  <!-- Public plugin name should be written in Title Case.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+  <name>GreyCat</name>
+
+  <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+  <vendor email="contact@datathings.com" url="https://datathings.com/">DataThings SA</vendor>
+
+  <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+       Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+       Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+  <description><![CDATA[
+    Leverages GreyCat's LSP server to improve development
+  ]]></description>
+
+  <!-- Product and plugin compatibility requirements.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+  <depends>com.intellij.modules.platform</depends>
+  <depends>com.intellij.modules.ultimate</depends>
+  <depends>NodeJS</depends>
+
+  <!-- Extension points defined by the plugin.
+       Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+  <extensions defaultExtensionNs="com.intellij">
+    <fileType name="GreyCat File" implementationClass="io.greycat.GreyCatFileType" fieldName="INSTANCE" language="GreyCat" extensions="gcl" />
+    <lang.parserDefinition language="GreyCat" implementationClass="io.greycat.language.GreyCatParserDefinition" />
+    <lang.syntaxHighlighterFactory language="GreyCat" implementationClass="io.greycat.language.GreyCatSyntaxHighlighter$Factory" />
+    <lang.foldingBuilder language="GreyCat" implementationClass="io.greycat.language.GreyCatFoldingBuilder" />
+    <platform.lsp.serverSupportProvider implementation="io.greycat.GreyCatLspServerProvider" />
+  </extensions>
+</idea-plugin>

@@ -1,0 +1,34 @@
+// This is a generated file. Not intended for manual editing.
+package io.greycat.language.psi;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.psi.PsiElement;
+
+public interface GreyCatModuleStatement extends PsiElement {
+
+  @Nullable
+  GreyCatEmptyStmt getEmptyStmt();
+
+  @Nullable
+  GreyCatEnumDecl getEnumDecl();
+
+  @Nullable
+  GreyCatFnDecl getFnDecl();
+
+  @Nullable
+  GreyCatPragmaStmt getPragmaStmt();
+
+  @Nullable
+  GreyCatTypeAlias getTypeAlias();
+
+  @Nullable
+  GreyCatTypeDecl getTypeDecl();
+
+  @Nullable
+  GreyCatUseStmt getUseStmt();
+
+  @Nullable
+  GreyCatVarDecl getVarDecl();
+
+}

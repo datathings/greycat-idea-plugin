@@ -1,0 +1,12 @@
+image: oci.datathings.com/greycat/build/java:1.0.9-main
+
+build:
+  script:
+    - export VERSION=`./git2version -s`
+    - echo "${VERSION}"
+    - ./gradlew -Dorg.gradle.project.version=${VERSION} build
+    - ./publish.sh
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - build/distributions/*.zip

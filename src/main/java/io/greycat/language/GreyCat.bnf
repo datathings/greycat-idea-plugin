@@ -1,0 +1,340 @@
+{
+    parserClass="io.greycat.language.parser.GreyCatParser"
+//    parserUtilClass="io.greycat.language.parser.GreyCatParserUtil"
+
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="GreyCat"
+    psiImplClassSuffix="Impl"
+    psiPackage="io.greycat.language.psi"
+    psiImplPackage="io.greycat.language.psi.impl"
+
+    elementTypeHolderClass="io.greycat.language.psi.GreyCatTypes"
+    elementTypeClass="io.greycat.language.psi.GreyCatElementType"
+    tokenTypeClass="io.greycat.language.psi.GreyCatTokenType"
+
+    tokens = [
+        // terminals
+        LPAREN = '('
+        RPAREN = ')'
+        LCURLY = '{'
+        RCURLY = '}'
+        LSQUARE = '['
+        RSQUARE = ']'
+        COMMA = ','
+        DOT_DOT = '..'
+        DOT = '.'
+        CARET = '^'
+        AMP_AMP = '&&'
+        AMP = '&'
+        GT_EQ = '>='
+        GT = '>'
+        LT_EQ = '<='
+        LT = '<'
+        BAR_BAR = '||'
+        BAR = '|'
+        ARROW = '->'
+        AT = '@'
+        SQUOTE = "'"
+        COLON_COLON = '::'
+        COLON = ':'
+        SEMI = ';'
+        DOLLAR = '$'
+        SLASH_EQ = '/='
+        SLASH = '/'
+        SLASH_STAR = '/*'
+        STAR_SLASH = '*/'
+        MINUS_MINUS = '--'
+        MINUS_EQ = '-='
+        MINUS = '-'
+        PLUS_PLUS = '++'
+        PLUS_EQ = '+='
+        PLUS = '+'
+        STAR_EQ = '*='
+        STAR = '*'
+        PERCENT_EQ = '%='
+        PERCENT = '%'
+        EQ_EQ = '=='
+        EQ = '='
+        NOT_EQ = '!='
+        NOT_NOT = '!!'
+        NOT = '!'
+        QUESTION_QUESTION = '??'
+        QUESTION = '?'
+        QUESTION_EQ = '?='
+
+        // keywords (which are also terminals)
+        ABSTRACT_KW   = 'abstract'
+        AS_KW         = 'as'
+        AT_KW         = 'at'
+        BREAK_KW      = 'break'
+        CONTINUE_KW   = 'continue'
+        CATCH_KW      = 'catch'
+        DO_KW         = 'do'
+        ELSE_KW       = 'else'
+        ENUM_KW       = 'enum'
+        FN_KW         = 'fn'
+        FOR_KW        = 'for'
+        IF_KW         = 'if'
+        IN_KW         = 'in'
+        IS_KW         = 'is'
+        LIMIT_KW      = 'limit'
+        NATIVE_KW     = 'native'
+        NULL_KW       = 'null'
+        PRIVATE_KW    = 'private'
+        RETURN_KW     = 'return'
+        SAMPLING_KW   = 'sampling'
+        SKIP_KW       = 'skip'
+        STATIC_KW     = 'static'
+        THIS_KW       = 'this'
+        THROW_KW      = 'throw'
+        TRY_KW        = 'try'
+        TYPE_KW       = 'type'
+        USE_KW        = 'use'
+        VAR_KW        = 'var'
+        WHILE_KW      = 'while'
+        WITHOUT_KW    = 'without'
+        TRUE_KW       = 'true'
+        FALSE_KW      = 'false'
+        EXTENDS_KW    = 'extends'
+        TASK_KW       = 'task'
+        TYPE_OF_KW    = 'typeof'
+
+        T2_ID         = 't2'
+        T2F_ID        = 't2f'
+        T3_ID         = 't3'
+        T3F_ID        = 't3f'
+        STR_ID        = 'str'
+        GEO_ID        = 'geo'
+        DURATION_ID   = 'duration'
+        TIME_ID       = 'time'
+        FLOAT_ID      = 'float'
+        INT_ID        = 'int'
+        NODE_ID       = 'node'
+        NODE_TIME_ID  = 'nodeTime'
+        NODE_LIST_ID  = 'nodeList'
+        NODE_INDEX_ID = 'nodeIndex'
+        NODE_GEO_ID   = 'nodeGeo'
+
+        D_US  = 'us'
+        D_MS  = 'ms'
+        D_S   = 's'
+        D_MIN = 'min'
+        D_HR  = 'hour'
+        D_DAY = 'day'
+
+        // non-terminals
+        IDENTIFIER = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
+        WHITE_SPACE = 'regexp:\s+'
+        STRING = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\")"
+        NUMBER='regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
+        LINE_COMMENT='regexp://[^\r\n]*'
+        BLOCK_COMMENT='regexp:/\*(.|\n)*\*/'
+    ]
+}
+
+GreyCat ::= ModuleStatement*
+BuiltInType ::= INT_ID|FLOAT_ID|TIME_ID|GEO_ID|DURATION_ID|T2_ID|T2F_ID|T3_ID|T3F_ID|STR_ID|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID
+NumAppendix ::= D_US|D_MS|D_S|D_MIN|D_HR|D_DAY|'f'|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID|TIME_ID
+ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | TypeAlias | VarDecl | EmptyStmt
+
+FnIdent ::= IDENTIFIER
+TypeIdent ::= TYPE_OF_KW? (IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? COLON_COLON)? IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? QUESTION?
+EnumIdent ::= IDENTIFIER
+AttrIdent ::= IdentOrKeyword
+MethodIdent ::= IdentOrKeyword
+
+EmptyStmt ::= SEMI
+
+PragmaStmt ::= Pragma SEMI
+Pragma ::= PragmaIdent PragmaArgs?
+PragmaIdent ::= AT IdentOrKeyword
+PragmaArgs ::= LPAREN Literal (COMMA Literal)* RPAREN
+
+UseStmt ::= USE_KW IDENTIFIER SEMI
+          | USE_KW IDENTIFIER COLON_COLON IDENTIFIER (AS_KW IDENTIFIER)? SEMI
+          | USE_KW IDENTIFIER WITHOUT_KW IDENTIFIER (COMMA IDENTIFIER)* SEMI
+
+Pragmas ::= Pragma+
+
+FnOrTask ::= FN_KW | TASK_KW
+FnDecl ::= Pragmas? Flags? FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+FnParams ::= FnParam (COMMA FnParam)* COMMA?
+FnParam ::= Pragmas? FnParamIdent TypeSpec
+FnParamIdent ::= IdentOrKeyword
+// We accept "more" than what is valid because it will be the role of the analysis
+// to report the errors (if any)
+Flags ::= PRIVATE_KW? ABSTRACT_KW? STATIC_KW? NATIVE_KW?
+
+TypeDecl ::= Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeFields? RCURLY
+GenericParams ::= LT TypeSpecifier (COMMA TypeSpecifier)* GT
+TypeExtends ::= EXTENDS_KW TypeSpecifier
+TypeFields ::= (TypeAttr | TypeMethod)*
+TypeAttr ::= Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
+TypeMethod ::= Pragmas? Flags? FnOrTask MethodIdent LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+
+EnumDecl ::= Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField SEMI)* RCURLY
+EnumField ::= EnumFieldIdent (LPAREN Literal RPAREN)?
+EnumFieldIdent ::= IdentOrKeyword
+
+TypeAlias ::= TypeSpecifier (BAR TypeSpecifier)* SEMI
+
+Block ::= LCURLY Statement* RCURLY
+
+Statement ::=
+    VarDecl
+    | ReturnStmt
+    | TryStmt
+    | ThrowStmt
+    | IfStmt
+    | WhileStmt
+    | DoWhileStmt
+    | ForStmt
+    | ForInStmt
+    | BreakStmt
+    | ContinueStmt
+    | AtStmt
+    | ExprStmt
+    | BlockStmt
+    | EmptyStmt
+
+VarDecl ::= Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
+VarDeclIdent ::= IDENTIFIER
+
+ReturnStmt ::= RETURN_KW Expression? SEMI
+
+TryStmt ::= TRY_KW Block CatchStmt
+CatchStmt ::= CATCH_KW (LPAREN IDENTIFIER RPAREN)? Block
+
+ThrowStmt ::= THROW_KW Expression SEMI
+
+IfStmt ::= IF_KW LPAREN Expression RPAREN Block ElseStmt?
+ElseStmt ::= ELSE_KW (Block | IfStmt)
+
+Initializer ::= EQ Expression
+
+// no need to handle precedence here, we just want the grammar to know about the different operators
+Expression ::= PostfixExpr (BinOp PostfixExpr | (AS_KW | IS_KW) TypeSpecifier)*
+PostfixExpr ::= PrefixExpr (PLUS_PLUS | MINUS_MINUS)?
+
+BinOp ::=
+    BAR_BAR | QUESTION_QUESTION // or
+    | AMP_AMP                   // and
+    | EQ_EQ | NOT_EQ            // equality
+    | LT | GT | LT_EQ | GT_EQ   // relative
+    | PLUS | MINUS              // additive
+    | STAR | SLASH | PERCENT    // multiplicative
+    | CARET                     // power
+    | EQ | QUESTION_EQ          // assign
+
+PrefixExpr ::= (NOT | STAR | PLUS | MINUS | PLUS_PLUS | MINUS_MINUS)? CallExpr
+
+CallExpr ::= PrimaryExpr CallExprSpec*
+CallExprSpec ::= CallArgs | StaticAccess | PropAccess | OffsetAccess | NOT_NOT
+// CallArgs is the only one that do not allow for optional-chaining construct
+// even though it might seem natural that we do allow it because every other
+// callExprSpec do
+CallArgs ::= LPAREN Arguments? RPAREN
+Arguments ::= Expression (COMMA Expression)* COMMA?
+PropAccess ::= QUESTION? (DOT | ARROW) IdentOrKeyword
+OffsetAccess ::= QUESTION? LSQUARE Expression RSQUARE
+
+StaticAccess ::= COLON_COLON (TypeSpecifier COLON_COLON)? StaticPropIdent
+StaticPropIdent ::= IdentOrKeyword | STRING
+
+WhileStmt ::= WHILE_KW LPAREN Expression RPAREN Block
+DoWhileStmt ::= DO_KW Block WHILE_KW LPAREN Expression RPAREN SEMI
+
+ForExpr ::= Expression QUESTION? RangeAccess?
+RangeAccess ::= (LSQUARE|RSQUARE) Expression? DOT_DOT Expression? (LSQUARE|RSQUARE)
+
+ForStmt ::= FOR_KW LPAREN VarDecl ExprStmt ForExpr RPAREN Block
+ForInStmt ::= FOR_KW LPAREN ForInParams IN_KW ForExpr ForInSampling? ForInSkip? ForInLimit? RPAREN Block
+ForInParams ::= ForInParam (COMMA ForInParam)*
+ForInParam ::= FnParam | IDENTIFIER
+ForInSampling ::= SAMPLING_KW Expression
+ForInSkip ::= SKIP_KW Expression
+ForInLimit ::= LIMIT_KW Expression
+
+BreakStmt ::= BREAK_KW SEMI
+ContinueStmt ::= CONTINUE_KW SEMI
+
+AtStmt ::= AT_KW LPAREN Expression RPAREN Block
+
+ExprStmt ::= Expression SEMI
+
+BlockStmt ::= Block SEMI?
+
+PrimaryExpr ::=
+    Literal
+    | FnExpr
+    | TupleExpr
+    | OneFieldObj
+    | TwoFieldsObj
+    | ThreeFieldsObj
+    | ArrayExpr
+    | TableExpr
+    | ParenExpr
+    | ObjectExpr
+    | IDENTIFIER
+
+ParenExpr ::= LPAREN Expression RPAREN
+
+ObjectExpr ::= TypeIdent? LCURLY ObjectProps? RCURLY
+ObjectProps ::= ObjectProp (COMMA ObjectProp)* COMMA?
+ObjectProp ::= ObjectPropIdent COLON Expression
+ObjectPropIdent ::= IdentOrKeyword
+
+ArrayExpr ::= ShortArrayExpr | ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY)
+ShortArrayExpr ::= LSQUARE Arguments? RSQUARE
+FnExpr ::= FN_KW LPAREN FnParams? RPAREN Block
+TupleExpr ::= LPAREN Expression COMMA Expression RPAREN
+TableExpr ::= TypeIdent LCURLY TableExprRows? RCURLY
+TableExprRows ::= ShortArrayExpr (COMMA ShortArrayExpr)* COMMA?
+OneFieldObj ::= TypeIdent LCURLY Expression? RCURLY
+TwoFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression RCURLY
+ThreeFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA Expression RCURLY
+
+TypeSpec ::= COLON TypeSpecifier
+TypeSpecifier ::= (IDENTIFIER COLON_COLON)? (BuiltInType | IDENTIFIER) (LT TypeSpecList GT)? QUESTION?
+TypeSpecList ::= TypeSpecifier (COMMA TypeSpecifier)*
+
+IdentOrKeyword ::=
+    ABSTRACT_KW
+    | AS_KW
+    | AT_KW
+    | BREAK_KW
+    | CATCH_KW
+    | DO_KW
+    | ELSE_KW
+    | ENUM_KW
+    | FN_KW
+    | FOR_KW
+    | IF_KW
+    | IN_KW
+    | IS_KW
+    | LIMIT_KW
+    | NATIVE_KW
+    | NULL_KW
+    | PRIVATE_KW
+    | RETURN_KW
+    | SAMPLING_KW
+    | SKIP_KW
+    | STATIC_KW
+    | THIS_KW
+    | THROW_KW
+    | TRY_KW
+    | TASK_KW
+    | TYPE_KW
+    | USE_KW
+    | VAR_KW
+    | WHILE_KW
+    | WITHOUT_KW
+    | BuiltInType
+    | NumAppendix
+    | IDENTIFIER
+
+Literal ::= StringLit | (PLUS|MINUS)? NUMBER NumAppendix? | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
+StringLit ::= TemplateString | STRING
+TemplateString ::= ENTER_TEMPLATE (RAW_STRING | Interpolation)* EXIT_TEMPLATE
+Interpolation ::= ENTER_INTERPOLATION Expression? EXIT_INTERPOLATION
