@@ -4,8 +4,14 @@ build:
   script:
     - export VERSION=`git2version -s`
     - echo "${VERSION}"
-    - ./gradlew -Dorg.gradle.project.version=${VERSION} build
+    - ./gradlew -Dorg.gradle.project.version=${VERSION} --build-cache build
     - ./publish.sh
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - build
+      - .gradle
   artifacts:
     expire_in: 1 month
     paths:
