@@ -11,6 +11,7 @@ build:
     policy: push
     paths:
       - build
+      - gradle
       - .gradle
   artifacts:
     expire_in: 1 month
