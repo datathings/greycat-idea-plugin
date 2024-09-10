@@ -1,4 +1,4 @@
-# Relevant doc:
+# Relevant links:
 
 - [JetBrains IDE Plugin Tutorial](https://plugins.jetbrains.com/docs/intellij/custom-language-support-tutorial.html)
   - [Run BNF Parser Generator](https://plugins.jetbrains.com/docs/intellij/grammar-and-parser.html#generate-a-parser)
