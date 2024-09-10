@@ -10,14 +10,17 @@ public interface GreyCatTypeMethod extends PsiElement {
   @Nullable
   GreyCatBlock getBlock();
 
-  @Nullable
-  GreyCatFlags getFlags();
+  @NotNull
+  List<GreyCatFlags> getFlagsList();
 
   @NotNull
   GreyCatFnOrTask getFnOrTask();
 
   @Nullable
   GreyCatFnParams getFnParams();
+
+  @Nullable
+  GreyCatGenericParams getGenericParams();
 
   @NotNull
   GreyCatMethodIdent getMethodIdent();

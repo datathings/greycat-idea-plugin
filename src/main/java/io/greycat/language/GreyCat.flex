@@ -130,6 +130,7 @@ MULTI_LINE_COMMENT_END        = "*/"
 <YYINITIAL, IN_INTERPOLATION> "throw"       { return THROW_KW; }
 <YYINITIAL, IN_INTERPOLATION> "try"         { return TRY_KW; }
 <YYINITIAL, IN_INTERPOLATION> "type"        { return TYPE_KW; }
+<YYINITIAL, IN_INTERPOLATION> "typeof"      { return TYPE_OF_KW; }
 <YYINITIAL, IN_INTERPOLATION> "use"         { return USE_KW; }
 <YYINITIAL, IN_INTERPOLATION> "var"         { return VAR_KW; }
 <YYINITIAL, IN_INTERPOLATION> "while"       { return WHILE_KW; }

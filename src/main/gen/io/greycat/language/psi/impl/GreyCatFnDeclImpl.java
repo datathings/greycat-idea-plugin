@@ -34,9 +34,9 @@ public class GreyCatFnDeclImpl extends ASTWrapperPsiElement implements GreyCatFn
   }
 
   @Override
-  @Nullable
-  public GreyCatFlags getFlags() {
-    return findChildByClass(GreyCatFlags.class);
+  @NotNull
+  public List<GreyCatFlags> getFlagsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatFlags.class);
   }
 
   @Override

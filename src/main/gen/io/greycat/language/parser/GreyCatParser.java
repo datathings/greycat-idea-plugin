@@ -597,49 +597,21 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PRIVATE_KW? ABSTRACT_KW? STATIC_KW? NATIVE_KW?
+  // PRIVATE_KW | ABSTRACT_KW | STATIC_KW | NATIVE_KW
   public static boolean Flags(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Flags")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, FLAGS, "<flags>");
-    r = Flags_0(b, l + 1);
-    r = r && Flags_1(b, l + 1);
-    r = r && Flags_2(b, l + 1);
-    r = r && Flags_3(b, l + 1);
+    r = consumeToken(b, PRIVATE_KW);
+    if (!r) r = consumeToken(b, ABSTRACT_KW);
+    if (!r) r = consumeToken(b, STATIC_KW);
+    if (!r) r = consumeToken(b, NATIVE_KW);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // PRIVATE_KW?
-  private static boolean Flags_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Flags_0")) return false;
-    consumeToken(b, PRIVATE_KW);
-    return true;
-  }
-
-  // ABSTRACT_KW?
-  private static boolean Flags_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Flags_1")) return false;
-    consumeToken(b, ABSTRACT_KW);
-    return true;
-  }
-
-  // STATIC_KW?
-  private static boolean Flags_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Flags_2")) return false;
-    consumeToken(b, STATIC_KW);
-    return true;
-  }
-
-  // NATIVE_KW?
-  private static boolean Flags_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Flags_3")) return false;
-    consumeToken(b, NATIVE_KW);
-    return true;
-  }
-
   /* ********************************************************** */
-  // Pragmas? Flags? FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+  // Pragmas? Flags* FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
   public static boolean FnDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FnDecl")) return false;
     boolean r;
@@ -665,10 +637,14 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // Flags?
+  // Flags*
   private static boolean FnDecl_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FnDecl_1")) return false;
-    Flags(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!Flags(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "FnDecl_1", c)) break;
+    }
     return true;
   }
 
@@ -2320,7 +2296,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Pragmas? Flags? FnOrTask MethodIdent LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+  // Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
   public static boolean TypeMethod(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeMethod")) return false;
     boolean r;
@@ -2329,11 +2305,12 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     r = r && TypeMethod_1(b, l + 1);
     r = r && FnOrTask(b, l + 1);
     r = r && MethodIdent(b, l + 1);
+    r = r && TypeMethod_4(b, l + 1);
     r = r && consumeToken(b, LPAREN);
-    r = r && TypeMethod_5(b, l + 1);
+    r = r && TypeMethod_6(b, l + 1);
     r = r && consumeToken(b, RPAREN);
-    r = r && TypeMethod_7(b, l + 1);
     r = r && TypeMethod_8(b, l + 1);
+    r = r && TypeMethod_9(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -2345,30 +2322,41 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // Flags?
+  // Flags*
   private static boolean TypeMethod_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeMethod_1")) return false;
-    Flags(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!Flags(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "TypeMethod_1", c)) break;
+    }
+    return true;
+  }
+
+  // GenericParams?
+  private static boolean TypeMethod_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeMethod_4")) return false;
+    GenericParams(b, l + 1);
     return true;
   }
 
   // FnParams?
-  private static boolean TypeMethod_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeMethod_5")) return false;
+  private static boolean TypeMethod_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeMethod_6")) return false;
     FnParams(b, l + 1);
     return true;
   }
 
   // TypeSpec?
-  private static boolean TypeMethod_7(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeMethod_7")) return false;
+  private static boolean TypeMethod_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeMethod_8")) return false;
     TypeSpec(b, l + 1);
     return true;
   }
 
   // Block | SEMI
-  private static boolean TypeMethod_8(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeMethod_8")) return false;
+  private static boolean TypeMethod_9(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeMethod_9")) return false;
     boolean r;
     r = Block(b, l + 1);
     if (!r) r = consumeToken(b, SEMI);
@@ -2423,55 +2411,55 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (IDENTIFIER COLON_COLON)? (BuiltInType | IDENTIFIER) (LT TypeSpecList GT)? QUESTION?
+  // TYPE_OF_KW? (IdentOrKeyword COLON_COLON)? IdentOrKeyword (LT TypeSpecList GT)? QUESTION?
   public static boolean TypeSpecifier(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeSpecifier")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, TYPE_SPECIFIER, "<type specifier>");
     r = TypeSpecifier_0(b, l + 1);
     r = r && TypeSpecifier_1(b, l + 1);
-    r = r && TypeSpecifier_2(b, l + 1);
+    r = r && IdentOrKeyword(b, l + 1);
     r = r && TypeSpecifier_3(b, l + 1);
+    r = r && TypeSpecifier_4(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // (IDENTIFIER COLON_COLON)?
+  // TYPE_OF_KW?
   private static boolean TypeSpecifier_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeSpecifier_0")) return false;
-    TypeSpecifier_0_0(b, l + 1);
+    consumeToken(b, TYPE_OF_KW);
     return true;
   }
 
-  // IDENTIFIER COLON_COLON
-  private static boolean TypeSpecifier_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeSpecifier_0_0")) return false;
+  // (IdentOrKeyword COLON_COLON)?
+  private static boolean TypeSpecifier_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeSpecifier_1")) return false;
+    TypeSpecifier_1_0(b, l + 1);
+    return true;
+  }
+
+  // IdentOrKeyword COLON_COLON
+  private static boolean TypeSpecifier_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeSpecifier_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeTokens(b, 0, IDENTIFIER, COLON_COLON);
+    r = IdentOrKeyword(b, l + 1);
+    r = r && consumeToken(b, COLON_COLON);
     exit_section_(b, m, null, r);
     return r;
   }
 
-  // BuiltInType | IDENTIFIER
-  private static boolean TypeSpecifier_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeSpecifier_1")) return false;
-    boolean r;
-    r = BuiltInType(b, l + 1);
-    if (!r) r = consumeToken(b, IDENTIFIER);
-    return r;
-  }
-
   // (LT TypeSpecList GT)?
-  private static boolean TypeSpecifier_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeSpecifier_2")) return false;
-    TypeSpecifier_2_0(b, l + 1);
+  private static boolean TypeSpecifier_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeSpecifier_3")) return false;
+    TypeSpecifier_3_0(b, l + 1);
     return true;
   }
 
   // LT TypeSpecList GT
-  private static boolean TypeSpecifier_2_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeSpecifier_2_0")) return false;
+  private static boolean TypeSpecifier_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeSpecifier_3_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LT);
@@ -2482,8 +2470,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   // QUESTION?
-  private static boolean TypeSpecifier_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeSpecifier_3")) return false;
+  private static boolean TypeSpecifier_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeSpecifier_4")) return false;
     consumeToken(b, QUESTION);
     return true;
   }

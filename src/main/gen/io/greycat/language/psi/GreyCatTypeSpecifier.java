@@ -7,8 +7,8 @@ import com.intellij.psi.PsiElement;
 
 public interface GreyCatTypeSpecifier extends PsiElement {
 
-  @Nullable
-  GreyCatBuiltInType getBuiltInType();
+  @NotNull
+  List<GreyCatIdentOrKeyword> getIdentOrKeywordList();
 
   @Nullable
   GreyCatTypeSpecList getTypeSpecList();

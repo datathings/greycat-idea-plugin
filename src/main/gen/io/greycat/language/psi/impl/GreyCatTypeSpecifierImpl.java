@@ -28,9 +28,9 @@ public class GreyCatTypeSpecifierImpl extends ASTWrapperPsiElement implements Gr
   }
 
   @Override
-  @Nullable
-  public GreyCatBuiltInType getBuiltInType() {
-    return findChildByClass(GreyCatBuiltInType.class);
+  @NotNull
+  public List<GreyCatIdentOrKeyword> getIdentOrKeywordList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatIdentOrKeyword.class);
   }
 
   @Override

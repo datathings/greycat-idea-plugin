@@ -34,9 +34,9 @@ public class GreyCatTypeMethodImpl extends ASTWrapperPsiElement implements GreyC
   }
 
   @Override
-  @Nullable
-  public GreyCatFlags getFlags() {
-    return findChildByClass(GreyCatFlags.class);
+  @NotNull
+  public List<GreyCatFlags> getFlagsList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatFlags.class);
   }
 
   @Override
@@ -49,6 +49,12 @@ public class GreyCatTypeMethodImpl extends ASTWrapperPsiElement implements GreyC
   @Nullable
   public GreyCatFnParams getFnParams() {
     return findChildByClass(GreyCatFnParams.class);
+  }
+
+  @Override
+  @Nullable
+  public GreyCatGenericParams getGenericParams() {
+    return findChildByClass(GreyCatGenericParams.class);
   }
 
   @Override

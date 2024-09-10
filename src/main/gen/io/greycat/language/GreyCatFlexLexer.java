@@ -125,12 +125,12 @@ public class GreyCatFlexLexer implements FlexLexer {
     "\5\0\4\32\1\113\1\114\4\32\1\115\3\32\1\116"+
     "\1\32\1\117\1\120\1\32\1\121\1\122\2\32\2\0"+
     "\1\32\1\123\1\124\2\32\1\125\1\126\5\32\1\127"+
-    "\1\130\1\32\1\0\3\32\1\131\1\32\1\132\1\32"+
-    "\1\133\1\32\1\0\2\32\1\134\1\135\1\32\1\136"+
-    "\1\137\1\140\1\141";
+    "\1\32\1\130\1\32\1\0\3\32\1\131\1\32\1\132"+
+    "\1\32\1\133\1\134\1\32\1\0\2\32\1\135\1\136"+
+    "\1\32\1\137\1\140\1\141\1\142";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[245];
+    int [] result = new int[247];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -180,15 +180,15 @@ public class GreyCatFlexLexer implements FlexLexer {
     "\0\u056a\0\u1f74\0\u1fb6\0\u0108\0\u1ff8\0\u203a\0\u207c\0\u20be"+
     "\0\u2100\0\u2142\0\u2184\0\u21c6\0\u2208\0\u056a\0\u056a\0\u224a"+
     "\0\u228c\0\u22ce\0\u2310\0\u056a\0\u2352\0\u2394\0\u23d6\0\u056a"+
-    "\0\u2418\0\u056a\0\u056a\0\u245a\0\u056a\0\u056a\0\u249c\0\u24de"+
-    "\0\u2520\0\u2562\0\u25a4\0\u056a\0\u056a\0\u25e6\0\u2628\0\u056a"+
-    "\0\u056a\0\u266a\0\u26ac\0\u26ee\0\u2730\0\u2772\0\u056a\0\u056a"+
-    "\0\u27b4\0\u27f6\0\u2838\0\u287a\0\u28bc\0\u056a\0\u28fe\0\u056a"+
-    "\0\u2940\0\u056a\0\u2982\0\u29c4\0\u2a06\0\u2a48\0\u056a\0\u056a"+
-    "\0\u2a8a\0\u056a\0\u056a\0\u056a\0\u056a";
+    "\0\u2418\0\u056a\0\u056a\0\u245a\0\u056a\0\u249c\0\u24de\0\u2520"+
+    "\0\u2562\0\u25a4\0\u25e6\0\u056a\0\u056a\0\u2628\0\u266a\0\u056a"+
+    "\0\u056a\0\u26ac\0\u26ee\0\u2730\0\u2772\0\u27b4\0\u056a\0\u27f6"+
+    "\0\u056a\0\u2838\0\u287a\0\u28bc\0\u28fe\0\u2940\0\u056a\0\u2982"+
+    "\0\u056a\0\u29c4\0\u056a\0\u056a\0\u2a06\0\u2a48\0\u2a8a\0\u2acc"+
+    "\0\u056a\0\u056a\0\u2b0e\0\u056a\0\u056a\0\u056a\0\u056a";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[245];
+    int [] result = new int[247];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -341,30 +341,32 @@ public class GreyCatFlexLexer implements FlexLexer {
     "\4\0\13\35\1\335\14\35\26\0\7\35\7\0\2\35"+
     "\4\0\11\35\1\336\16\35\26\0\7\35\7\0\2\35"+
     "\4\0\25\35\1\337\2\35\26\0\7\35\7\0\2\35"+
-    "\4\0\5\35\1\340\22\35\26\0\7\35\7\0\2\35"+
-    "\4\0\16\35\1\341\11\35\74\0\1\342\67\0\1\130"+
-    "\45\0\7\35\7\0\2\35\4\0\1\35\1\343\26\35"+
-    "\26\0\7\35\7\0\2\35\4\0\15\35\1\344\12\35"+
-    "\26\0\7\35\7\0\2\35\4\0\4\35\1\345\23\35"+
-    "\26\0\7\35\7\0\2\35\4\0\5\35\1\346\22\35"+
-    "\26\0\7\35\7\0\2\35\4\0\22\35\1\347\5\35"+
-    "\26\0\7\35\7\0\2\35\4\0\15\35\1\350\12\35"+
-    "\26\0\7\35\7\0\2\35\4\0\11\35\1\351\16\35"+
-    "\26\0\7\35\7\0\2\35\4\0\3\35\1\352\24\35"+
-    "\26\0\7\35\7\0\2\35\4\0\23\35\1\353\4\35"+
-    "\63\0\1\354\44\0\7\35\7\0\2\35\4\0\3\35"+
-    "\1\355\24\35\26\0\7\35\7\0\2\35\4\0\23\35"+
-    "\1\356\4\35\26\0\7\35\7\0\2\35\4\0\21\35"+
-    "\1\357\6\35\26\0\7\35\7\0\2\35\4\0\5\35"+
-    "\1\360\22\35\26\0\7\35\7\0\2\35\4\0\15\35"+
-    "\1\361\12\35\26\0\7\35\7\0\2\35\4\0\22\35"+
-    "\1\362\5\35\70\0\1\224\37\0\7\35\7\0\2\35"+
-    "\4\0\22\35\1\363\5\35\26\0\7\35\7\0\2\35"+
-    "\4\0\5\35\1\364\22\35\26\0\7\35\7\0\2\35"+
-    "\4\0\7\35\1\365\20\35\4\0";
+    "\4\0\16\35\1\340\11\35\26\0\7\35\7\0\2\35"+
+    "\4\0\5\35\1\341\22\35\26\0\7\35\7\0\2\35"+
+    "\4\0\16\35\1\342\11\35\74\0\1\343\67\0\1\130"+
+    "\45\0\7\35\7\0\2\35\4\0\1\35\1\344\26\35"+
+    "\26\0\7\35\7\0\2\35\4\0\15\35\1\345\12\35"+
+    "\26\0\7\35\7\0\2\35\4\0\4\35\1\346\23\35"+
+    "\26\0\7\35\7\0\2\35\4\0\5\35\1\347\22\35"+
+    "\26\0\7\35\7\0\2\35\4\0\22\35\1\350\5\35"+
+    "\26\0\7\35\7\0\2\35\4\0\15\35\1\351\12\35"+
+    "\26\0\7\35\7\0\2\35\4\0\11\35\1\352\16\35"+
+    "\26\0\7\35\7\0\2\35\4\0\3\35\1\353\24\35"+
+    "\26\0\7\35\7\0\2\35\4\0\6\35\1\354\21\35"+
+    "\26\0\7\35\7\0\2\35\4\0\23\35\1\355\4\35"+
+    "\63\0\1\356\44\0\7\35\7\0\2\35\4\0\3\35"+
+    "\1\357\24\35\26\0\7\35\7\0\2\35\4\0\23\35"+
+    "\1\360\4\35\26\0\7\35\7\0\2\35\4\0\21\35"+
+    "\1\361\6\35\26\0\7\35\7\0\2\35\4\0\5\35"+
+    "\1\362\22\35\26\0\7\35\7\0\2\35\4\0\15\35"+
+    "\1\363\12\35\26\0\7\35\7\0\2\35\4\0\22\35"+
+    "\1\364\5\35\70\0\1\224\37\0\7\35\7\0\2\35"+
+    "\4\0\22\35\1\365\5\35\26\0\7\35\7\0\2\35"+
+    "\4\0\5\35\1\366\22\35\26\0\7\35\7\0\2\35"+
+    "\4\0\7\35\1\367\20\35\4\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[10956];
+    int [] result = new int[11088];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -408,11 +410,11 @@ public class GreyCatFlexLexer implements FlexLexer {
     "\1\0\1\11\1\0\10\11\2\1\1\11\3\0\1\1"+
     "\3\0\1\11\1\0\1\1\2\0\6\11\41\1\3\11"+
     "\1\0\1\11\1\0\1\1\1\0\1\1\14\0\33\1"+
-    "\1\11\5\0\27\1\2\0\17\1\1\0\11\1\1\0"+
+    "\1\11\5\0\27\1\2\0\20\1\1\0\12\1\1\0"+
     "\11\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[245];
+    int [] result = new int[247];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -774,177 +776,177 @@ public class GreyCatFlexLexer implements FlexLexer {
             { return RAW_STRING;
             }
           // fall through
-          case 98: break;
+          case 99: break;
           case 2:
             { return BAD_CHARACTER;
             }
           // fall through
-          case 99: break;
+          case 100: break;
           case 3:
             { return WHITE_SPACE;
             }
           // fall through
-          case 100: break;
+          case 101: break;
           case 4:
             { return NOT;
             }
           // fall through
-          case 101: break;
+          case 102: break;
           case 5:
             { pushState(IN_TEMPLATE); return ENTER_TEMPLATE;
             }
           // fall through
-          case 102: break;
+          case 103: break;
           case 6:
             { return DOLLAR;
             }
           // fall through
-          case 103: break;
+          case 104: break;
           case 7:
             { return PERCENT;
             }
           // fall through
-          case 104: break;
+          case 105: break;
           case 8:
             { return AMP;
             }
           // fall through
-          case 105: break;
+          case 106: break;
           case 9:
             { return SQUOTE;
             }
           // fall through
-          case 106: break;
+          case 107: break;
           case 10:
             { return LPAREN;
             }
           // fall through
-          case 107: break;
+          case 108: break;
           case 11:
             { return RPAREN;
             }
           // fall through
-          case 108: break;
+          case 109: break;
           case 12:
             { return STAR;
             }
           // fall through
-          case 109: break;
+          case 110: break;
           case 13:
             { return PLUS;
             }
           // fall through
-          case 110: break;
+          case 111: break;
           case 14:
             { return COMMA;
             }
           // fall through
-          case 111: break;
+          case 112: break;
           case 15:
             { return MINUS;
             }
           // fall through
-          case 112: break;
+          case 113: break;
           case 16:
             { return DOT;
             }
           // fall through
-          case 113: break;
+          case 114: break;
           case 17:
             { return SLASH;
             }
           // fall through
-          case 114: break;
+          case 115: break;
           case 18:
             { return NUMBER;
             }
           // fall through
-          case 115: break;
+          case 116: break;
           case 19:
             { return COLON;
             }
           // fall through
-          case 116: break;
+          case 117: break;
           case 20:
             { return SEMI;
             }
           // fall through
-          case 117: break;
+          case 118: break;
           case 21:
             { return LT;
             }
           // fall through
-          case 118: break;
+          case 119: break;
           case 22:
             { return EQ;
             }
           // fall through
-          case 119: break;
+          case 120: break;
           case 23:
             { return GT;
             }
           // fall through
-          case 120: break;
+          case 121: break;
           case 24:
             { return QUESTION;
             }
           // fall through
-          case 121: break;
+          case 122: break;
           case 25:
             { return AT;
             }
           // fall through
-          case 122: break;
+          case 123: break;
           case 26:
             { return IDENTIFIER;
             }
           // fall through
-          case 123: break;
+          case 124: break;
           case 27:
             { return LSQUARE;
             }
           // fall through
-          case 124: break;
+          case 125: break;
           case 28:
             { return RSQUARE;
             }
           // fall through
-          case 125: break;
+          case 126: break;
           case 29:
             { return CARET;
             }
           // fall through
-          case 126: break;
+          case 127: break;
           case 30:
             { return LCURLY;
             }
           // fall through
-          case 127: break;
+          case 128: break;
           case 31:
             { return BAR;
             }
           // fall through
-          case 128: break;
+          case 129: break;
           case 32:
             { return RCURLY;
             }
           // fall through
-          case 129: break;
+          case 130: break;
           case 33:
             { return MULTI_LINE_COMMENT_BODY;
             }
           // fall through
-          case 130: break;
+          case 131: break;
           case 34:
             { popState(); return EXIT_TEMPLATE;
             }
           // fall through
-          case 131: break;
+          case 132: break;
           case 35:
             { lCurlyCount++; return LCURLY;
             }
           // fall through
-          case 132: break;
+          case 133: break;
           case 36:
             { if (lCurlyCount == 0) {
                                                           // we are supposed to get out of interpolation
@@ -955,314 +957,319 @@ public class GreyCatFlexLexer implements FlexLexer {
                                                         return RCURLY;
             }
           // fall through
-          case 133: break;
+          case 134: break;
           case 37:
             { return NOT_NOT;
             }
           // fall through
-          case 134: break;
+          case 135: break;
           case 38:
             { return NOT_EQ;
             }
           // fall through
-          case 135: break;
+          case 136: break;
           case 39:
             { return PERCENT_EQ;
             }
           // fall through
-          case 136: break;
+          case 137: break;
           case 40:
             { return AMP_AMP;
             }
           // fall through
-          case 137: break;
+          case 138: break;
           case 41:
             { return STRING;
             }
           // fall through
-          case 138: break;
+          case 139: break;
           case 42:
             { return STAR_SLASH;
             }
           // fall through
-          case 139: break;
+          case 140: break;
           case 43:
             { return STAR_EQ;
             }
           // fall through
-          case 140: break;
+          case 141: break;
           case 44:
             { return PLUS_PLUS;
             }
           // fall through
-          case 141: break;
+          case 142: break;
           case 45:
             { return PLUS_EQ;
             }
           // fall through
-          case 142: break;
+          case 143: break;
           case 46:
             { return MINUS_MINUS;
             }
           // fall through
-          case 143: break;
+          case 144: break;
           case 47:
             { return MINUS_EQ;
             }
           // fall through
-          case 144: break;
+          case 145: break;
           case 48:
             { return ARROW;
             }
           // fall through
-          case 145: break;
+          case 146: break;
           case 49:
             { return DOT_DOT;
             }
           // fall through
-          case 146: break;
+          case 147: break;
           case 50:
             { pushState(IN_COMMENT); return MULTI_LINE_COMMENT_START;
             }
           // fall through
-          case 147: break;
+          case 148: break;
           case 51:
             { return LINE_COMMENT;
             }
           // fall through
-          case 148: break;
+          case 149: break;
           case 52:
             { return SLASH_EQ;
             }
           // fall through
-          case 149: break;
+          case 150: break;
           case 53:
             { return COLON_COLON;
             }
           // fall through
-          case 150: break;
+          case 151: break;
           case 54:
             { return LT_EQ;
             }
           // fall through
-          case 151: break;
+          case 152: break;
           case 55:
             { return EQ_EQ;
             }
           // fall through
-          case 152: break;
+          case 153: break;
           case 56:
             { return GT_EQ;
             }
           // fall through
-          case 153: break;
+          case 154: break;
           case 57:
             { return QUESTION_EQ;
             }
           // fall through
-          case 154: break;
+          case 155: break;
           case 58:
             { return QUESTION_QUESTION;
             }
           // fall through
-          case 155: break;
+          case 156: break;
           case 59:
             { return AS_KW;
             }
           // fall through
-          case 156: break;
+          case 157: break;
           case 60:
             { return AT_KW;
             }
           // fall through
-          case 157: break;
+          case 158: break;
           case 61:
             { return DO_KW;
             }
           // fall through
-          case 158: break;
+          case 159: break;
           case 62:
             { return FN_KW;
             }
           // fall through
-          case 159: break;
+          case 160: break;
           case 63:
             { return IF_KW;
             }
           // fall through
-          case 160: break;
+          case 161: break;
           case 64:
             { return IN_KW;
             }
           // fall through
-          case 161: break;
+          case 162: break;
           case 65:
             { return IS_KW;
             }
           // fall through
-          case 162: break;
+          case 163: break;
           case 66:
             { return BAR_BAR;
             }
           // fall through
-          case 163: break;
+          case 164: break;
           case 67:
             { popState(); return yystate() == IN_COMMENT
                                                                    ? MULTI_LINE_COMMENT_BODY // inner comment closed
                                                                    : MULTI_LINE_COMMENT_END;
             }
           // fall through
-          case 164: break;
+          case 165: break;
           case 68:
             { pushState(IN_COMMENT); return MULTI_LINE_COMMENT_BODY;
             }
           // fall through
-          case 165: break;
+          case 166: break;
           case 69:
             { pushState(IN_INTERPOLATION); return ENTER_INTERPOLATION;
             }
           // fall through
-          case 166: break;
+          case 167: break;
           case 70:
             { return FOR_KW;
             }
           // fall through
-          case 167: break;
+          case 168: break;
           case 71:
             { return TRY_KW;
             }
           // fall through
-          case 168: break;
+          case 169: break;
           case 72:
             { return USE_KW;
             }
           // fall through
-          case 169: break;
+          case 170: break;
           case 73:
             { return VAR_KW;
             }
           // fall through
-          case 170: break;
+          case 171: break;
           case 74:
             { return MULTI_LINE_COMMENT;
             }
           // fall through
-          case 171: break;
+          case 172: break;
           case 75:
             { return ELSE_KW;
             }
           // fall through
-          case 172: break;
+          case 173: break;
           case 76:
             { return ENUM_KW;
             }
           // fall through
-          case 173: break;
+          case 174: break;
           case 77:
             { return NULL_KW;
             }
           // fall through
-          case 174: break;
+          case 175: break;
           case 78:
             { return SKIP_KW;
             }
           // fall through
-          case 175: break;
+          case 176: break;
           case 79:
             { return TASK_KW;
             }
           // fall through
-          case 176: break;
+          case 177: break;
           case 80:
             { return THIS_KW;
             }
           // fall through
-          case 177: break;
+          case 178: break;
           case 81:
             { return TRUE_KW;
             }
           // fall through
-          case 178: break;
+          case 179: break;
           case 82:
             { return TYPE_KW;
             }
           // fall through
-          case 179: break;
+          case 180: break;
           case 83:
             { return BREAK_KW;
             }
           // fall through
-          case 180: break;
+          case 181: break;
           case 84:
             { return CATCH_KW;
             }
           // fall through
-          case 181: break;
+          case 182: break;
           case 85:
             { return FALSE_KW;
             }
           // fall through
-          case 182: break;
+          case 183: break;
           case 86:
             { return LIMIT_KW;
             }
           // fall through
-          case 183: break;
+          case 184: break;
           case 87:
             { return THROW_KW;
             }
           // fall through
-          case 184: break;
+          case 185: break;
           case 88:
             { return WHILE_KW;
             }
           // fall through
-          case 185: break;
+          case 186: break;
           case 89:
             { return NATIVE_KW;
             }
           // fall through
-          case 186: break;
+          case 187: break;
           case 90:
             { return RETURN_KW;
             }
           // fall through
-          case 187: break;
+          case 188: break;
           case 91:
             { return STATIC_KW;
             }
           // fall through
-          case 188: break;
-          case 92:
-            { return EXTENDS_KW;
-            }
-          // fall through
           case 189: break;
-          case 93:
-            { return PRIVATE_KW;
+          case 92:
+            { return TYPE_OF_KW;
             }
           // fall through
           case 190: break;
-          case 94:
-            { return WITHOUT_KW;
+          case 93:
+            { return EXTENDS_KW;
             }
           // fall through
           case 191: break;
-          case 95:
-            { return ABSTRACT_KW;
+          case 94:
+            { return PRIVATE_KW;
             }
           // fall through
           case 192: break;
-          case 96:
-            { return CONTINUE_KW;
+          case 95:
+            { return WITHOUT_KW;
             }
           // fall through
           case 193: break;
-          case 97:
-            { return SAMPLING_KW;
+          case 96:
+            { return ABSTRACT_KW;
             }
           // fall through
           case 194: break;
+          case 97:
+            { return CONTINUE_KW;
+            }
+          // fall through
+          case 195: break;
+          case 98:
+            { return SAMPLING_KW;
+            }
+          // fall through
+          case 196: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

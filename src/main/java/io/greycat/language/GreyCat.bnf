@@ -158,20 +158,20 @@ UseStmt ::= USE_KW IDENTIFIER SEMI
 Pragmas ::= Pragma+
 
 FnOrTask ::= FN_KW | TASK_KW
-FnDecl ::= Pragmas? Flags? FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+FnDecl ::= Pragmas? Flags* FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
 FnParams ::= FnParam (COMMA FnParam)* COMMA?
 FnParam ::= Pragmas? FnParamIdent TypeSpec
 FnParamIdent ::= IdentOrKeyword
 // We accept "more" than what is valid because it will be the role of the analysis
 // to report the errors (if any)
-Flags ::= PRIVATE_KW? ABSTRACT_KW? STATIC_KW? NATIVE_KW?
+Flags ::= PRIVATE_KW | ABSTRACT_KW | STATIC_KW | NATIVE_KW
 
 TypeDecl ::= Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeFields? RCURLY
 GenericParams ::= LT TypeSpecifier (COMMA TypeSpecifier)* GT
 TypeExtends ::= EXTENDS_KW TypeSpecifier
 TypeFields ::= (TypeAttr | TypeMethod)*
 TypeAttr ::= Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
-TypeMethod ::= Pragmas? Flags? FnOrTask MethodIdent LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+TypeMethod ::= Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
 
 EnumDecl ::= Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField SEMI)* RCURLY
 EnumField ::= EnumFieldIdent (LPAREN Literal RPAREN)?
@@ -296,7 +296,7 @@ TwoFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression RCURLY
 ThreeFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA Expression RCURLY
 
 TypeSpec ::= COLON TypeSpecifier
-TypeSpecifier ::= (IDENTIFIER COLON_COLON)? (BuiltInType | IDENTIFIER) (LT TypeSpecList GT)? QUESTION?
+TypeSpecifier ::= TYPE_OF_KW? (IdentOrKeyword COLON_COLON)? IdentOrKeyword (LT TypeSpecList GT)? QUESTION?
 TypeSpecList ::= TypeSpecifier (COMMA TypeSpecifier)*
 
 IdentOrKeyword ::=

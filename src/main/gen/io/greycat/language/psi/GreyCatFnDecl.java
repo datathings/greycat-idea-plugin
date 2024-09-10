@@ -10,8 +10,8 @@ public interface GreyCatFnDecl extends PsiElement {
   @Nullable
   GreyCatBlock getBlock();
 
-  @Nullable
-  GreyCatFlags getFlags();
+  @NotNull
+  List<GreyCatFlags> getFlagsList();
 
   @NotNull
   GreyCatFnIdent getFnIdent();
