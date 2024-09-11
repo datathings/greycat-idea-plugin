@@ -78,33 +78,35 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ShortArrayExpr | ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY)
+  // ShortArrayExpr | ArrayObj
   public static boolean ArrayExpr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ArrayExpr")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ARRAY_EXPR, "<array expr>");
     r = ShortArrayExpr(b, l + 1);
-    if (!r) r = ArrayExpr_1(b, l + 1);
+    if (!r) r = ArrayObj(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
+  /* ********************************************************** */
   // (ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY
-  private static boolean ArrayExpr_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayExpr_1")) return false;
+  public static boolean ArrayObj(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ArrayObj")) return false;
+    if (!nextTokenIs(b, "<array obj>", ARRAY_ID, CORE_ARRAY_ID)) return false;
     boolean r;
-    Marker m = enter_section_(b);
-    r = ArrayExpr_1_0(b, l + 1);
+    Marker m = enter_section_(b, l, _NONE_, ARRAY_OBJ, "<array obj>");
+    r = ArrayObj_0(b, l + 1);
     r = r && consumeToken(b, LCURLY);
-    r = r && ArrayExpr_1_2(b, l + 1);
+    r = r && ArrayObj_2(b, l + 1);
     r = r && consumeToken(b, RCURLY);
-    exit_section_(b, m, null, r);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 
   // ARRAY_ID | CORE_ARRAY_ID
-  private static boolean ArrayExpr_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayExpr_1_0")) return false;
+  private static boolean ArrayObj_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ArrayObj_0")) return false;
     boolean r;
     r = consumeToken(b, ARRAY_ID);
     if (!r) r = consumeToken(b, CORE_ARRAY_ID);
@@ -112,8 +114,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   // Arguments?
-  private static boolean ArrayExpr_1_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayExpr_1_2")) return false;
+  private static boolean ArrayObj_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "ArrayObj_2")) return false;
     Arguments(b, l + 1);
     return true;
   }
@@ -1800,7 +1802,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   // TemplateString | STRING
   public static boolean StringLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "StringLit")) return false;
-    if (!nextTokenIs(b, "<string lit>", ENTER_TEMPLATE, STRING)) return false;
+    if (!nextTokenIs(b, "<string lit>", DQUOTE, STRING)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STRING_LIT, "<string lit>");
     r = TemplateString(b, l + 1);
@@ -1874,15 +1876,15 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ENTER_TEMPLATE (RAW_STRING | Interpolation)* EXIT_TEMPLATE
+  // DQUOTE (RAW_STRING | Interpolation)* DQUOTE
   public static boolean TemplateString(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TemplateString")) return false;
-    if (!nextTokenIs(b, ENTER_TEMPLATE)) return false;
+    if (!nextTokenIs(b, DQUOTE)) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, ENTER_TEMPLATE);
+    r = consumeToken(b, DQUOTE);
     r = r && TemplateString_1(b, l + 1);
-    r = r && consumeToken(b, EXIT_TEMPLATE);
+    r = r && consumeToken(b, DQUOTE);
     exit_section_(b, m, TEMPLATE_STRING, r);
     return r;
   }

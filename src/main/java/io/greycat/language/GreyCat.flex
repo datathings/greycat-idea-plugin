@@ -65,9 +65,10 @@ BUILT_IN_TYPE = (i|f|u|i64|i32|i16|i8|u64|u32|u16|u8|f64|f32|f16|f8|time|duratio
 DIGIT = [0-9_]
 EXPONENT = [Ee] [+-]? {DIGIT}+
 NUMBER = {DIGIT}+ ("." {DIGIT}+)? _* {EXPONENT}? _* {BUILT_IN_TYPE}?
-CHAR_LIT = '([^'\\]|\\.)*'
+SINGLE_QUOTE = '
+CHAR_LIT = {SINGLE_QUOTE}([^'\\]|\\.)*{SINGLE_QUOTE}
 
-LINE_COMMENT="/""/"[^\n]*
+LINE_COMMENT = \/\/[^\n]*
 
 MULTI_LINE_DEGENERATE_COMMENT = "/*" "*"+ "/"
 MULTI_LINE_COMMENT_START      = "/*"
@@ -75,7 +76,7 @@ MULTI_LINE_COMMENT_END        = "*/"
 
 %%
 // special state "changer"
-<YYINITIAL, IN_INTERPOLATION> \"                              { pushState(IN_TEMPLATE); return ENTER_TEMPLATE; }
+<YYINITIAL, IN_INTERPOLATION> \"                              { pushState(IN_TEMPLATE); return DQUOTE; }
 
 <YYINITIAL, IN_INTERPOLATION> {MULTI_LINE_DEGENERATE_COMMENT} { return MULTI_LINE_COMMENT; } // without this rule /*****/ is parsed as doc comment and /**/ is parsed as not closed doc comment
 
@@ -194,16 +195,10 @@ MULTI_LINE_COMMENT_END        = "*/"
 <YYINITIAL, IN_INTERPOLATION> {LINE_COMMENT}     { return LINE_COMMENT; }
 <YYINITIAL, IN_INTERPOLATION> {NUMBER}           { return NUMBER; }
 
-<IN_TEMPLATE> \"                                 { popState(); return EXIT_TEMPLATE; }
+<IN_TEMPLATE> \"                                 { popState(); return DQUOTE; }
 <IN_TEMPLATE> "${"                               { pushState(IN_INTERPOLATION); return ENTER_INTERPOLATION; }
-<IN_TEMPLATE> ([^\\\"\n\$] | (\\.))*             { return RAW_STRING; }
+<IN_TEMPLATE> ([^\\\"\n\$] | (\\.))+             { return RAW_STRING; }
 <IN_TEMPLATE>  \n                                { return WHITE_SPACE; }
-
-//<IN_COMMENT> "*/"                                { popState(); return EXIT_BLOCK_COMMENT; } // end of comment, go back to YYINITIAL state
-//<IN_COMMENT> "*"                                 {}
-//<IN_COMMENT> \n                                  { return WHITE_SPACE; }
-//<IN_COMMENT> [^]                                 {}
-
 
 // If the character sequence does not match any of the above rules, we return BAD_CHARACTER which indicates that
 // there is an error in the character sequence. This is used to highlight errors.

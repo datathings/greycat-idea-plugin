@@ -5,12 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GreyCatArrayExpr extends PsiElement {
+public interface GreyCatArrayObj extends PsiElement {
 
   @Nullable
-  GreyCatArrayObj getArrayObj();
-
-  @Nullable
-  GreyCatShortArrayExpr getShortArrayExpr();
+  GreyCatArguments getArguments();
 
 }

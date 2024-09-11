@@ -15,6 +15,10 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitArrayObj(@NotNull GreyCatArrayObj o) {
+    visitPsiElement(o);
+  }
+
   public void visitAtStmt(@NotNull GreyCatAtStmt o) {
     visitPsiElement(o);
   }

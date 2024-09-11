@@ -109,25 +109,25 @@ public class GreyCatFlexLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\2\0\1\1\1\0\1\2\1\3\1\4\1\5\1\6"+
-    "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-    "\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26"+
-    "\1\27\1\30\1\31\1\32\1\33\1\34\1\35\21\32"+
-    "\1\36\1\37\1\40\3\41\1\1\1\3\1\42\2\2"+
-    "\1\43\1\44\1\45\1\46\1\47\1\50\1\0\1\51"+
-    "\1\0\1\52\1\53\1\54\1\55\1\56\1\57\1\60"+
-    "\1\61\1\62\1\63\1\64\3\0\1\22\3\0\1\22"+
-    "\1\0\1\22\2\0\1\65\1\66\1\67\1\70\1\71"+
-    "\1\72\2\32\1\73\1\74\3\32\1\75\4\32\1\76"+
-    "\1\32\1\77\1\100\1\101\20\32\1\102\1\103\1\104"+
-    "\1\0\1\105\1\0\1\22\1\0\1\22\14\0\10\32"+
-    "\1\106\14\32\1\107\1\32\1\110\1\111\2\32\1\112"+
-    "\5\0\4\32\1\113\1\114\4\32\1\115\3\32\1\116"+
-    "\1\32\1\117\1\120\1\32\1\121\1\122\2\32\2\0"+
-    "\1\32\1\123\1\124\2\32\1\125\1\126\5\32\1\127"+
-    "\1\32\1\130\1\32\1\0\3\32\1\131\1\32\1\132"+
-    "\1\32\1\133\1\134\1\32\1\0\2\32\1\135\1\136"+
-    "\1\32\1\137\1\140\1\141\1\142";
+    "\4\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7"+
+    "\1\10\1\11\1\12\1\13\1\14\1\15\1\16\1\17"+
+    "\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27"+
+    "\1\30\1\31\1\32\1\33\1\34\21\31\1\35\1\36"+
+    "\1\37\3\40\1\41\1\2\1\42\2\1\1\43\1\44"+
+    "\1\45\1\46\1\47\1\50\1\0\1\51\1\0\1\52"+
+    "\1\53\1\54\1\55\1\56\1\57\1\60\1\61\1\62"+
+    "\1\63\1\64\3\0\1\21\3\0\1\21\1\0\1\21"+
+    "\2\0\1\65\1\66\1\67\1\70\1\71\1\72\2\31"+
+    "\1\73\1\74\3\31\1\75\4\31\1\76\1\31\1\77"+
+    "\1\100\1\101\20\31\1\102\1\103\1\104\1\0\1\105"+
+    "\1\0\1\21\1\0\1\21\14\0\10\31\1\106\14\31"+
+    "\1\107\1\31\1\110\1\111\2\31\1\112\5\0\4\31"+
+    "\1\113\1\114\4\31\1\115\3\31\1\116\1\31\1\117"+
+    "\1\120\1\31\1\121\1\122\2\31\2\0\1\31\1\123"+
+    "\1\124\2\31\1\125\1\126\5\31\1\127\1\31\1\130"+
+    "\1\31\1\0\3\31\1\131\1\31\1\132\1\31\1\133"+
+    "\1\134\1\31\1\0\2\31\1\135\1\136\1\31\1\137"+
+    "\1\140\1\141\1\142";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[247];
@@ -404,14 +404,13 @@ public class GreyCatFlexLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\2\0\1\1\1\0\1\11\2\1\2\11\3\1\2\11"+
-    "\2\1\1\11\5\1\1\11\4\1\1\11\1\1\3\11"+
-    "\21\1\1\11\1\1\2\11\3\1\2\11\2\1\6\11"+
-    "\1\0\1\11\1\0\10\11\2\1\1\11\3\0\1\1"+
-    "\3\0\1\11\1\0\1\1\2\0\6\11\41\1\3\11"+
-    "\1\0\1\11\1\0\1\1\1\0\1\1\14\0\33\1"+
-    "\1\11\5\0\27\1\2\0\20\1\1\0\12\1\1\0"+
-    "\11\1";
+    "\4\0\1\11\2\1\2\11\3\1\2\11\2\1\1\11"+
+    "\5\1\1\11\4\1\1\11\1\1\3\11\21\1\1\11"+
+    "\1\1\2\11\3\1\2\11\2\1\6\11\1\0\1\11"+
+    "\1\0\10\11\2\1\1\11\3\0\1\1\3\0\1\11"+
+    "\1\0\1\1\2\0\6\11\41\1\3\11\1\0\1\11"+
+    "\1\0\1\1\1\0\1\1\14\0\33\1\1\11\5\0"+
+    "\27\1\2\0\20\1\1\0\12\1\1\0\11\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[247];
@@ -773,172 +772,172 @@ public class GreyCatFlexLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { return RAW_STRING;
+            { return BAD_CHARACTER;
             }
           // fall through
           case 99: break;
           case 2:
-            { return BAD_CHARACTER;
+            { return WHITE_SPACE;
             }
           // fall through
           case 100: break;
           case 3:
-            { return WHITE_SPACE;
+            { return NOT;
             }
           // fall through
           case 101: break;
           case 4:
-            { return NOT;
+            { pushState(IN_TEMPLATE); return DQUOTE;
             }
           // fall through
           case 102: break;
           case 5:
-            { pushState(IN_TEMPLATE); return ENTER_TEMPLATE;
+            { return DOLLAR;
             }
           // fall through
           case 103: break;
           case 6:
-            { return DOLLAR;
+            { return PERCENT;
             }
           // fall through
           case 104: break;
           case 7:
-            { return PERCENT;
+            { return AMP;
             }
           // fall through
           case 105: break;
           case 8:
-            { return AMP;
+            { return SQUOTE;
             }
           // fall through
           case 106: break;
           case 9:
-            { return SQUOTE;
+            { return LPAREN;
             }
           // fall through
           case 107: break;
           case 10:
-            { return LPAREN;
+            { return RPAREN;
             }
           // fall through
           case 108: break;
           case 11:
-            { return RPAREN;
+            { return STAR;
             }
           // fall through
           case 109: break;
           case 12:
-            { return STAR;
+            { return PLUS;
             }
           // fall through
           case 110: break;
           case 13:
-            { return PLUS;
+            { return COMMA;
             }
           // fall through
           case 111: break;
           case 14:
-            { return COMMA;
+            { return MINUS;
             }
           // fall through
           case 112: break;
           case 15:
-            { return MINUS;
+            { return DOT;
             }
           // fall through
           case 113: break;
           case 16:
-            { return DOT;
+            { return SLASH;
             }
           // fall through
           case 114: break;
           case 17:
-            { return SLASH;
+            { return NUMBER;
             }
           // fall through
           case 115: break;
           case 18:
-            { return NUMBER;
+            { return COLON;
             }
           // fall through
           case 116: break;
           case 19:
-            { return COLON;
+            { return SEMI;
             }
           // fall through
           case 117: break;
           case 20:
-            { return SEMI;
+            { return LT;
             }
           // fall through
           case 118: break;
           case 21:
-            { return LT;
+            { return EQ;
             }
           // fall through
           case 119: break;
           case 22:
-            { return EQ;
+            { return GT;
             }
           // fall through
           case 120: break;
           case 23:
-            { return GT;
+            { return QUESTION;
             }
           // fall through
           case 121: break;
           case 24:
-            { return QUESTION;
+            { return AT;
             }
           // fall through
           case 122: break;
           case 25:
-            { return AT;
+            { return IDENTIFIER;
             }
           // fall through
           case 123: break;
           case 26:
-            { return IDENTIFIER;
+            { return LSQUARE;
             }
           // fall through
           case 124: break;
           case 27:
-            { return LSQUARE;
+            { return RSQUARE;
             }
           // fall through
           case 125: break;
           case 28:
-            { return RSQUARE;
+            { return CARET;
             }
           // fall through
           case 126: break;
           case 29:
-            { return CARET;
+            { return LCURLY;
             }
           // fall through
           case 127: break;
           case 30:
-            { return LCURLY;
+            { return BAR;
             }
           // fall through
           case 128: break;
           case 31:
-            { return BAR;
+            { return RCURLY;
             }
           // fall through
           case 129: break;
           case 32:
-            { return RCURLY;
+            { return MULTI_LINE_COMMENT_BODY;
             }
           // fall through
           case 130: break;
           case 33:
-            { return MULTI_LINE_COMMENT_BODY;
+            { return RAW_STRING;
             }
           // fall through
           case 131: break;
           case 34:
-            { popState(); return EXIT_TEMPLATE;
+            { popState(); return DQUOTE;
             }
           // fall through
           case 132: break;

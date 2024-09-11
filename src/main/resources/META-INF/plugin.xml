@@ -27,9 +27,18 @@
        Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
   <extensions defaultExtensionNs="com.intellij">
     <fileType name="GreyCat File" implementationClass="io.greycat.GreyCatFileType" fieldName="INSTANCE" language="GreyCat" extensions="gcl" />
+    <problemFileHighlightFilter implementation="io.greycat.GreyCatFileHighlightFilter"/>
+
     <lang.parserDefinition language="GreyCat" implementationClass="io.greycat.language.GreyCatParserDefinition" />
     <lang.syntaxHighlighterFactory language="GreyCat" implementationClass="io.greycat.language.GreyCatSyntaxHighlighter$Factory" />
     <lang.foldingBuilder language="GreyCat" implementationClass="io.greycat.language.GreyCatFoldingBuilder" />
+    <lang.braceMatcher
+            language="GreyCat"
+            implementationClass="io.greycat.language.GreyCatBraceMatcher"/>
+    <lang.commenter
+            language="GreyCat"
+            implementationClass="io.greycat.language.GreyCatCommenter"/>
+
     <platform.lsp.serverSupportProvider implementation="io.greycat.GreyCatLspServerProvider" />
   </extensions>
 </idea-plugin>

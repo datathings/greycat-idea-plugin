@@ -26,7 +26,7 @@ public interface GreyCatTypesExt {
     );
 
     TokenSet STRINGS = TokenSet.create(
-            ENTER_TEMPLATE, EXIT_TEMPLATE, RAW_STRING, STRING
+            DQUOTE, RAW_STRING, STRING
     );
 
     TokenSet OPERATORS = TokenSet.create(

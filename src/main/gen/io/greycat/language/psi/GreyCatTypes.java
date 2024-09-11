@@ -10,6 +10,7 @@ public interface GreyCatTypes {
 
   IElementType ARGUMENTS = new GreyCatElementType("ARGUMENTS");
   IElementType ARRAY_EXPR = new GreyCatElementType("ARRAY_EXPR");
+  IElementType ARRAY_OBJ = new GreyCatElementType("ARRAY_OBJ");
   IElementType ATTR_IDENT = new GreyCatElementType("ATTR_IDENT");
   IElementType AT_STMT = new GreyCatElementType("AT_STMT");
   IElementType BIN_OP = new GreyCatElementType("BIN_OP");
@@ -125,6 +126,7 @@ public interface GreyCatTypes {
   IElementType DOT = new GreyCatTokenType(".");
   IElementType DOT_DOT = new GreyCatTokenType("..");
   IElementType DO_KW = new GreyCatTokenType("do");
+  IElementType DQUOTE = new GreyCatTokenType("\"");
   IElementType DURATION_ID = new GreyCatTokenType("duration");
   IElementType D_DAY = new GreyCatTokenType("day");
   IElementType D_HR = new GreyCatTokenType("hour");
@@ -134,12 +136,10 @@ public interface GreyCatTypes {
   IElementType D_US = new GreyCatTokenType("us");
   IElementType ELSE_KW = new GreyCatTokenType("else");
   IElementType ENTER_INTERPOLATION = new GreyCatTokenType("ENTER_INTERPOLATION");
-  IElementType ENTER_TEMPLATE = new GreyCatTokenType("ENTER_TEMPLATE");
   IElementType ENUM_KW = new GreyCatTokenType("enum");
   IElementType EQ = new GreyCatTokenType("=");
   IElementType EQ_EQ = new GreyCatTokenType("==");
   IElementType EXIT_INTERPOLATION = new GreyCatTokenType("EXIT_INTERPOLATION");
-  IElementType EXIT_TEMPLATE = new GreyCatTokenType("EXIT_TEMPLATE");
   IElementType EXTENDS_KW = new GreyCatTokenType("extends");
   IElementType FALSE_KW = new GreyCatTokenType("false");
   IElementType FLOAT_ID = new GreyCatTokenType("float");
@@ -226,6 +226,9 @@ public interface GreyCatTypes {
       }
       else if (type == ARRAY_EXPR) {
         return new GreyCatArrayExprImpl(node);
+      }
+      else if (type == ARRAY_OBJ) {
+        return new GreyCatArrayObjImpl(node);
       }
       else if (type == ATTR_IDENT) {
         return new GreyCatAttrIdentImpl(node);

@@ -62,6 +62,7 @@
         QUESTION_QUESTION = '??'
         QUESTION = '?'
         QUESTION_EQ = '?='
+        DQUOTE = '"'
 
         // keywords (which are also terminals)
         ABSTRACT_KW   = 'abstract'
@@ -285,7 +286,8 @@ ObjectProps ::= ObjectProp (COMMA ObjectProp)* COMMA?
 ObjectProp ::= ObjectPropIdent COLON Expression
 ObjectPropIdent ::= IdentOrKeyword
 
-ArrayExpr ::= ShortArrayExpr | ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY)
+ArrayExpr ::= ShortArrayExpr | ArrayObj
+ArrayObj ::= ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY)
 ShortArrayExpr ::= LSQUARE Arguments? RSQUARE
 FnExpr ::= FN_KW LPAREN FnParams? RPAREN Block
 TupleExpr ::= LPAREN Expression COMMA Expression RPAREN
@@ -336,5 +338,5 @@ IdentOrKeyword ::=
 
 Literal ::= StringLit | (PLUS|MINUS)? NUMBER NumAppendix? | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
 StringLit ::= TemplateString | STRING
-TemplateString ::= ENTER_TEMPLATE (RAW_STRING | Interpolation)* EXIT_TEMPLATE
+TemplateString ::= DQUOTE (RAW_STRING | Interpolation)* DQUOTE
 Interpolation ::= ENTER_INTERPOLATION Expression? EXIT_INTERPOLATION
