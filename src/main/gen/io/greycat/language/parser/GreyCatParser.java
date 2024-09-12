@@ -1296,12 +1296,13 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword
+  // IdentOrKeyword | STRING
   public static boolean ObjectPropIdent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ObjectPropIdent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, OBJECT_PROP_IDENT, "<object prop ident>");
     r = IdentOrKeyword(b, l + 1);
+    if (!r) r = consumeToken(b, STRING);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

@@ -78,16 +78,16 @@ MULTI_LINE_COMMENT_END        = "*/"
 // special state "changer"
 <YYINITIAL, IN_INTERPOLATION> \"                              { pushState(IN_TEMPLATE); return DQUOTE; }
 
-<YYINITIAL, IN_INTERPOLATION> {MULTI_LINE_DEGENERATE_COMMENT} { return MULTI_LINE_COMMENT; } // without this rule /*****/ is parsed as doc comment and /**/ is parsed as not closed doc comment
+//<YYINITIAL, IN_INTERPOLATION> {MULTI_LINE_DEGENERATE_COMMENT} { return MULTI_LINE_COMMENT; } // without this rule /*****/ is parsed as doc comment and /**/ is parsed as not closed doc comment
 
 // next rules return temporary IElementType's that are rplaced with DartTokenTypesSets#MULTI_LINE_COMMENT or DartTokenTypesSets#MULTI_LINE_DOC_COMMENT in com.jetbrains.lang.dart.lexer.DartLexer
 <YYINITIAL, IN_INTERPOLATION> {MULTI_LINE_COMMENT_START}  { pushState(IN_COMMENT); return MULTI_LINE_COMMENT_START; }
 
 <IN_COMMENT>       {MULTI_LINE_COMMENT_START}      { pushState(IN_COMMENT); return MULTI_LINE_COMMENT_BODY; }
-<IN_COMMENT>       [^]                             { return MULTI_LINE_COMMENT_BODY; }
 <IN_COMMENT>       {MULTI_LINE_COMMENT_END}        { popState(); return yystate() == IN_COMMENT
                                                                    ? MULTI_LINE_COMMENT_BODY // inner comment closed
                                                                    : MULTI_LINE_COMMENT_END; }
+<IN_COMMENT>       [^]                             { return MULTI_LINE_COMMENT_BODY; }
 
 <YYINITIAL> "{"                                      { return LCURLY; }
 <YYINITIAL> "}"                                      { return RCURLY; }

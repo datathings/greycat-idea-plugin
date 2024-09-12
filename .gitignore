@@ -6,6 +6,7 @@ build/
 jflex-*.jar
 .idea
 .run
+src/main/gen/io/greycat/language/GreyCatFlexLexer.java~
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

@@ -284,7 +284,7 @@ ParenExpr ::= LPAREN Expression RPAREN
 ObjectExpr ::= TypeIdent? LCURLY ObjectProps? RCURLY
 ObjectProps ::= ObjectProp (COMMA ObjectProp)* COMMA?
 ObjectProp ::= ObjectPropIdent COLON Expression
-ObjectPropIdent ::= IdentOrKeyword
+ObjectPropIdent ::= IdentOrKeyword | STRING
 
 ArrayExpr ::= ShortArrayExpr | ArrayObj
 ArrayObj ::= ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY)

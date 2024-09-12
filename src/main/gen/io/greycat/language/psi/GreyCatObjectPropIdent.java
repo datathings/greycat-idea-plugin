@@ -7,7 +7,10 @@ import com.intellij.psi.PsiElement;
 
 public interface GreyCatObjectPropIdent extends PsiElement {
 
-  @NotNull
+  @Nullable
   GreyCatIdentOrKeyword getIdentOrKeyword();
+
+  @Nullable
+  PsiElement getString();
 
 }
