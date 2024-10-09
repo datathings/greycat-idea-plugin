@@ -14,6 +14,9 @@ public interface GreyCatPrimaryExpr extends PsiElement {
   GreyCatFnExpr getFnExpr();
 
   @Nullable
+  GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit();
+
+  @Nullable
   GreyCatLiteral getLiteral();
 
   @Nullable
@@ -36,8 +39,5 @@ public interface GreyCatPrimaryExpr extends PsiElement {
 
   @Nullable
   GreyCatTwoFieldsObj getTwoFieldsObj();
-
-  @Nullable
-  PsiElement getIdentifier();
 
 }

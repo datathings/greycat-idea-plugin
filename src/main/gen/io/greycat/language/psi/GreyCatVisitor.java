@@ -175,6 +175,10 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitIdentOrKeywordOrStrLit(@NotNull GreyCatIdentOrKeywordOrStrLit o) {
+    visitPsiElement(o);
+  }
+
   public void visitIfStmt(@NotNull GreyCatIfStmt o) {
     visitPsiElement(o);
   }

@@ -50,6 +50,7 @@ public interface GreyCatTypes {
   IElementType FOR_STMT = new GreyCatElementType("FOR_STMT");
   IElementType GENERIC_PARAMS = new GreyCatElementType("GENERIC_PARAMS");
   IElementType IDENT_OR_KEYWORD = new GreyCatElementType("IDENT_OR_KEYWORD");
+  IElementType IDENT_OR_KEYWORD_OR_STR_LIT = new GreyCatElementType("IDENT_OR_KEYWORD_OR_STR_LIT");
   IElementType IF_STMT = new GreyCatElementType("IF_STMT");
   IElementType INITIALIZER = new GreyCatElementType("INITIALIZER");
   IElementType INTERPOLATION = new GreyCatElementType("INTERPOLATION");
@@ -346,6 +347,9 @@ public interface GreyCatTypes {
       }
       else if (type == IDENT_OR_KEYWORD) {
         return new GreyCatIdentOrKeywordImpl(node);
+      }
+      else if (type == IDENT_OR_KEYWORD_OR_STR_LIT) {
+        return new GreyCatIdentOrKeywordOrStrLitImpl(node);
       }
       else if (type == IF_STMT) {
         return new GreyCatIfStmtImpl(node);

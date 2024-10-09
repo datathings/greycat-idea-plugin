@@ -235,8 +235,8 @@ CallExprSpec ::= CallArgs | StaticAccess | PropAccess | OffsetAccess | NOT_NOT
 // CallArgs is the only one that do not allow for optional-chaining construct
 // even though it might seem natural that we do allow it because every other
 // callExprSpec do
-CallArgs ::= LPAREN Arguments? RPAREN
-Arguments ::= Expression (COMMA Expression)* COMMA?
+CallArgs ::= LPAREN Arguments? COMMA? RPAREN
+Arguments ::= Expression (COMMA Expression)*
 PropAccess ::= QUESTION? (DOT | ARROW) IdentOrKeyword
 OffsetAccess ::= QUESTION? LSQUARE Expression RSQUARE
 
@@ -277,7 +277,7 @@ PrimaryExpr ::=
     | TableExpr
     | ParenExpr
     | ObjectExpr
-    | IDENTIFIER
+    | IdentOrKeywordOrStrLit
 
 ParenExpr ::= LPAREN Expression RPAREN
 
@@ -287,15 +287,15 @@ ObjectProp ::= ObjectPropIdent COLON Expression
 ObjectPropIdent ::= IdentOrKeyword | STRING
 
 ArrayExpr ::= ShortArrayExpr | ArrayObj
-ArrayObj ::= ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? RCURLY)
-ShortArrayExpr ::= LSQUARE Arguments? RSQUARE
+ArrayObj ::= ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? COMMA? RCURLY)
+ShortArrayExpr ::= LSQUARE Arguments? COMMA? RSQUARE
 FnExpr ::= FN_KW LPAREN FnParams? RPAREN Block
-TupleExpr ::= LPAREN Expression COMMA Expression RPAREN
-TableExpr ::= TypeIdent LCURLY TableExprRows? RCURLY
-TableExprRows ::= ShortArrayExpr (COMMA ShortArrayExpr)* COMMA?
-OneFieldObj ::= TypeIdent LCURLY Expression? RCURLY
-TwoFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression RCURLY
-ThreeFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA Expression RCURLY
+TupleExpr ::= LPAREN Expression COMMA Expression COMMA? RPAREN
+TableExpr ::= TypeIdent LCURLY TableExprRows? COMMA? RCURLY
+TableExprRows ::= ShortArrayExpr (COMMA ShortArrayExpr)*
+OneFieldObj ::= TypeIdent LCURLY Expression? COMMA? RCURLY
+TwoFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA? RCURLY
+ThreeFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA Expression COMMA? RCURLY
 
 TypeSpec ::= COLON TypeSpecifier
 TypeSpecifier ::= TYPE_OF_KW? (IdentOrKeyword COLON_COLON)? IdentOrKeyword (LT TypeSpecList GT)? QUESTION?
@@ -335,6 +335,7 @@ IdentOrKeyword ::=
     | BuiltInType
     | NumAppendix
     | IDENTIFIER
+IdentOrKeywordOrStrLit ::= IdentOrKeyword | STRING
 
 Literal ::= StringLit | (PLUS|MINUS)? NUMBER NumAppendix? | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
 StringLit ::= TemplateString | STRING

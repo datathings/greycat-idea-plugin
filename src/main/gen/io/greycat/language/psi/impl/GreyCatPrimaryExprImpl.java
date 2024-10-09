@@ -41,6 +41,12 @@ public class GreyCatPrimaryExprImpl extends ASTWrapperPsiElement implements Grey
 
   @Override
   @Nullable
+  public GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit() {
+    return findChildByClass(GreyCatIdentOrKeywordOrStrLit.class);
+  }
+
+  @Override
+  @Nullable
   public GreyCatLiteral getLiteral() {
     return findChildByClass(GreyCatLiteral.class);
   }
@@ -85,12 +91,6 @@ public class GreyCatPrimaryExprImpl extends ASTWrapperPsiElement implements Grey
   @Nullable
   public GreyCatTwoFieldsObj getTwoFieldsObj() {
     return findChildByClass(GreyCatTwoFieldsObj.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
   }
 
 }
