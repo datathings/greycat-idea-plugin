@@ -29,8 +29,8 @@ public class GreyCatAttrIdentImpl extends ASTWrapperPsiElement implements GreyCa
 
   @Override
   @NotNull
-  public GreyCatIdentOrKeyword getIdentOrKeyword() {
-    return findNotNullChildByClass(GreyCatIdentOrKeyword.class);
+  public GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit() {
+    return findNotNullChildByClass(GreyCatIdentOrKeywordOrStrLit.class);
   }
 
 }

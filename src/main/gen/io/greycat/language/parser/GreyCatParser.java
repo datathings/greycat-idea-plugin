@@ -136,12 +136,12 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword
+  // IdentOrKeywordOrStrLit
   public static boolean AttrIdent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AttrIdent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ATTR_IDENT, "<attr ident>");
-    r = IdentOrKeyword(b, l + 1);
+    r = IdentOrKeywordOrStrLit(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -507,12 +507,12 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword
+  // IdentOrKeywordOrStrLit
   public static boolean EnumFieldIdent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumFieldIdent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ENUM_FIELD_IDENT, "<enum field ident>");
-    r = IdentOrKeyword(b, l + 1);
+    r = IdentOrKeywordOrStrLit(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1626,14 +1626,14 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // QUESTION? (DOT | ARROW) IdentOrKeyword
+  // QUESTION? (DOT | ARROW) IdentOrKeywordOrStrLit
   public static boolean PropAccess(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PropAccess")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, PROP_ACCESS, "<prop access>");
     r = PropAccess_0(b, l + 1);
     r = r && PropAccess_1(b, l + 1);
-    r = r && IdentOrKeyword(b, l + 1);
+    r = r && IdentOrKeywordOrStrLit(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1824,13 +1824,12 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword | STRING
+  // IdentOrKeywordOrStrLit
   public static boolean StaticPropIdent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "StaticPropIdent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, STATIC_PROP_IDENT, "<static prop ident>");
-    r = IdentOrKeyword(b, l + 1);
-    if (!r) r = consumeToken(b, STRING);
+    r = IdentOrKeywordOrStrLit(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }

@@ -142,7 +142,7 @@ ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | TypeAl
 FnIdent ::= IDENTIFIER
 TypeIdent ::= TYPE_OF_KW? (IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? COLON_COLON)? IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? QUESTION?
 EnumIdent ::= IDENTIFIER
-AttrIdent ::= IdentOrKeyword
+AttrIdent ::= IdentOrKeywordOrStrLit
 MethodIdent ::= IdentOrKeyword
 
 EmptyStmt ::= SEMI
@@ -176,7 +176,7 @@ TypeMethod ::= Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnPara
 
 EnumDecl ::= Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField SEMI)* RCURLY
 EnumField ::= EnumFieldIdent (LPAREN Literal RPAREN)?
-EnumFieldIdent ::= IdentOrKeyword
+EnumFieldIdent ::= IdentOrKeywordOrStrLit
 
 TypeAlias ::= TypeSpecifier (BAR TypeSpecifier)* SEMI
 
@@ -237,11 +237,11 @@ CallExprSpec ::= CallArgs | StaticAccess | PropAccess | OffsetAccess | NOT_NOT
 // callExprSpec do
 CallArgs ::= LPAREN Arguments? COMMA? RPAREN
 Arguments ::= Expression (COMMA Expression)*
-PropAccess ::= QUESTION? (DOT | ARROW) IdentOrKeyword
+PropAccess ::= QUESTION? (DOT | ARROW) IdentOrKeywordOrStrLit
 OffsetAccess ::= QUESTION? LSQUARE Expression RSQUARE
 
 StaticAccess ::= COLON_COLON (TypeSpecifier COLON_COLON)? StaticPropIdent
-StaticPropIdent ::= IdentOrKeyword | STRING
+StaticPropIdent ::= IdentOrKeywordOrStrLit
 
 WhileStmt ::= WHILE_KW LPAREN Expression RPAREN Block
 DoWhileStmt ::= DO_KW Block WHILE_KW LPAREN Expression RPAREN SEMI

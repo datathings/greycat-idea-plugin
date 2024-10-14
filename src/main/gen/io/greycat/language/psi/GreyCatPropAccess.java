@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface GreyCatPropAccess extends PsiElement {
 
   @NotNull
-  GreyCatIdentOrKeyword getIdentOrKeyword();
+  GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit();
 
 }

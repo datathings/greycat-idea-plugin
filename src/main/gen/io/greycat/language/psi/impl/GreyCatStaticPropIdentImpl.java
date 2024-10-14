@@ -28,15 +28,9 @@ public class GreyCatStaticPropIdentImpl extends ASTWrapperPsiElement implements 
   }
 
   @Override
-  @Nullable
-  public GreyCatIdentOrKeyword getIdentOrKeyword() {
-    return findChildByClass(GreyCatIdentOrKeyword.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
+  @NotNull
+  public GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit() {
+    return findNotNullChildByClass(GreyCatIdentOrKeywordOrStrLit.class);
   }
 
 }

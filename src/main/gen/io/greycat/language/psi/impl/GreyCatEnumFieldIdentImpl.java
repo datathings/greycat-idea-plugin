@@ -29,8 +29,8 @@ public class GreyCatEnumFieldIdentImpl extends ASTWrapperPsiElement implements G
 
   @Override
   @NotNull
-  public GreyCatIdentOrKeyword getIdentOrKeyword() {
-    return findNotNullChildByClass(GreyCatIdentOrKeyword.class);
+  public GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit() {
+    return findNotNullChildByClass(GreyCatIdentOrKeywordOrStrLit.class);
   }
 
 }

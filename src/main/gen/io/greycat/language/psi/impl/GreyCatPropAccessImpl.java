@@ -29,8 +29,8 @@ public class GreyCatPropAccessImpl extends ASTWrapperPsiElement implements GreyC
 
   @Override
   @NotNull
-  public GreyCatIdentOrKeyword getIdentOrKeyword() {
-    return findNotNullChildByClass(GreyCatIdentOrKeyword.class);
+  public GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit() {
+    return findNotNullChildByClass(GreyCatIdentOrKeywordOrStrLit.class);
   }
 
 }
