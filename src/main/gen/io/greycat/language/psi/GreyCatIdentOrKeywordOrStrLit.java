@@ -11,6 +11,6 @@ public interface GreyCatIdentOrKeywordOrStrLit extends PsiElement {
   GreyCatIdentOrKeyword getIdentOrKeyword();
 
   @Nullable
-  PsiElement getString();
+  GreyCatTemplateString getTemplateString();
 
 }

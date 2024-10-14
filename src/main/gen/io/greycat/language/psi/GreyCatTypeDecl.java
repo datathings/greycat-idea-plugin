@@ -16,8 +16,8 @@ public interface GreyCatTypeDecl extends PsiElement {
   @Nullable
   GreyCatTypeExtends getTypeExtends();
 
-  @Nullable
-  GreyCatTypeFields getTypeFields();
+  @NotNull
+  List<GreyCatTypeField> getTypeFieldList();
 
   @NotNull
   GreyCatTypeIdent getTypeIdent();

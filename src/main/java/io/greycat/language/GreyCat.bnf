@@ -1,6 +1,6 @@
 {
     parserClass="io.greycat.language.parser.GreyCatParser"
-//    parserUtilClass="io.greycat.language.parser.GreyCatParserUtil"
+    parserUtilClass="io.greycat.language.parser.GreyCatParserUtil"
 
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
 
@@ -127,7 +127,7 @@
         // non-terminals
         IDENTIFIER = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
         WHITE_SPACE = 'regexp:\s+'
-        STRING = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\")"
+        STRING = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
         NUMBER='regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
         LINE_COMMENT='regexp://[^\r\n]*'
         BLOCK_COMMENT='regexp:/\*(.|\n)*\*/'
@@ -167,10 +167,10 @@ FnParamIdent ::= IdentOrKeyword
 // to report the errors (if any)
 Flags ::= PRIVATE_KW | ABSTRACT_KW | STATIC_KW | NATIVE_KW
 
-TypeDecl ::= Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeFields? RCURLY
+TypeDecl ::= Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeField* RCURLY
 GenericParams ::= LT TypeSpecifier (COMMA TypeSpecifier)* GT
 TypeExtends ::= EXTENDS_KW TypeSpecifier
-TypeFields ::= (TypeAttr | TypeMethod)*
+TypeField ::= TypeAttr | TypeMethod
 TypeAttr ::= Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
 TypeMethod ::= Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
 
@@ -335,7 +335,7 @@ IdentOrKeyword ::=
     | BuiltInType
     | NumAppendix
     | IDENTIFIER
-IdentOrKeywordOrStrLit ::= IdentOrKeyword | STRING
+IdentOrKeywordOrStrLit ::= TemplateString | IdentOrKeyword
 
 Literal ::= StringLit | (PLUS|MINUS)? NUMBER NumAppendix? | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
 StringLit ::= TemplateString | STRING

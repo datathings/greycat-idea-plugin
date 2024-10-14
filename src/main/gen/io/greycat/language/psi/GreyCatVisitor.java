@@ -347,7 +347,7 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitTypeFields(@NotNull GreyCatTypeFields o) {
+  public void visitTypeField(@NotNull GreyCatTypeField o) {
     visitPsiElement(o);
   }
 

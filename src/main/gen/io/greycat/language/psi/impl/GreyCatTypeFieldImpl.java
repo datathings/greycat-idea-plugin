@@ -11,14 +11,14 @@ import static io.greycat.language.psi.GreyCatTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.greycat.language.psi.*;
 
-public class GreyCatTypeFieldsImpl extends ASTWrapperPsiElement implements GreyCatTypeFields {
+public class GreyCatTypeFieldImpl extends ASTWrapperPsiElement implements GreyCatTypeField {
 
-  public GreyCatTypeFieldsImpl(@NotNull ASTNode node) {
+  public GreyCatTypeFieldImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GreyCatVisitor visitor) {
-    visitor.visitTypeFields(this);
+    visitor.visitTypeField(this);
   }
 
   @Override
@@ -28,15 +28,15 @@ public class GreyCatTypeFieldsImpl extends ASTWrapperPsiElement implements GreyC
   }
 
   @Override
-  @NotNull
-  public List<GreyCatTypeAttr> getTypeAttrList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatTypeAttr.class);
+  @Nullable
+  public GreyCatTypeAttr getTypeAttr() {
+    return findChildByClass(GreyCatTypeAttr.class);
   }
 
   @Override
-  @NotNull
-  public List<GreyCatTypeMethod> getTypeMethodList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatTypeMethod.class);
+  @Nullable
+  public GreyCatTypeMethod getTypeMethod() {
+    return findChildByClass(GreyCatTypeMethod.class);
   }
 
 }

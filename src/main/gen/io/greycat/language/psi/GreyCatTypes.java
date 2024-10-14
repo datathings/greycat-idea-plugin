@@ -93,7 +93,7 @@ public interface GreyCatTypes {
   IElementType TYPE_ATTR = new GreyCatElementType("TYPE_ATTR");
   IElementType TYPE_DECL = new GreyCatElementType("TYPE_DECL");
   IElementType TYPE_EXTENDS = new GreyCatElementType("TYPE_EXTENDS");
-  IElementType TYPE_FIELDS = new GreyCatElementType("TYPE_FIELDS");
+  IElementType TYPE_FIELD = new GreyCatElementType("TYPE_FIELD");
   IElementType TYPE_IDENT = new GreyCatElementType("TYPE_IDENT");
   IElementType TYPE_METHOD = new GreyCatElementType("TYPE_METHOD");
   IElementType TYPE_SPEC = new GreyCatElementType("TYPE_SPEC");
@@ -477,8 +477,8 @@ public interface GreyCatTypes {
       else if (type == TYPE_EXTENDS) {
         return new GreyCatTypeExtendsImpl(node);
       }
-      else if (type == TYPE_FIELDS) {
-        return new GreyCatTypeFieldsImpl(node);
+      else if (type == TYPE_FIELD) {
+        return new GreyCatTypeFieldImpl(node);
       }
       else if (type == TYPE_IDENT) {
         return new GreyCatTypeIdentImpl(node);

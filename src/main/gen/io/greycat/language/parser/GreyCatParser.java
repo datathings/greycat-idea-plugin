@@ -4,7 +4,7 @@ package io.greycat.language.parser;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
 import static io.greycat.language.psi.GreyCatTypes.*;
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
+import static io.greycat.language.parser.GreyCatParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
@@ -1103,13 +1103,13 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword | STRING
+  // TemplateString | IdentOrKeyword
   public static boolean IdentOrKeywordOrStrLit(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "IdentOrKeywordOrStrLit")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, IDENT_OR_KEYWORD_OR_STR_LIT, "<ident or keyword or str lit>");
-    r = IdentOrKeyword(b, l + 1);
-    if (!r) r = consumeToken(b, STRING);
+    r = TemplateString(b, l + 1);
+    if (!r) r = IdentOrKeyword(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -2120,7 +2120,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeFields? RCURLY
+  // Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeField* RCURLY
   public static boolean TypeDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeDecl")) return false;
     boolean r;
@@ -2182,10 +2182,14 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // TypeFields?
+  // TypeField*
   private static boolean TypeDecl_9(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeDecl_9")) return false;
-    TypeFields(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!TypeField(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "TypeDecl_9", c)) break;
+    }
     return true;
   }
 
@@ -2203,25 +2207,14 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (TypeAttr | TypeMethod)*
-  public static boolean TypeFields(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeFields")) return false;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_FIELDS, "<type fields>");
-    while (true) {
-      int c = current_position_(b);
-      if (!TypeFields_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "TypeFields", c)) break;
-    }
-    exit_section_(b, l, m, true, false, null);
-    return true;
-  }
-
   // TypeAttr | TypeMethod
-  private static boolean TypeFields_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeFields_0")) return false;
+  public static boolean TypeField(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeField")) return false;
     boolean r;
+    Marker m = enter_section_(b, l, _NONE_, TYPE_FIELD, "<type field>");
     r = TypeAttr(b, l + 1);
     if (!r) r = TypeMethod(b, l + 1);
+    exit_section_(b, l, m, r, false, null);
     return r;
   }
 

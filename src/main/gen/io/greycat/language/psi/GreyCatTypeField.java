@@ -5,12 +5,12 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GreyCatTypeFields extends PsiElement {
+public interface GreyCatTypeField extends PsiElement {
 
-  @NotNull
-  List<GreyCatTypeAttr> getTypeAttrList();
+  @Nullable
+  GreyCatTypeAttr getTypeAttr();
 
-  @NotNull
-  List<GreyCatTypeMethod> getTypeMethodList();
+  @Nullable
+  GreyCatTypeMethod getTypeMethod();
 
 }

@@ -35,8 +35,8 @@ public class GreyCatIdentOrKeywordOrStrLitImpl extends ASTWrapperPsiElement impl
 
   @Override
   @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
+  public GreyCatTemplateString getTemplateString() {
+    return findChildByClass(GreyCatTemplateString.class);
   }
 
 }

@@ -46,9 +46,9 @@ public class GreyCatTypeDeclImpl extends ASTWrapperPsiElement implements GreyCat
   }
 
   @Override
-  @Nullable
-  public GreyCatTypeFields getTypeFields() {
-    return findChildByClass(GreyCatTypeFields.class);
+  @NotNull
+  public List<GreyCatTypeField> getTypeFieldList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatTypeField.class);
   }
 
   @Override
