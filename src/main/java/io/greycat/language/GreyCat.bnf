@@ -270,10 +270,8 @@ PrimaryExpr ::=
     Literal
     | FnExpr
     | TupleExpr
-    | OneFieldObj
-    | TwoFieldsObj
-    | ThreeFieldsObj
-    | ArrayExpr
+    | NativeObjExpr
+    | ShortArrayExpr
     | TableExpr
     | ParenExpr
     | ObjectExpr
@@ -286,16 +284,12 @@ ObjectProps ::= ObjectProp (COMMA ObjectProp)* COMMA?
 ObjectProp ::= ObjectPropIdent COLON Expression
 ObjectPropIdent ::= IdentOrKeyword | STRING
 
-ArrayExpr ::= ShortArrayExpr | ArrayObj
-ArrayObj ::= ((ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? COMMA? RCURLY)
 ShortArrayExpr ::= LSQUARE Arguments? COMMA? RSQUARE
 FnExpr ::= FN_KW LPAREN FnParams? RPAREN Block
 TupleExpr ::= LPAREN Expression COMMA Expression COMMA? RPAREN
 TableExpr ::= TypeIdent LCURLY TableExprRows? COMMA? RCURLY
 TableExprRows ::= ShortArrayExpr (COMMA ShortArrayExpr)*
-OneFieldObj ::= TypeIdent LCURLY Expression? COMMA? RCURLY
-TwoFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA? RCURLY
-ThreeFieldsObj ::= TypeIdent LCURLY Expression COMMA Expression COMMA Expression COMMA? RCURLY
+NativeObjExpr ::= TypeIdent LCURLY Arguments? COMMA? RCURLY
 
 TypeSpec ::= COLON TypeSpecifier
 TypeSpecifier ::= TYPE_OF_KW? (IdentOrKeyword COLON_COLON)? IdentOrKeyword (LT TypeSpecList GT)? QUESTION?

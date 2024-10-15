@@ -9,8 +9,6 @@ import io.greycat.language.psi.impl.*;
 public interface GreyCatTypes {
 
   IElementType ARGUMENTS = new GreyCatElementType("ARGUMENTS");
-  IElementType ARRAY_EXPR = new GreyCatElementType("ARRAY_EXPR");
-  IElementType ARRAY_OBJ = new GreyCatElementType("ARRAY_OBJ");
   IElementType ATTR_IDENT = new GreyCatElementType("ATTR_IDENT");
   IElementType AT_STMT = new GreyCatElementType("AT_STMT");
   IElementType BIN_OP = new GreyCatElementType("BIN_OP");
@@ -57,13 +55,13 @@ public interface GreyCatTypes {
   IElementType LITERAL = new GreyCatElementType("LITERAL");
   IElementType METHOD_IDENT = new GreyCatElementType("METHOD_IDENT");
   IElementType MODULE_STATEMENT = new GreyCatElementType("MODULE_STATEMENT");
+  IElementType NATIVE_OBJ_EXPR = new GreyCatElementType("NATIVE_OBJ_EXPR");
   IElementType NUM_APPENDIX = new GreyCatElementType("NUM_APPENDIX");
   IElementType OBJECT_EXPR = new GreyCatElementType("OBJECT_EXPR");
   IElementType OBJECT_PROP = new GreyCatElementType("OBJECT_PROP");
   IElementType OBJECT_PROPS = new GreyCatElementType("OBJECT_PROPS");
   IElementType OBJECT_PROP_IDENT = new GreyCatElementType("OBJECT_PROP_IDENT");
   IElementType OFFSET_ACCESS = new GreyCatElementType("OFFSET_ACCESS");
-  IElementType ONE_FIELD_OBJ = new GreyCatElementType("ONE_FIELD_OBJ");
   IElementType PAREN_EXPR = new GreyCatElementType("PAREN_EXPR");
   IElementType POSTFIX_EXPR = new GreyCatElementType("POSTFIX_EXPR");
   IElementType PRAGMA = new GreyCatElementType("PRAGMA");
@@ -84,11 +82,9 @@ public interface GreyCatTypes {
   IElementType TABLE_EXPR = new GreyCatElementType("TABLE_EXPR");
   IElementType TABLE_EXPR_ROWS = new GreyCatElementType("TABLE_EXPR_ROWS");
   IElementType TEMPLATE_STRING = new GreyCatElementType("TEMPLATE_STRING");
-  IElementType THREE_FIELDS_OBJ = new GreyCatElementType("THREE_FIELDS_OBJ");
   IElementType THROW_STMT = new GreyCatElementType("THROW_STMT");
   IElementType TRY_STMT = new GreyCatElementType("TRY_STMT");
   IElementType TUPLE_EXPR = new GreyCatElementType("TUPLE_EXPR");
-  IElementType TWO_FIELDS_OBJ = new GreyCatElementType("TWO_FIELDS_OBJ");
   IElementType TYPE_ALIAS = new GreyCatElementType("TYPE_ALIAS");
   IElementType TYPE_ATTR = new GreyCatElementType("TYPE_ATTR");
   IElementType TYPE_DECL = new GreyCatElementType("TYPE_DECL");
@@ -107,7 +103,6 @@ public interface GreyCatTypes {
   IElementType ABSTRACT_KW = new GreyCatTokenType("abstract");
   IElementType AMP = new GreyCatTokenType("&");
   IElementType AMP_AMP = new GreyCatTokenType("&&");
-  IElementType ARRAY_ID = new GreyCatTokenType("ARRAY_ID");
   IElementType ARROW = new GreyCatTokenType("->");
   IElementType AS_KW = new GreyCatTokenType("as");
   IElementType AT = new GreyCatTokenType("@");
@@ -122,7 +117,6 @@ public interface GreyCatTypes {
   IElementType COLON_COLON = new GreyCatTokenType("::");
   IElementType COMMA = new GreyCatTokenType(",");
   IElementType CONTINUE_KW = new GreyCatTokenType("continue");
-  IElementType CORE_ARRAY_ID = new GreyCatTokenType("CORE_ARRAY_ID");
   IElementType DOLLAR = new GreyCatTokenType("$");
   IElementType DOT = new GreyCatTokenType(".");
   IElementType DOT_DOT = new GreyCatTokenType("..");
@@ -224,12 +218,6 @@ public interface GreyCatTypes {
       IElementType type = node.getElementType();
       if (type == ARGUMENTS) {
         return new GreyCatArgumentsImpl(node);
-      }
-      else if (type == ARRAY_EXPR) {
-        return new GreyCatArrayExprImpl(node);
-      }
-      else if (type == ARRAY_OBJ) {
-        return new GreyCatArrayObjImpl(node);
       }
       else if (type == ATTR_IDENT) {
         return new GreyCatAttrIdentImpl(node);
@@ -369,6 +357,9 @@ public interface GreyCatTypes {
       else if (type == MODULE_STATEMENT) {
         return new GreyCatModuleStatementImpl(node);
       }
+      else if (type == NATIVE_OBJ_EXPR) {
+        return new GreyCatNativeObjExprImpl(node);
+      }
       else if (type == NUM_APPENDIX) {
         return new GreyCatNumAppendixImpl(node);
       }
@@ -386,9 +377,6 @@ public interface GreyCatTypes {
       }
       else if (type == OFFSET_ACCESS) {
         return new GreyCatOffsetAccessImpl(node);
-      }
-      else if (type == ONE_FIELD_OBJ) {
-        return new GreyCatOneFieldObjImpl(node);
       }
       else if (type == PAREN_EXPR) {
         return new GreyCatParenExprImpl(node);
@@ -450,9 +438,6 @@ public interface GreyCatTypes {
       else if (type == TEMPLATE_STRING) {
         return new GreyCatTemplateStringImpl(node);
       }
-      else if (type == THREE_FIELDS_OBJ) {
-        return new GreyCatThreeFieldsObjImpl(node);
-      }
       else if (type == THROW_STMT) {
         return new GreyCatThrowStmtImpl(node);
       }
@@ -461,9 +446,6 @@ public interface GreyCatTypes {
       }
       else if (type == TUPLE_EXPR) {
         return new GreyCatTupleExprImpl(node);
-      }
-      else if (type == TWO_FIELDS_OBJ) {
-        return new GreyCatTwoFieldsObjImpl(node);
       }
       else if (type == TYPE_ALIAS) {
         return new GreyCatTypeAliasImpl(node);

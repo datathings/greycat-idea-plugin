@@ -5,10 +5,10 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GreyCatOneFieldObj extends PsiElement {
+public interface GreyCatNativeObjExpr extends PsiElement {
 
   @Nullable
-  GreyCatExpression getExpression();
+  GreyCatArguments getArguments();
 
   @NotNull
   GreyCatTypeIdent getTypeIdent();

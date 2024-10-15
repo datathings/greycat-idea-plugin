@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface GreyCatPrimaryExpr extends PsiElement {
 
   @Nullable
-  GreyCatArrayExpr getArrayExpr();
-
-  @Nullable
   GreyCatFnExpr getFnExpr();
 
   @Nullable
@@ -20,24 +17,21 @@ public interface GreyCatPrimaryExpr extends PsiElement {
   GreyCatLiteral getLiteral();
 
   @Nullable
-  GreyCatObjectExpr getObjectExpr();
+  GreyCatNativeObjExpr getNativeObjExpr();
 
   @Nullable
-  GreyCatOneFieldObj getOneFieldObj();
+  GreyCatObjectExpr getObjectExpr();
 
   @Nullable
   GreyCatParenExpr getParenExpr();
 
   @Nullable
+  GreyCatShortArrayExpr getShortArrayExpr();
+
+  @Nullable
   GreyCatTableExpr getTableExpr();
 
   @Nullable
-  GreyCatThreeFieldsObj getThreeFieldsObj();
-
-  @Nullable
   GreyCatTupleExpr getTupleExpr();
-
-  @Nullable
-  GreyCatTwoFieldsObj getTwoFieldsObj();
 
 }

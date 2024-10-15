@@ -70,57 +70,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // ShortArrayExpr | ArrayObj
-  public static boolean ArrayExpr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayExpr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ARRAY_EXPR, "<array expr>");
-    r = ShortArrayExpr(b, l + 1);
-    if (!r) r = ArrayObj(b, l + 1);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // (ARRAY_ID | CORE_ARRAY_ID) LCURLY Arguments? COMMA? RCURLY
-  public static boolean ArrayObj(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayObj")) return false;
-    if (!nextTokenIs(b, "<array obj>", ARRAY_ID, CORE_ARRAY_ID)) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ARRAY_OBJ, "<array obj>");
-    r = ArrayObj_0(b, l + 1);
-    r = r && consumeToken(b, LCURLY);
-    r = r && ArrayObj_2(b, l + 1);
-    r = r && ArrayObj_3(b, l + 1);
-    r = r && consumeToken(b, RCURLY);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // ARRAY_ID | CORE_ARRAY_ID
-  private static boolean ArrayObj_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayObj_0")) return false;
-    boolean r;
-    r = consumeToken(b, ARRAY_ID);
-    if (!r) r = consumeToken(b, CORE_ARRAY_ID);
-    return r;
-  }
-
-  // Arguments?
-  private static boolean ArrayObj_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayObj_2")) return false;
-    Arguments(b, l + 1);
-    return true;
-  }
-
-  // COMMA?
-  private static boolean ArrayObj_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ArrayObj_3")) return false;
-    consumeToken(b, COMMA);
-    return true;
-  }
-
-  /* ********************************************************** */
   // AT_KW LPAREN Expression RPAREN Block
   public static boolean AtStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "AtStmt")) return false;
@@ -1252,6 +1201,35 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // TypeIdent LCURLY Arguments? COMMA? RCURLY
+  public static boolean NativeObjExpr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "NativeObjExpr")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, NATIVE_OBJ_EXPR, "<native obj expr>");
+    r = TypeIdent(b, l + 1);
+    r = r && consumeToken(b, LCURLY);
+    r = r && NativeObjExpr_2(b, l + 1);
+    r = r && NativeObjExpr_3(b, l + 1);
+    r = r && consumeToken(b, RCURLY);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+  }
+
+  // Arguments?
+  private static boolean NativeObjExpr_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "NativeObjExpr_2")) return false;
+    Arguments(b, l + 1);
+    return true;
+  }
+
+  // COMMA?
+  private static boolean NativeObjExpr_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "NativeObjExpr_3")) return false;
+    consumeToken(b, COMMA);
+    return true;
+  }
+
+  /* ********************************************************** */
   // D_US|D_MS|D_S|D_MIN|D_HR|D_DAY|'f'|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID|TIME_ID
   public static boolean NumAppendix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "NumAppendix")) return false;
@@ -1388,35 +1366,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   private static boolean OffsetAccess_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "OffsetAccess_0")) return false;
     consumeToken(b, QUESTION);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // TypeIdent LCURLY Expression? COMMA? RCURLY
-  public static boolean OneFieldObj(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "OneFieldObj")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, ONE_FIELD_OBJ, "<one field obj>");
-    r = TypeIdent(b, l + 1);
-    r = r && consumeToken(b, LCURLY);
-    r = r && OneFieldObj_2(b, l + 1);
-    r = r && OneFieldObj_3(b, l + 1);
-    r = r && consumeToken(b, RCURLY);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // Expression?
-  private static boolean OneFieldObj_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "OneFieldObj_2")) return false;
-    Expression(b, l + 1);
-    return true;
-  }
-
-  // COMMA?
-  private static boolean OneFieldObj_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "OneFieldObj_3")) return false;
-    consumeToken(b, COMMA);
     return true;
   }
 
@@ -1598,10 +1547,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   // Literal
   //     | FnExpr
   //     | TupleExpr
-  //     | OneFieldObj
-  //     | TwoFieldsObj
-  //     | ThreeFieldsObj
-  //     | ArrayExpr
+  //     | NativeObjExpr
+  //     | ShortArrayExpr
   //     | TableExpr
   //     | ParenExpr
   //     | ObjectExpr
@@ -1613,10 +1560,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     r = Literal(b, l + 1);
     if (!r) r = FnExpr(b, l + 1);
     if (!r) r = TupleExpr(b, l + 1);
-    if (!r) r = OneFieldObj(b, l + 1);
-    if (!r) r = TwoFieldsObj(b, l + 1);
-    if (!r) r = ThreeFieldsObj(b, l + 1);
-    if (!r) r = ArrayExpr(b, l + 1);
+    if (!r) r = NativeObjExpr(b, l + 1);
+    if (!r) r = ShortArrayExpr(b, l + 1);
     if (!r) r = TableExpr(b, l + 1);
     if (!r) r = ParenExpr(b, l + 1);
     if (!r) r = ObjectExpr(b, l + 1);
@@ -1946,32 +1891,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TypeIdent LCURLY Expression COMMA Expression COMMA Expression COMMA? RCURLY
-  public static boolean ThreeFieldsObj(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ThreeFieldsObj")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, THREE_FIELDS_OBJ, "<three fields obj>");
-    r = TypeIdent(b, l + 1);
-    r = r && consumeToken(b, LCURLY);
-    r = r && Expression(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && Expression(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && Expression(b, l + 1);
-    r = r && ThreeFieldsObj_7(b, l + 1);
-    r = r && consumeToken(b, RCURLY);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // COMMA?
-  private static boolean ThreeFieldsObj_7(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "ThreeFieldsObj_7")) return false;
-    consumeToken(b, COMMA);
-    return true;
-  }
-
-  /* ********************************************************** */
   // THROW_KW Expression SEMI
   public static boolean ThrowStmt(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ThrowStmt")) return false;
@@ -2019,30 +1938,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   // COMMA?
   private static boolean TupleExpr_4(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TupleExpr_4")) return false;
-    consumeToken(b, COMMA);
-    return true;
-  }
-
-  /* ********************************************************** */
-  // TypeIdent LCURLY Expression COMMA Expression COMMA? RCURLY
-  public static boolean TwoFieldsObj(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TwoFieldsObj")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TWO_FIELDS_OBJ, "<two fields obj>");
-    r = TypeIdent(b, l + 1);
-    r = r && consumeToken(b, LCURLY);
-    r = r && Expression(b, l + 1);
-    r = r && consumeToken(b, COMMA);
-    r = r && Expression(b, l + 1);
-    r = r && TwoFieldsObj_5(b, l + 1);
-    r = r && consumeToken(b, RCURLY);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // COMMA?
-  private static boolean TwoFieldsObj_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TwoFieldsObj_5")) return false;
     consumeToken(b, COMMA);
     return true;
   }

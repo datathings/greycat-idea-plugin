@@ -11,14 +11,6 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitArrayExpr(@NotNull GreyCatArrayExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitArrayObj(@NotNull GreyCatArrayObj o) {
-    visitPsiElement(o);
-  }
-
   public void visitAtStmt(@NotNull GreyCatAtStmt o) {
     visitPsiElement(o);
   }
@@ -203,6 +195,10 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitNativeObjExpr(@NotNull GreyCatNativeObjExpr o) {
+    visitPsiElement(o);
+  }
+
   public void visitNumAppendix(@NotNull GreyCatNumAppendix o) {
     visitPsiElement(o);
   }
@@ -224,10 +220,6 @@ public class GreyCatVisitor extends PsiElementVisitor {
   }
 
   public void visitOffsetAccess(@NotNull GreyCatOffsetAccess o) {
-    visitPsiElement(o);
-  }
-
-  public void visitOneFieldObj(@NotNull GreyCatOneFieldObj o) {
     visitPsiElement(o);
   }
 
@@ -311,10 +303,6 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitThreeFieldsObj(@NotNull GreyCatThreeFieldsObj o) {
-    visitPsiElement(o);
-  }
-
   public void visitThrowStmt(@NotNull GreyCatThrowStmt o) {
     visitPsiElement(o);
   }
@@ -324,10 +312,6 @@ public class GreyCatVisitor extends PsiElementVisitor {
   }
 
   public void visitTupleExpr(@NotNull GreyCatTupleExpr o) {
-    visitPsiElement(o);
-  }
-
-  public void visitTwoFieldsObj(@NotNull GreyCatTwoFieldsObj o) {
     visitPsiElement(o);
   }
 

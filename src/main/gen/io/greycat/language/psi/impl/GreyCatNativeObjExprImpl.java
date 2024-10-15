@@ -11,14 +11,14 @@ import static io.greycat.language.psi.GreyCatTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.greycat.language.psi.*;
 
-public class GreyCatArrayObjImpl extends ASTWrapperPsiElement implements GreyCatArrayObj {
+public class GreyCatNativeObjExprImpl extends ASTWrapperPsiElement implements GreyCatNativeObjExpr {
 
-  public GreyCatArrayObjImpl(@NotNull ASTNode node) {
+  public GreyCatNativeObjExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GreyCatVisitor visitor) {
-    visitor.visitArrayObj(this);
+    visitor.visitNativeObjExpr(this);
   }
 
   @Override
@@ -31,6 +31,12 @@ public class GreyCatArrayObjImpl extends ASTWrapperPsiElement implements GreyCat
   @Nullable
   public GreyCatArguments getArguments() {
     return findChildByClass(GreyCatArguments.class);
+  }
+
+  @Override
+  @NotNull
+  public GreyCatTypeIdent getTypeIdent() {
+    return findNotNullChildByClass(GreyCatTypeIdent.class);
   }
 
 }

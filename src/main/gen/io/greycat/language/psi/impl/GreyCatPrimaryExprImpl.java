@@ -29,12 +29,6 @@ public class GreyCatPrimaryExprImpl extends ASTWrapperPsiElement implements Grey
 
   @Override
   @Nullable
-  public GreyCatArrayExpr getArrayExpr() {
-    return findChildByClass(GreyCatArrayExpr.class);
-  }
-
-  @Override
-  @Nullable
   public GreyCatFnExpr getFnExpr() {
     return findChildByClass(GreyCatFnExpr.class);
   }
@@ -53,14 +47,14 @@ public class GreyCatPrimaryExprImpl extends ASTWrapperPsiElement implements Grey
 
   @Override
   @Nullable
-  public GreyCatObjectExpr getObjectExpr() {
-    return findChildByClass(GreyCatObjectExpr.class);
+  public GreyCatNativeObjExpr getNativeObjExpr() {
+    return findChildByClass(GreyCatNativeObjExpr.class);
   }
 
   @Override
   @Nullable
-  public GreyCatOneFieldObj getOneFieldObj() {
-    return findChildByClass(GreyCatOneFieldObj.class);
+  public GreyCatObjectExpr getObjectExpr() {
+    return findChildByClass(GreyCatObjectExpr.class);
   }
 
   @Override
@@ -71,26 +65,20 @@ public class GreyCatPrimaryExprImpl extends ASTWrapperPsiElement implements Grey
 
   @Override
   @Nullable
+  public GreyCatShortArrayExpr getShortArrayExpr() {
+    return findChildByClass(GreyCatShortArrayExpr.class);
+  }
+
+  @Override
+  @Nullable
   public GreyCatTableExpr getTableExpr() {
     return findChildByClass(GreyCatTableExpr.class);
   }
 
   @Override
   @Nullable
-  public GreyCatThreeFieldsObj getThreeFieldsObj() {
-    return findChildByClass(GreyCatThreeFieldsObj.class);
-  }
-
-  @Override
-  @Nullable
   public GreyCatTupleExpr getTupleExpr() {
     return findChildByClass(GreyCatTupleExpr.class);
-  }
-
-  @Override
-  @Nullable
-  public GreyCatTwoFieldsObj getTwoFieldsObj() {
-    return findChildByClass(GreyCatTwoFieldsObj.class);
   }
 
 }
