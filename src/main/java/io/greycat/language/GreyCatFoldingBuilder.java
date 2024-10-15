@@ -16,7 +16,7 @@ import java.util.List;
 import static io.greycat.language.psi.GreyCatTypes.*;
 
 public class GreyCatFoldingBuilder implements FoldingBuilder {
-    private static final TokenSet CURLY_FOLDABLES = TokenSet.create(TYPE_DECL, FN_DECL, ENUM_DECL, TYPE_METHOD, BLOCK, FN_EXPR, ONE_FIELD_OBJ, TWO_FIELDS_OBJ, THREE_FIELDS_OBJ, ARRAY_EXPR, TABLE_EXPR, OBJECT_EXPR, ARRAY_OBJ);
+    private static final TokenSet CURLY_FOLDABLES = TokenSet.create(TYPE_DECL, FN_DECL, ENUM_DECL, TYPE_METHOD, BLOCK, FN_EXPR, NATIVE_OBJ_EXPR, TABLE_EXPR, OBJECT_EXPR, SHORT_ARRAY_EXPR);
     private static final TokenSet SQUARE_FOLDABLES = TokenSet.create(SHORT_ARRAY_EXPR);
 
     @NotNull
