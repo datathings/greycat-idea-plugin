@@ -1,19 +1,22 @@
 plugins {
   id("java")
-  id("org.jetbrains.kotlin.jvm") version "1.9.25"
-  id("org.jetbrains.intellij") version "1.17.4"
-  //id("org.jetbrains.intellij.platform") version "2.0.1"
+  id("org.jetbrains.kotlin.jvm") version "2.0.20"
+  id("org.jetbrains.intellij.platform") version "2.2.1"
 }
 
 group = "io.greycat"
-version = "1.0-SNAPSHOT"
+version = "7.0.0"
 
 repositories {
+  mavenLocal()
   mavenCentral()
-  maven("https://cache-redirector.jetbrains.com/intellij-dependencies")
-//  intellijPlatform {
-//    defaultRepositories()
-//  }
+  maven { url = uri("https://repository.jboss.org/nexus/content/repositories/snapshots") }
+  maven { url = uri("https://repository.jboss.org/nexus/content/groups/public") }
+  maven { url = uri("https://repo.eclipse.org/content/repositories/lsp4mp-snapshots") }
+  maven { url = uri("https://repo.eclipse.org/content/repositories/lsp4mp-releases") }
+  intellijPlatform {
+    defaultRepositories()
+  }
 }
 
 sourceSets {
@@ -24,14 +27,24 @@ sourceSets {
   }
 }
 
+dependencies {
+  intellijPlatform {
+    intellijIdeaCommunity("2023.3")
+    plugins("com.redhat.devtools.lsp4ij:0.12.0")
+  }
+  implementation("com.redhat.microprofile:com.redhat.qute.ls:0.17.0") {
+    exclude("org.eclipse.lsp4j")
+  }
+}
+
 // Configure Gradle IntelliJ Plugin
 // Read more: https://plugins.jetbrains.com/docs/intellij/tools-gradle-intellij-plugin.html
-intellij {
-  version.set("2024.1")
-  type.set("CL") // Target IDE Platform
+//intellij {
+  //version.set("2024.1")
+  //type.set("CL") // Target IDE Platform
 
-  plugins.set(listOf("NodeJS"))
-}
+  //plugins.set(listOf("NodeJS"))
+//}
 
 tasks {
   // Set the JVM compatibility versions
