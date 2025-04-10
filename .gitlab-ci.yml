@@ -3,7 +3,7 @@ build:
   script:
     - export VERSION=`greycat build-version`
     - echo "${VERSION}"
-    - ./gradlew -Dorg.gradle.project.version=${VERSION} --build-cache build
+    - ./gradlew -Dorg.gradle.project.version=${VERSION} buildPlugin
     - ./publish.sh
   cache:
     key: "$CI_COMMIT_REF_NAME"
