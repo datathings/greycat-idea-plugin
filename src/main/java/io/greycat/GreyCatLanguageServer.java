@@ -29,13 +29,10 @@ public class GreyCatLanguageServer extends OSProcessStreamConnectionProvider {
             // missing LSP installation
             throw new RuntimeException("GreyCat Lang Server not found");
         }
-        GeneralCommandLine commandLine = new GeneralCommandLine();
-        commandLine.setExePath("node");
+        GeneralCommandLine commandLine = new GeneralCommandLine("node", lsp_path, "--stdio");
         commandLine.withParentEnvironmentType(GeneralCommandLine.ParentEnvironmentType.CONSOLE);
         commandLine.withCharset(StandardCharsets.UTF_8);
         commandLine.withWorkDirectory(project.getBasePath());
-        commandLine.addParameter(lsp_path);
-        commandLine.addParameter("--stdio");
         super.setCommandLine(commandLine);
     }
 
