@@ -52,14 +52,14 @@ tasks {
     sourceCompatibility = "17"
     targetCompatibility = "17"
   }
-  withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
-  }
+//  withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+//    kotlinOptions.jvmTarget = "17"
+//  }
 
-  patchPluginXml {
-    sinceBuild.set("232")
-    untilBuild.set("260.*")
-  }
+//  patchPluginXml {
+//    sinceBuild.set("232")
+//    untilBuild.set("260.*")
+//  }
 
   signPlugin {
     certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
