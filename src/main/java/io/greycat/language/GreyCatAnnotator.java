@@ -21,33 +21,33 @@ public class GreyCatAnnotator implements Annotator {
 
         final IElementType type = element.getNode().getElementType();
         if (type == GreyCatTypes.TYPE_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.TYPE);
+            setHighlighting(holder, GreyCatColors.TYPE);
         } else if (type == GreyCatTypes.ATTR_IDENT) {
             PsiElement firstChild = element.getParent().getFirstChild();
             if (firstChild == null || firstChild.equals(element)) {
-                setHighlighting(holder, GreyCatHighlighterColors.INSTANCE_FIELD_DECLARATION);
+                setHighlighting(holder, GreyCatColors.INSTANCE_FIELD_DECLARATION);
             } else {
-                setHighlighting(holder, GreyCatHighlighterColors.STATIC_FIELD_DECLARATION);
+                setHighlighting(holder, GreyCatColors.STATIC_FIELD_DECLARATION);
             }
         } else if (type == GreyCatTypes.FN_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.FUNCTION_DECL);
+            setHighlighting(holder, GreyCatColors.FUNCTION_DECL);
         } else if (type == GreyCatTypes.ENUM_FIELD_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.ENUM_FIELD);
+            setHighlighting(holder, GreyCatColors.ENUM_FIELD);
         } else if (type == GreyCatTypes.OBJECT_PROP_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.INSTANCE_FIELD_REFERENCE);
+            setHighlighting(holder, GreyCatColors.INSTANCE_FIELD_REFERENCE);
         } else if (type == GreyCatTypes.FN_PARAM_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.PARAMETER_DECLARATION);
+            setHighlighting(holder, GreyCatColors.PARAMETER_DECLARATION);
         } else if (type == GreyCatTypes.VAR_DECL_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.LOCAL_VARIABLE_DECLARATION);
+            setHighlighting(holder, GreyCatColors.LOCAL_VARIABLE_DECLARATION);
         } else if (type == GreyCatTypes.METHOD_IDENT) {
             PsiElement firstChild = element.getParent().getFirstChild();
             if (firstChild != null && firstChild.getText().equals("static")) {
-                setHighlighting(holder, GreyCatHighlighterColors.STATIC_METHOD_DECLARATION);
+                setHighlighting(holder, GreyCatColors.STATIC_METHOD_DECLARATION);
                 return;
             }
-            setHighlighting(holder, GreyCatHighlighterColors.INSTANCE_METHOD_DECLARATION);
+            setHighlighting(holder, GreyCatColors.INSTANCE_METHOD_DECLARATION);
         } else if (type == GreyCatTypes.PRAGMA_IDENT) {
-            setHighlighting(holder, GreyCatHighlighterColors.ANNOTATION);
+            setHighlighting(holder, GreyCatColors.ANNOTATION);
         }
     }
 

@@ -17,7 +17,6 @@ import java.util.Map;
 import static io.greycat.language.psi.GreyCatTypes.*;
 import static io.greycat.language.psi.GreyCatTypesExt.*;
 
-
 public class GreyCatSyntaxHighlighter extends SyntaxHighlighterBase {
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
 
@@ -51,7 +50,11 @@ public class GreyCatSyntaxHighlighter extends SyntaxHighlighterBase {
         ATTRIBUTES.put(ARROW, GreyCatColors.FAT_ARROW);
 
         ATTRIBUTES.put(LINE_COMMENT, GreyCatColors.LINE_COMMENT);
-        ATTRIBUTES.put(MULTI_LINE_COMMENT, GreyCatColors.BLOCK_COMMENT);
+        ATTRIBUTES.put(DOC_COMMENT, GreyCatColors.DOC_COMMENT);
+
+        ATTRIBUTES.put(MULTI_LINE_COMMENT_START, GreyCatColors.BLOCK_COMMENT);
+        ATTRIBUTES.put(MULTI_LINE_COMMENT_END, GreyCatColors.BLOCK_COMMENT);
+        ATTRIBUTES.put(MULTI_LINE_COMMENT_BODY, GreyCatColors.BLOCK_COMMENT);
 
         // Annotator API to specify type/enum/fn
         ATTRIBUTES.put(TYPE_IDENT, GreyCatColors.TYPE);

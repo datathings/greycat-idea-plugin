@@ -157,5 +157,9 @@ public final class GreyCatColors {
 
     public static final TextAttributesKey LOCAL_FUNCTION_REFERENCE =
             createTextAttributesKey(GREYCAT_LOCAL_FUNCTION_REFERENCE, LOCAL_VARIABLE_REFERENCE);
+
+    public static final TextAttributesKey FUNCTION_DECL =
+            createTextAttributesKey(GREYCAT_FUNCTION_CALL, DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
+
 }
 
