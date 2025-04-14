@@ -10,7 +10,4 @@ public interface GreyCatCatchStmt extends PsiElement {
   @NotNull
   GreyCatBlock getBlock();
 
-  @Nullable
-  PsiElement getIdentifier();
-
 }

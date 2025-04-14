@@ -3,9 +3,8 @@ package io.greycat.language.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-
-import static com.intellij.lang.parser.GeneratedParserUtilBase.*;
 import static io.greycat.language.psi.GreyCatTypes.*;
+import static io.greycat.language.parser.GreyCatParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.tree.TokenSet;
@@ -373,55 +372,76 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField SEMI)* RCURLY
+  // DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField (SEMI | COMMA))* RCURLY
   public static boolean EnumDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumDecl")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, ENUM_DECL, "<enum decl>");
     r = EnumDecl_0(b, l + 1);
     r = r && EnumDecl_1(b, l + 1);
+    r = r && EnumDecl_2(b, l + 1);
     r = r && consumeToken(b, ENUM_KW);
     r = r && EnumIdent(b, l + 1);
     r = r && consumeToken(b, LCURLY);
-    r = r && EnumDecl_5(b, l + 1);
+    r = r && EnumDecl_6(b, l + 1);
     r = r && consumeToken(b, RCURLY);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // Pragmas?
+  // DOC_COMMENT*
   private static boolean EnumDecl_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumDecl_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, DOC_COMMENT)) break;
+      if (!empty_element_parsed_guard_(b, "EnumDecl_0", c)) break;
+    }
+    return true;
+  }
+
+  // Pragmas?
+  private static boolean EnumDecl_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_1")) return false;
     Pragmas(b, l + 1);
     return true;
   }
 
   // PRIVATE_KW?
-  private static boolean EnumDecl_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_1")) return false;
+  private static boolean EnumDecl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_2")) return false;
     consumeToken(b, PRIVATE_KW);
     return true;
   }
 
-  // (EnumField SEMI)*
-  private static boolean EnumDecl_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_5")) return false;
+  // (EnumField (SEMI | COMMA))*
+  private static boolean EnumDecl_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_6")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!EnumDecl_5_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "EnumDecl_5", c)) break;
+      if (!EnumDecl_6_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "EnumDecl_6", c)) break;
     }
     return true;
   }
 
-  // EnumField SEMI
-  private static boolean EnumDecl_5_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_5_0")) return false;
+  // EnumField (SEMI | COMMA)
+  private static boolean EnumDecl_6_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_6_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = EnumField(b, l + 1);
-    r = r && consumeToken(b, SEMI);
+    r = r && EnumDecl_6_0_1(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // SEMI | COMMA
+  private static boolean EnumDecl_6_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_6_0_1")) return false;
+    boolean r;
+    r = consumeToken(b, SEMI);
+    if (!r) r = consumeToken(b, COMMA);
     return r;
   }
 
@@ -571,67 +591,79 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Pragmas? Flags* FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+  // DOC_COMMENT* Pragmas? Flags* FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
   public static boolean FnDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FnDecl")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, FN_DECL, "<fn decl>");
     r = FnDecl_0(b, l + 1);
     r = r && FnDecl_1(b, l + 1);
+    r = r && FnDecl_2(b, l + 1);
     r = r && FnOrTask(b, l + 1);
     r = r && FnIdent(b, l + 1);
-    r = r && FnDecl_4(b, l + 1);
+    r = r && FnDecl_5(b, l + 1);
     r = r && consumeToken(b, LPAREN);
-    r = r && FnDecl_6(b, l + 1);
+    r = r && FnDecl_7(b, l + 1);
     r = r && consumeToken(b, RPAREN);
-    r = r && FnDecl_8(b, l + 1);
     r = r && FnDecl_9(b, l + 1);
+    r = r && FnDecl_10(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // Pragmas?
+  // DOC_COMMENT*
   private static boolean FnDecl_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "FnDecl_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, DOC_COMMENT)) break;
+      if (!empty_element_parsed_guard_(b, "FnDecl_0", c)) break;
+    }
+    return true;
+  }
+
+  // Pragmas?
+  private static boolean FnDecl_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "FnDecl_1")) return false;
     Pragmas(b, l + 1);
     return true;
   }
 
   // Flags*
-  private static boolean FnDecl_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "FnDecl_1")) return false;
+  private static boolean FnDecl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "FnDecl_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!Flags(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "FnDecl_1", c)) break;
+      if (!empty_element_parsed_guard_(b, "FnDecl_2", c)) break;
     }
     return true;
   }
 
   // GenericParams?
-  private static boolean FnDecl_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "FnDecl_4")) return false;
+  private static boolean FnDecl_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "FnDecl_5")) return false;
     GenericParams(b, l + 1);
     return true;
   }
 
   // FnParams?
-  private static boolean FnDecl_6(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "FnDecl_6")) return false;
+  private static boolean FnDecl_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "FnDecl_7")) return false;
     FnParams(b, l + 1);
     return true;
   }
 
   // TypeSpec?
-  private static boolean FnDecl_8(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "FnDecl_8")) return false;
+  private static boolean FnDecl_9(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "FnDecl_9")) return false;
     TypeSpec(b, l + 1);
     return true;
   }
 
   // Block | SEMI
-  private static boolean FnDecl_9(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "FnDecl_9")) return false;
+  private static boolean FnDecl_10(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "FnDecl_10")) return false;
     boolean r;
     r = Block(b, l + 1);
     if (!r) r = consumeToken(b, SEMI);
@@ -1184,7 +1216,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | TypeAlias | VarDecl | EmptyStmt
+  // PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | VarDecl | EmptyStmt
   public static boolean ModuleStatement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ModuleStatement")) return false;
     boolean r;
@@ -1194,7 +1226,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     if (!r) r = FnDecl(b, l + 1);
     if (!r) r = TypeDecl(b, l + 1);
     if (!r) r = EnumDecl(b, l + 1);
-    if (!r) r = TypeAlias(b, l + 1);
     if (!r) r = VarDecl(b, l + 1);
     if (!r) r = EmptyStmt(b, l + 1);
     exit_section_(b, l, m, r, false, null);
@@ -1944,41 +1975,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // TypeSpecifier (BAR TypeSpecifier)* SEMI
-  public static boolean TypeAlias(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeAlias")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, TYPE_ALIAS, "<type alias>");
-    r = TypeSpecifier(b, l + 1);
-    r = r && TypeAlias_1(b, l + 1);
-    r = r && consumeToken(b, SEMI);
-    exit_section_(b, l, m, r, false, null);
-    return r;
-  }
-
-  // (BAR TypeSpecifier)*
-  private static boolean TypeAlias_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeAlias_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!TypeAlias_1_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "TypeAlias_1", c)) break;
-    }
-    return true;
-  }
-
-  // BAR TypeSpecifier
-  private static boolean TypeAlias_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeAlias_1_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, BAR);
-    r = r && TypeSpecifier(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
   // Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
   public static boolean TypeAttr(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeAttr")) return false;
@@ -2016,7 +2012,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeField* RCURLY
+  // DOC_COMMENT* Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeField* RCURLY
   public static boolean TypeDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeDecl")) return false;
     boolean r;
@@ -2025,66 +2021,78 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     r = r && TypeDecl_1(b, l + 1);
     r = r && TypeDecl_2(b, l + 1);
     r = r && TypeDecl_3(b, l + 1);
+    r = r && TypeDecl_4(b, l + 1);
     r = r && consumeToken(b, TYPE_KW);
     r = r && TypeIdent(b, l + 1);
-    r = r && TypeDecl_6(b, l + 1);
     r = r && TypeDecl_7(b, l + 1);
+    r = r && TypeDecl_8(b, l + 1);
     r = r && consumeToken(b, LCURLY);
-    r = r && TypeDecl_9(b, l + 1);
+    r = r && TypeDecl_10(b, l + 1);
     r = r && consumeToken(b, RCURLY);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // Pragmas?
+  // DOC_COMMENT*
   private static boolean TypeDecl_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "TypeDecl_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, DOC_COMMENT)) break;
+      if (!empty_element_parsed_guard_(b, "TypeDecl_0", c)) break;
+    }
+    return true;
+  }
+
+  // Pragmas?
+  private static boolean TypeDecl_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_1")) return false;
     Pragmas(b, l + 1);
     return true;
   }
 
   // PRIVATE_KW?
-  private static boolean TypeDecl_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeDecl_1")) return false;
+  private static boolean TypeDecl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_2")) return false;
     consumeToken(b, PRIVATE_KW);
     return true;
   }
 
   // ABSTRACT_KW?
-  private static boolean TypeDecl_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeDecl_2")) return false;
+  private static boolean TypeDecl_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_3")) return false;
     consumeToken(b, ABSTRACT_KW);
     return true;
   }
 
   // NATIVE_KW?
-  private static boolean TypeDecl_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeDecl_3")) return false;
+  private static boolean TypeDecl_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_4")) return false;
     consumeToken(b, NATIVE_KW);
     return true;
   }
 
   // GenericParams?
-  private static boolean TypeDecl_6(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeDecl_6")) return false;
+  private static boolean TypeDecl_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_7")) return false;
     GenericParams(b, l + 1);
     return true;
   }
 
   // TypeExtends?
-  private static boolean TypeDecl_7(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeDecl_7")) return false;
+  private static boolean TypeDecl_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_8")) return false;
     TypeExtends(b, l + 1);
     return true;
   }
 
   // TypeField*
-  private static boolean TypeDecl_9(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "TypeDecl_9")) return false;
+  private static boolean TypeDecl_10(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "TypeDecl_10")) return false;
     while (true) {
       int c = current_position_(b);
       if (!TypeField(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "TypeDecl_9", c)) break;
+      if (!empty_element_parsed_guard_(b, "TypeDecl_10", c)) break;
     }
     return true;
   }
@@ -2506,39 +2514,50 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
+  // DOC_COMMENT* Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
   public static boolean VarDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "VarDecl")) return false;
-    if (!nextTokenIs(b, "<var decl>", AT, VAR_KW)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VAR_DECL, "<var decl>");
     r = VarDecl_0(b, l + 1);
+    r = r && VarDecl_1(b, l + 1);
     r = r && consumeToken(b, VAR_KW);
     r = r && VarDeclIdent(b, l + 1);
-    r = r && VarDecl_3(b, l + 1);
     r = r && VarDecl_4(b, l + 1);
+    r = r && VarDecl_5(b, l + 1);
     r = r && consumeToken(b, SEMI);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
 
-  // Pragmas?
+  // DOC_COMMENT*
   private static boolean VarDecl_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "VarDecl_0")) return false;
+    while (true) {
+      int c = current_position_(b);
+      if (!consumeToken(b, DOC_COMMENT)) break;
+      if (!empty_element_parsed_guard_(b, "VarDecl_0", c)) break;
+    }
+    return true;
+  }
+
+  // Pragmas?
+  private static boolean VarDecl_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_1")) return false;
     Pragmas(b, l + 1);
     return true;
   }
 
   // TypeSpec?
-  private static boolean VarDecl_3(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "VarDecl_3")) return false;
+  private static boolean VarDecl_4(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_4")) return false;
     TypeSpec(b, l + 1);
     return true;
   }
 
   // Initializer?
-  private static boolean VarDecl_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "VarDecl_4")) return false;
+  private static boolean VarDecl_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_5")) return false;
     Initializer(b, l + 1);
     return true;
   }

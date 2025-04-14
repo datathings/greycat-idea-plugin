@@ -85,7 +85,6 @@ public interface GreyCatTypes {
   IElementType THROW_STMT = new GreyCatElementType("THROW_STMT");
   IElementType TRY_STMT = new GreyCatElementType("TRY_STMT");
   IElementType TUPLE_EXPR = new GreyCatElementType("TUPLE_EXPR");
-  IElementType TYPE_ALIAS = new GreyCatElementType("TYPE_ALIAS");
   IElementType TYPE_ATTR = new GreyCatElementType("TYPE_ATTR");
   IElementType TYPE_DECL = new GreyCatElementType("TYPE_DECL");
   IElementType TYPE_EXTENDS = new GreyCatElementType("TYPE_EXTENDS");
@@ -109,7 +108,6 @@ public interface GreyCatTypes {
   IElementType AT_KW = new GreyCatTokenType("at");
   IElementType BAR = new GreyCatTokenType("|");
   IElementType BAR_BAR = new GreyCatTokenType("||");
-  IElementType BLOCK_COMMENT = new GreyCatTokenType("BLOCK_COMMENT");
   IElementType BREAK_KW = new GreyCatTokenType("break");
   IElementType CARET = new GreyCatTokenType("^");
   IElementType CATCH_KW = new GreyCatTokenType("catch");
@@ -117,6 +115,7 @@ public interface GreyCatTypes {
   IElementType COLON_COLON = new GreyCatTokenType("::");
   IElementType COMMA = new GreyCatTokenType(",");
   IElementType CONTINUE_KW = new GreyCatTokenType("continue");
+  IElementType DOC_COMMENT = new GreyCatTokenType("DOC_COMMENT");
   IElementType DOLLAR = new GreyCatTokenType("$");
   IElementType DOT = new GreyCatTokenType(".");
   IElementType DOT_DOT = new GreyCatTokenType("..");
@@ -188,11 +187,9 @@ public interface GreyCatTypes {
   IElementType SKIP_KW = new GreyCatTokenType("skip");
   IElementType SLASH = new GreyCatTokenType("/");
   IElementType SLASH_EQ = new GreyCatTokenType("/=");
-  IElementType SLASH_STAR = new GreyCatTokenType("/*");
   IElementType SQUOTE = new GreyCatTokenType("'");
   IElementType STAR = new GreyCatTokenType("*");
   IElementType STAR_EQ = new GreyCatTokenType("*=");
-  IElementType STAR_SLASH = new GreyCatTokenType("*/");
   IElementType STATIC_KW = new GreyCatTokenType("static");
   IElementType STRING = new GreyCatTokenType("STRING");
   IElementType STR_ID = new GreyCatTokenType("str");
@@ -446,9 +443,6 @@ public interface GreyCatTypes {
       }
       else if (type == TUPLE_EXPR) {
         return new GreyCatTupleExprImpl(node);
-      }
-      else if (type == TYPE_ALIAS) {
-        return new GreyCatTypeAliasImpl(node);
       }
       else if (type == TYPE_ATTR) {
         return new GreyCatTypeAttrImpl(node);

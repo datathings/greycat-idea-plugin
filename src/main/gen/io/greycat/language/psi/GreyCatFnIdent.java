@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface GreyCatFnIdent extends PsiElement {
 
-  @NotNull
-  PsiElement getIdentifier();
-
 }

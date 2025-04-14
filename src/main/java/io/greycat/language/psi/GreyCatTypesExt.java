@@ -7,7 +7,6 @@ import com.intellij.psi.tree.TokenSet;
 import static io.greycat.language.psi.GreyCatTypes.*;
 
 public interface GreyCatTypesExt {
-    // can't appear in PSI because merged into MULTI_LINE_COMMENT
     IElementType WHITE_SPACE = TokenType.WHITE_SPACE;
     IElementType BAD_CHARACTER = TokenType.BAD_CHARACTER;
 
@@ -17,7 +16,10 @@ public interface GreyCatTypesExt {
 
     IElementType MULTI_LINE_COMMENT = new GreyCatElementType("MULTI_LINE_COMMENT");
 
-    TokenSet COMMENTS = TokenSet.create(LINE_COMMENT, BLOCK_COMMENT, MULTI_LINE_COMMENT);
+    TokenSet COMMENTS = TokenSet.create(
+            LINE_COMMENT, DOC_COMMENT, MULTI_LINE_COMMENT, MULTI_LINE_COMMENT_START, MULTI_LINE_COMMENT_BODY,
+            MULTI_LINE_COMMENT_END
+    );
 
     TokenSet KEYWORDS = TokenSet.create(
             ABSTRACT_KW, AS_KW, AT_KW, BREAK_KW, CATCH_KW, DO_KW, ELSE_KW, ENUM_KW, FOR_KW, FN_KW, IF_KW, IN_KW,
@@ -74,7 +76,6 @@ public interface GreyCatTypesExt {
     TokenSet DECLARATIONS = TokenSet.create(
             TYPE_DECL,
             ENUM_DECL,
-            TYPE_ALIAS,
             FN_DECL,
             TYPE_METHOD,
             TYPE_ATTR,

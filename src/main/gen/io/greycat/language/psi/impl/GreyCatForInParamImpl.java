@@ -33,10 +33,4 @@ public class GreyCatForInParamImpl extends ASTWrapperPsiElement implements GreyC
     return findChildByClass(GreyCatFnParam.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
-  }
-
 }

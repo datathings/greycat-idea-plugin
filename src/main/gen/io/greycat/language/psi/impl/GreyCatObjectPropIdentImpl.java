@@ -33,10 +33,4 @@ public class GreyCatObjectPropIdentImpl extends ASTWrapperPsiElement implements 
     return findChildByClass(GreyCatIdentOrKeyword.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
-  }
-
 }

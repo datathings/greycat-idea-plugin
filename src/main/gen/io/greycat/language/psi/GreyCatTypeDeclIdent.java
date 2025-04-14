@@ -5,6 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface GreyCatVarDeclIdent extends PsiElement {
+public interface GreyCatTypeDeclIdent extends PsiElement {
+
+  @NotNull
+  GreyCatTypeIdent getTypeIdent();
 
 }

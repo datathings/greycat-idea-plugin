@@ -315,10 +315,6 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitTypeAlias(@NotNull GreyCatTypeAlias o) {
-    visitPsiElement(o);
-  }
-
   public void visitTypeAttr(@NotNull GreyCatTypeAttr o) {
     visitPsiElement(o);
   }

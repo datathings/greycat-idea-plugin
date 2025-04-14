@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static io.greycat.language.psi.GreyCatTypes.*;
+import static io.greycat.language.psi.GreyCatTypesExt.*;
 
 public class GreyCatBraceMatcher implements PairedBraceMatcher {
     private static final BracePair[] BRACE_PAIRS = {
@@ -18,6 +19,7 @@ public class GreyCatBraceMatcher implements PairedBraceMatcher {
             new BracePair(DQUOTE, DQUOTE, false),
             new BracePair(SQUOTE, SQUOTE, false),
             new BracePair(ENTER_INTERPOLATION, EXIT_INTERPOLATION, false),
+            new BracePair(MULTI_LINE_COMMENT_START, MULTI_LINE_COMMENT_END, false),
     };
 
     @Override

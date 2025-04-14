@@ -23,6 +23,7 @@
         <lang.commenter
                 language="GreyCat"
                 implementationClass="io.greycat.language.GreyCatCommenter"/>
+        <annotator language="GreyCat" implementationClass="io.greycat.language.GreyCatAnnotator"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">

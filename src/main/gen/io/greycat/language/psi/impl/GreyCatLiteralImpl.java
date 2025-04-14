@@ -39,10 +39,4 @@ public class GreyCatLiteralImpl extends ASTWrapperPsiElement implements GreyCatL
     return findChildByClass(GreyCatStringLit.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getNumber() {
-    return findChildByType(NUMBER);
-  }
-
 }

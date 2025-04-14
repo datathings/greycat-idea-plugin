@@ -20,9 +20,6 @@ public interface GreyCatModuleStatement extends PsiElement {
   GreyCatPragmaStmt getPragmaStmt();
 
   @Nullable
-  GreyCatTypeAlias getTypeAlias();
-
-  @Nullable
   GreyCatTypeDecl getTypeDecl();
 
   @Nullable

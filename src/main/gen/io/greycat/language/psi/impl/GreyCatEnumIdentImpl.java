@@ -27,10 +27,4 @@ public class GreyCatEnumIdentImpl extends ASTWrapperPsiElement implements GreyCa
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
-  }
-
 }

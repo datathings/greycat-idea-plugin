@@ -33,10 +33,4 @@ public class GreyCatCatchStmtImpl extends ASTWrapperPsiElement implements GreyCa
     return findNotNullChildByClass(GreyCatBlock.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getIdentifier() {
-    return findChildByType(IDENTIFIER);
-  }
-
 }

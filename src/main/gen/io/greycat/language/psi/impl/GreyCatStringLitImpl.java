@@ -33,10 +33,4 @@ public class GreyCatStringLitImpl extends ASTWrapperPsiElement implements GreyCa
     return findChildByClass(GreyCatTemplateString.class);
   }
 
-  @Override
-  @Nullable
-  public PsiElement getString() {
-    return findChildByType(STRING);
-  }
-
 }

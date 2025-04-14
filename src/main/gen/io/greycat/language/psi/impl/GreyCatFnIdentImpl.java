@@ -27,10 +27,4 @@ public class GreyCatFnIdentImpl extends ASTWrapperPsiElement implements GreyCatF
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public PsiElement getIdentifier() {
-    return findNotNullChildByType(IDENTIFIER);
-  }
-
 }

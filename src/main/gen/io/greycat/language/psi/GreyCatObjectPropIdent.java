@@ -10,7 +10,4 @@ public interface GreyCatObjectPropIdent extends PsiElement {
   @Nullable
   GreyCatIdentOrKeyword getIdentOrKeyword();
 
-  @Nullable
-  PsiElement getString();
-
 }

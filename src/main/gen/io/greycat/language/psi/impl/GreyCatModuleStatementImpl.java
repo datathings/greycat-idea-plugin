@@ -53,12 +53,6 @@ public class GreyCatModuleStatementImpl extends ASTWrapperPsiElement implements 
 
   @Override
   @Nullable
-  public GreyCatTypeAlias getTypeAlias() {
-    return findChildByClass(GreyCatTypeAlias.class);
-  }
-
-  @Override
-  @Nullable
   public GreyCatTypeDecl getTypeDecl() {
     return findChildByClass(GreyCatTypeDecl.class);
   }
