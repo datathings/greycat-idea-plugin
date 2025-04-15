@@ -30,7 +30,7 @@ public class GreyCatAnnotator implements Annotator {
                 setHighlighting(holder, GreyCatColors.STATIC_FIELD_DECLARATION);
             }
         } else if (type == GreyCatTypes.FN_IDENT) {
-            setHighlighting(holder, GreyCatColors.FUNCTION_CALL);
+            setHighlighting(holder, GreyCatColors.FUNCTION_DECL);
         } else if (type == GreyCatTypes.ENUM_FIELD_IDENT) {
             setHighlighting(holder, GreyCatColors.ENUM_FIELD);
         } else if (type == GreyCatTypes.OBJECT_PROP_IDENT) {

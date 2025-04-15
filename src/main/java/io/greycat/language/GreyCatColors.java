@@ -15,6 +15,7 @@ public final class GreyCatColors {
     public static final String GREYCAT_ANNOTATION = "GREYCAT_ANNOTATION";
     public static final String GREYCAT_TYPE = "GREYCAT_CLASS";
     public static final String GREYCAT_FUNCTION_CALL = "GREYCAT_FUNCTION_CALL";
+    public static final String GREYCAT_FUNCTION_DECLR = "GREYCAT_FUNCTION_DECLR";
 
     public static final String GREYCAT_DYNAMIC_LOCAL_VARIABLE_DECLARATION = "GREYCAT_DYNAMIC_LOCAL_VARIABLE_DECLARATION";
     public static final String GREYCAT_DYNAMIC_LOCAL_VARIABLE_REFERENCE = "GREYCAT_DYNAMIC_LOCAL_VARIABLE_REFERENCE";
@@ -157,6 +158,9 @@ public final class GreyCatColors {
 
     public static final TextAttributesKey LOCAL_FUNCTION_REFERENCE =
             createTextAttributesKey(GREYCAT_LOCAL_FUNCTION_REFERENCE, LOCAL_VARIABLE_REFERENCE);
+
+    public static final TextAttributesKey FUNCTION_DECL =
+            createTextAttributesKey(GREYCAT_FUNCTION_DECLR, DefaultLanguageHighlighterColors.FUNCTION_DECLARATION);
 
 }
 
