@@ -39,4 +39,10 @@ public class GreyCatIdentOrKeywordImpl extends ASTWrapperPsiElement implements G
     return findChildByClass(GreyCatNumAppendix.class);
   }
 
+  @Override
+  @Nullable
+  public PsiElement getIdentifier() {
+    return findChildByType(IDENTIFIER);
+  }
+
 }

@@ -27,4 +27,10 @@ public class GreyCatVarDeclIdentImpl extends ASTWrapperPsiElement implements Gre
     else super.accept(visitor);
   }
 
+  @Override
+  @NotNull
+  public PsiElement getIdentifier() {
+    return findNotNullChildByType(IDENTIFIER);
+  }
+
 }

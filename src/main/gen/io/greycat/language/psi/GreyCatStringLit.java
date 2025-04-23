@@ -10,4 +10,7 @@ public interface GreyCatStringLit extends PsiElement {
   @Nullable
   GreyCatTemplateString getTemplateString();
 
+  @Nullable
+  PsiElement getString();
+
 }

@@ -13,4 +13,7 @@ public interface GreyCatLiteral extends PsiElement {
   @Nullable
   GreyCatStringLit getStringLit();
 
+  @Nullable
+  PsiElement getNumber();
+
 }

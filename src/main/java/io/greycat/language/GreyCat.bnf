@@ -99,43 +99,20 @@
         TASK_KW       = 'task'
         TYPE_OF_KW    = 'typeof'
 
-        T2_ID         = 't2'
-        T2F_ID        = 't2f'
-        T3_ID         = 't3'
-        T3F_ID        = 't3f'
-        STR_ID        = 'str'
-        GEO_ID        = 'geo'
-        DURATION_ID   = 'duration'
-        TIME_ID       = 'time'
-        FLOAT_ID      = 'float'
-        INT_ID        = 'int'
-        NODE_ID       = 'node'
-        NODE_TIME_ID  = 'nodeTime'
-        NODE_LIST_ID  = 'nodeList'
-        NODE_INDEX_ID = 'nodeIndex'
-        NODE_GEO_ID   = 'nodeGeo'
-
-        D_US  = 'us'
-        D_MS  = 'ms'
-        D_S   = 's'
-        D_MIN = 'min'
-        D_HR  = 'hour'
-        D_DAY = 'day'
-
         // non-terminals
-//        IDENTIFIER                = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
-//        WHITE_SPACE               = 'regexp:\s+'
-//        STRING                    = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
-//        NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
-//        DOC_COMMENT               = 'regexp:///[^\n]*'
+        IDENTIFIER                = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
+        WHITE_SPACE               = 'regexp:\s+'
+        STRING                    = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
+        NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
+        DOC_COMMENT               = 'regexp:///[^\n]*'
         LINE_COMMENT              = 'regexp://[^\n]*'
-//        BLOCK_COMMENT='regexp:/\*(.|\n)*\*/'
+        BLOCK_COMMENT             ='regexp:/\*(.|\n)*\*/'
     ]
 }
 
 GreyCat ::= ModuleStatement*
-BuiltInType ::= INT_ID|FLOAT_ID|TIME_ID|GEO_ID|DURATION_ID|T2_ID|T2F_ID|T3_ID|T3F_ID|STR_ID|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID
-NumAppendix ::= D_US|D_MS|D_S|D_MIN|D_HR|D_DAY|'f'|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID|TIME_ID
+BuiltInType ::= 'bool'|'int'|'float'|'time'|'geo'|'duration'|'t2'|'t2f'|'t3'|'t3f'|'str'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'
+NumAppendix ::= 'us'|'ms'|'s'|'min'|'hour'|'day'|'f'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'|'time'
 ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | VarDecl | EmptyStmt
 
 FnIdent ::= IDENTIFIER

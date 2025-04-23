@@ -187,26 +187,27 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // INT_ID|FLOAT_ID|TIME_ID|GEO_ID|DURATION_ID|T2_ID|T2F_ID|T3_ID|T3F_ID|STR_ID|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID
+  // 'bool'|'int'|'float'|'time'|'geo'|'duration'|'t2'|'t2f'|'t3'|'t3f'|'str'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'
   public static boolean BuiltInType(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "BuiltInType")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, BUILT_IN_TYPE, "<built in type>");
-    r = consumeToken(b, INT_ID);
-    if (!r) r = consumeToken(b, FLOAT_ID);
-    if (!r) r = consumeToken(b, TIME_ID);
-    if (!r) r = consumeToken(b, GEO_ID);
-    if (!r) r = consumeToken(b, DURATION_ID);
-    if (!r) r = consumeToken(b, T2_ID);
-    if (!r) r = consumeToken(b, T2F_ID);
-    if (!r) r = consumeToken(b, T3_ID);
-    if (!r) r = consumeToken(b, T3F_ID);
-    if (!r) r = consumeToken(b, STR_ID);
-    if (!r) r = consumeToken(b, NODE_ID);
-    if (!r) r = consumeToken(b, NODE_TIME_ID);
-    if (!r) r = consumeToken(b, NODE_GEO_ID);
-    if (!r) r = consumeToken(b, NODE_LIST_ID);
-    if (!r) r = consumeToken(b, NODE_INDEX_ID);
+    r = consumeToken(b, "bool");
+    if (!r) r = consumeToken(b, "int");
+    if (!r) r = consumeToken(b, "float");
+    if (!r) r = consumeToken(b, "time");
+    if (!r) r = consumeToken(b, "geo");
+    if (!r) r = consumeToken(b, "duration");
+    if (!r) r = consumeToken(b, "t2");
+    if (!r) r = consumeToken(b, "t2f");
+    if (!r) r = consumeToken(b, "t3");
+    if (!r) r = consumeToken(b, "t3f");
+    if (!r) r = consumeToken(b, "str");
+    if (!r) r = consumeToken(b, "node");
+    if (!r) r = consumeToken(b, "nodeTime");
+    if (!r) r = consumeToken(b, "nodeGeo");
+    if (!r) r = consumeToken(b, "nodeList");
+    if (!r) r = consumeToken(b, "nodeIndex");
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -1262,24 +1263,24 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // D_US|D_MS|D_S|D_MIN|D_HR|D_DAY|'f'|NODE_ID|NODE_TIME_ID|NODE_GEO_ID|NODE_LIST_ID|NODE_INDEX_ID|TIME_ID
+  // 'us'|'ms'|'s'|'min'|'hour'|'day'|'f'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'|'time'
   public static boolean NumAppendix(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "NumAppendix")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, NUM_APPENDIX, "<num appendix>");
-    r = consumeToken(b, D_US);
-    if (!r) r = consumeToken(b, D_MS);
-    if (!r) r = consumeToken(b, D_S);
-    if (!r) r = consumeToken(b, D_MIN);
-    if (!r) r = consumeToken(b, D_HR);
-    if (!r) r = consumeToken(b, D_DAY);
+    r = consumeToken(b, "us");
+    if (!r) r = consumeToken(b, "ms");
+    if (!r) r = consumeToken(b, "s");
+    if (!r) r = consumeToken(b, "min");
+    if (!r) r = consumeToken(b, "hour");
+    if (!r) r = consumeToken(b, "day");
     if (!r) r = consumeToken(b, "f");
-    if (!r) r = consumeToken(b, NODE_ID);
-    if (!r) r = consumeToken(b, NODE_TIME_ID);
-    if (!r) r = consumeToken(b, NODE_GEO_ID);
-    if (!r) r = consumeToken(b, NODE_LIST_ID);
-    if (!r) r = consumeToken(b, NODE_INDEX_ID);
-    if (!r) r = consumeToken(b, TIME_ID);
+    if (!r) r = consumeToken(b, "node");
+    if (!r) r = consumeToken(b, "nodeTime");
+    if (!r) r = consumeToken(b, "nodeGeo");
+    if (!r) r = consumeToken(b, "nodeList");
+    if (!r) r = consumeToken(b, "nodeIndex");
+    if (!r) r = consumeToken(b, "time");
     exit_section_(b, l, m, r, false, null);
     return r;
   }

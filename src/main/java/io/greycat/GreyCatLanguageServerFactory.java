@@ -14,7 +14,7 @@ public class GreyCatLanguageServerFactory implements LanguageServerFactory {
         return new GreyCatLanguageServer(project);
     }
 
-    @Override // If you need to provide client specific features
+    @Override
     public @NotNull LanguageClientImpl createLanguageClient(@NotNull Project project) {
         return new GreyCatLanguageClient(project);
     }

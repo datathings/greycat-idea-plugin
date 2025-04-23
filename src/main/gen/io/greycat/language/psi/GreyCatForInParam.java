@@ -10,4 +10,7 @@ public interface GreyCatForInParam extends PsiElement {
   @Nullable
   GreyCatFnParam getFnParam();
 
+  @Nullable
+  PsiElement getIdentifier();
+
 }
