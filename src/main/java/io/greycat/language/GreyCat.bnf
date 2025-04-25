@@ -126,7 +126,7 @@ EmptyStmt ::= SEMI
 PragmaStmt ::= Pragma SEMI
 Pragma ::= PragmaIdent PragmaArgs?
 PragmaIdent ::= AT IdentOrKeyword
-PragmaArgs ::= LPAREN Literal (COMMA Literal)* RPAREN
+PragmaArgs ::= LPAREN Expression (COMMA Expression)* RPAREN
 
 UseStmt ::= USE_KW IDENTIFIER SEMI
           | USE_KW IDENTIFIER COLON_COLON IDENTIFIER (AS_KW IDENTIFIER)? SEMI

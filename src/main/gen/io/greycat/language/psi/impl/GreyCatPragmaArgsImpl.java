@@ -29,8 +29,8 @@ public class GreyCatPragmaArgsImpl extends ASTWrapperPsiElement implements GreyC
 
   @Override
   @NotNull
-  public List<GreyCatLiteral> getLiteralList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatLiteral.class);
+  public List<GreyCatExpression> getExpressionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatExpression.class);
   }
 
 }

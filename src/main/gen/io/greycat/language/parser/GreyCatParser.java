@@ -1465,21 +1465,21 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LPAREN Literal (COMMA Literal)* RPAREN
+  // LPAREN Expression (COMMA Expression)* RPAREN
   public static boolean PragmaArgs(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PragmaArgs")) return false;
     if (!nextTokenIs(b, LPAREN)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LPAREN);
-    r = r && Literal(b, l + 1);
+    r = r && Expression(b, l + 1);
     r = r && PragmaArgs_2(b, l + 1);
     r = r && consumeToken(b, RPAREN);
     exit_section_(b, m, PRAGMA_ARGS, r);
     return r;
   }
 
-  // (COMMA Literal)*
+  // (COMMA Expression)*
   private static boolean PragmaArgs_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PragmaArgs_2")) return false;
     while (true) {
@@ -1490,13 +1490,13 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // COMMA Literal
+  // COMMA Expression
   private static boolean PragmaArgs_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PragmaArgs_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && Literal(b, l + 1);
+    r = r && Expression(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
