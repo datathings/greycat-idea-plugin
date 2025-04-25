@@ -5,7 +5,6 @@ plugins {
 }
 
 group = "io.greycat"
-version = "7.0.0"
 
 repositories {
   mavenLocal()
