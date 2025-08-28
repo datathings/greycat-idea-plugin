@@ -27,8 +27,15 @@
     </extensions>
 
     <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">
-        <server factoryClass="io.greycat.GreyCatLanguageServerFactory" id="greyCatLanguageServerId" name="GreyCat Language Server" />
+        <server factoryClass="io.greycat.GreyCatLanguageServerFactory" id="greyCatLanguageServerId"
+                name="GreyCat Language Server"/>
         <languageMapping language="GreyCat" serverId="greyCatLanguageServerId"/>
+<!--        <semanticTokensColorsProvider-->
+<!--                serverId="greyCatLanguageServerId"-->
+<!--                class="com.redhat.devtools.lsp4ij.features.semanticTokens.DefaultSemanticTokensColorsProvider"/>-->
     </extensions>
 
+    <actions>
+        <action id="greycat.run.fn" class="io.greycat.GreyCatRunCommand" text="GreyCat Run"/>
+    </actions>
 </idea-plugin>

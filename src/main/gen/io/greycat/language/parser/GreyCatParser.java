@@ -1327,12 +1327,12 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword | STRING
+  // IdentOrKeywordOrStrLit | STRING
   public static boolean ObjectPropIdent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ObjectPropIdent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, OBJECT_PROP_IDENT, "<object prop ident>");
-    r = IdentOrKeyword(b, l + 1);
+    r = IdentOrKeywordOrStrLit(b, l + 1);
     if (!r) r = consumeToken(b, STRING);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -2515,17 +2515,18 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DOC_COMMENT* Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
+  // DOC_COMMENT* Pragmas? PRIVATE_KW? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
   public static boolean VarDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "VarDecl")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VAR_DECL, "<var decl>");
     r = VarDecl_0(b, l + 1);
     r = r && VarDecl_1(b, l + 1);
+    r = r && VarDecl_2(b, l + 1);
     r = r && consumeToken(b, VAR_KW);
     r = r && VarDeclIdent(b, l + 1);
-    r = r && VarDecl_4(b, l + 1);
     r = r && VarDecl_5(b, l + 1);
+    r = r && VarDecl_6(b, l + 1);
     r = r && consumeToken(b, SEMI);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -2549,16 +2550,23 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  // PRIVATE_KW?
+  private static boolean VarDecl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_2")) return false;
+    consumeToken(b, PRIVATE_KW);
+    return true;
+  }
+
   // TypeSpec?
-  private static boolean VarDecl_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "VarDecl_4")) return false;
+  private static boolean VarDecl_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_5")) return false;
     TypeSpec(b, l + 1);
     return true;
   }
 
   // Initializer?
-  private static boolean VarDecl_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "VarDecl_5")) return false;
+  private static boolean VarDecl_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_6")) return false;
     Initializer(b, l + 1);
     return true;
   }

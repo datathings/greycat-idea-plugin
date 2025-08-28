@@ -29,8 +29,8 @@ public class GreyCatObjectPropIdentImpl extends ASTWrapperPsiElement implements 
 
   @Override
   @Nullable
-  public GreyCatIdentOrKeyword getIdentOrKeyword() {
-    return findChildByClass(GreyCatIdentOrKeyword.class);
+  public GreyCatIdentOrKeywordOrStrLit getIdentOrKeywordOrStrLit() {
+    return findChildByClass(GreyCatIdentOrKeywordOrStrLit.class);
   }
 
   @Override

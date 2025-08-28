@@ -173,7 +173,7 @@ Statement ::=
     | BlockStmt
     | EmptyStmt
 
-VarDecl ::= DOC_COMMENT* Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
+VarDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
 VarDeclIdent ::= IDENTIFIER
 
 ReturnStmt ::= RETURN_KW Expression? SEMI
@@ -256,7 +256,7 @@ ParenExpr ::= LPAREN Expression RPAREN
 ObjectExpr ::= TypeIdent? LCURLY ObjectProps? RCURLY
 ObjectProps ::= ObjectProp (COMMA ObjectProp)* COMMA?
 ObjectProp ::= ObjectPropIdent COLON Expression
-ObjectPropIdent ::= IdentOrKeyword | STRING
+ObjectPropIdent ::= IdentOrKeywordOrStrLit | STRING
 
 ShortArrayExpr ::= LSQUARE Arguments? COMMA? RSQUARE
 FnExpr ::= FN_KW LPAREN FnParams? RPAREN Block
