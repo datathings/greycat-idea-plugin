@@ -18,9 +18,21 @@ public class GreyCatLanguageServer extends OSProcessStreamConnectionProvider {
 
     public GreyCatLanguageServer(@NotNull Project project) {
         String lsp_path = null;
-        Path lsp;
+        Path lsp = null;
         String greycatHome = System.getProperty("user.home") + File.separator + ".greycat";
-        lsp = Paths.get(greycatHome, "misc", "lang-server.js");
+        String projectBasePath = project.getBasePath();
+        boolean legacy_lsp = false;
+        if (projectBasePath != null) {
+            lsp = Paths.get(projectBasePath, "bin", "greycat-lang");
+        }
+        if (lsp == null || !lsp.toFile().exists()) {
+            lsp = Paths.get(greycatHome, "misc", "lang-server.js");
+        }
+        if (!lsp.toFile().exists()) {
+            lsp = Paths.get(greycatHome, "bin", "greycat-lang");
+        } else {
+            legacy_lsp = true;
+        }
         if (lsp.toFile().exists()) {
             lsp_path = lsp.toAbsolutePath().toString();
         }
@@ -28,7 +40,6 @@ public class GreyCatLanguageServer extends OSProcessStreamConnectionProvider {
             // missing LSP installation
             throw new RuntimeException("GreyCat Lang Server not found");
         }
-
         String path_env_var = EnvironmentUtil.getValue("PATH");
         if (path_env_var == null) {
             throw new RuntimeException("GreyCat Lang Server unable to find PATH");
@@ -50,8 +61,12 @@ public class GreyCatLanguageServer extends OSProcessStreamConnectionProvider {
         if (node_path == null) {
             throw new RuntimeException("GreyCat Lang Server requires a Node.js runtime in PATH");
         }
-
-        GeneralCommandLine commandLine = new GeneralCommandLine(node_path, lsp_path, "--stdio");
+        GeneralCommandLine commandLine;
+        if (legacy_lsp) {
+            commandLine = new GeneralCommandLine(node_path, lsp_path, "--stdio");
+        } else {
+            commandLine = new GeneralCommandLine(node_path, lsp_path, "server", "--stdio");
+        }
         commandLine.withParentEnvironmentType(GeneralCommandLine.ParentEnvironmentType.CONSOLE);
         commandLine.withCharset(StandardCharsets.UTF_8);
         commandLine.withWorkDirectory(project.getBasePath());
