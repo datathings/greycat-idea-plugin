@@ -29,7 +29,7 @@ sourceSets {
 dependencies {
   intellijPlatform {
     intellijIdeaCommunity("2023.3")
-    plugins("com.redhat.devtools.lsp4ij:0.15.0")
+    plugins("com.redhat.devtools.lsp4ij:0.16.1")
   }
   implementation("com.redhat.microprofile:com.redhat.qute.ls:0.21.0") {
     exclude("org.eclipse.lsp4j")
