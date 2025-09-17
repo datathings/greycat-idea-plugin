@@ -373,7 +373,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField (SEMI | COMMA))* RCURLY
+  // DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY EnumField? ((SEMI | COMMA) EnumField)* (SEMI | COMMA)? RCURLY
   public static boolean EnumDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumDecl")) return false;
     boolean r;
@@ -385,6 +385,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     r = r && EnumIdent(b, l + 1);
     r = r && consumeToken(b, LCURLY);
     r = r && EnumDecl_6(b, l + 1);
+    r = r && EnumDecl_7(b, l + 1);
+    r = r && EnumDecl_8(b, l + 1);
     r = r && consumeToken(b, RCURLY);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -415,31 +417,54 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (EnumField (SEMI | COMMA))*
+  // EnumField?
   private static boolean EnumDecl_6(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumDecl_6")) return false;
+    EnumField(b, l + 1);
+    return true;
+  }
+
+  // ((SEMI | COMMA) EnumField)*
+  private static boolean EnumDecl_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_7")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!EnumDecl_6_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "EnumDecl_6", c)) break;
+      if (!EnumDecl_7_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "EnumDecl_7", c)) break;
     }
     return true;
   }
 
-  // EnumField (SEMI | COMMA)
-  private static boolean EnumDecl_6_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_6_0")) return false;
+  // (SEMI | COMMA) EnumField
+  private static boolean EnumDecl_7_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_7_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = EnumField(b, l + 1);
-    r = r && EnumDecl_6_0_1(b, l + 1);
+    r = EnumDecl_7_0_0(b, l + 1);
+    r = r && EnumField(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // SEMI | COMMA
-  private static boolean EnumDecl_6_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_6_0_1")) return false;
+  private static boolean EnumDecl_7_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_7_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, SEMI);
+    if (!r) r = consumeToken(b, COMMA);
+    return r;
+  }
+
+  // (SEMI | COMMA)?
+  private static boolean EnumDecl_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_8")) return false;
+    EnumDecl_8_0(b, l + 1);
+    return true;
+  }
+
+  // SEMI | COMMA
+  private static boolean EnumDecl_8_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_8_0")) return false;
     boolean r;
     r = consumeToken(b, SEMI);
     if (!r) r = consumeToken(b, COMMA);

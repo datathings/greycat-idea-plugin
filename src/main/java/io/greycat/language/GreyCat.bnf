@@ -150,7 +150,7 @@ TypeField ::= TypeAttr | TypeMethod
 TypeAttr ::= Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
 TypeMethod ::= Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
 
-EnumDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField (SEMI | COMMA))* RCURLY
+EnumDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY EnumField? ((SEMI | COMMA) EnumField)* (SEMI | COMMA)? RCURLY
 EnumField ::= EnumFieldIdent (LPAREN Literal RPAREN)?
 EnumFieldIdent ::= IdentOrKeywordOrStrLit
 
