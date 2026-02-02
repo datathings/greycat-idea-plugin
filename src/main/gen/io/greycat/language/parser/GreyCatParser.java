@@ -1067,8 +1067,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   //     | WHILE_KW
   //     | WITHOUT_KW
   //     | BuiltInType
-  //     | NumAppendix
   //     | IDENTIFIER
+<<<<<<< HEAD
   public static boolean IdentOrKeyword(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "IdentOrKeyword")) return false;
     boolean result_;
@@ -1108,6 +1108,46 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, IDENTIFIER);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
+=======
+  public static boolean IdentOrKeyword(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "IdentOrKeyword")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, IDENT_OR_KEYWORD, "<ident or keyword>");
+    r = consumeToken(b, ABSTRACT_KW);
+    if (!r) r = consumeToken(b, AS_KW);
+    if (!r) r = consumeToken(b, AT_KW);
+    if (!r) r = consumeToken(b, BREAK_KW);
+    if (!r) r = consumeToken(b, CATCH_KW);
+    if (!r) r = consumeToken(b, DO_KW);
+    if (!r) r = consumeToken(b, ELSE_KW);
+    if (!r) r = consumeToken(b, ENUM_KW);
+    if (!r) r = consumeToken(b, FN_KW);
+    if (!r) r = consumeToken(b, FOR_KW);
+    if (!r) r = consumeToken(b, IF_KW);
+    if (!r) r = consumeToken(b, IN_KW);
+    if (!r) r = consumeToken(b, IS_KW);
+    if (!r) r = consumeToken(b, LIMIT_KW);
+    if (!r) r = consumeToken(b, NATIVE_KW);
+    if (!r) r = consumeToken(b, NULL_KW);
+    if (!r) r = consumeToken(b, PRIVATE_KW);
+    if (!r) r = consumeToken(b, RETURN_KW);
+    if (!r) r = consumeToken(b, SAMPLING_KW);
+    if (!r) r = consumeToken(b, SKIP_KW);
+    if (!r) r = consumeToken(b, STATIC_KW);
+    if (!r) r = consumeToken(b, THIS_KW);
+    if (!r) r = consumeToken(b, THROW_KW);
+    if (!r) r = consumeToken(b, TRY_KW);
+    if (!r) r = consumeToken(b, TASK_KW);
+    if (!r) r = consumeToken(b, TYPE_KW);
+    if (!r) r = consumeToken(b, USE_KW);
+    if (!r) r = consumeToken(b, VAR_KW);
+    if (!r) r = consumeToken(b, WHILE_KW);
+    if (!r) r = consumeToken(b, WITHOUT_KW);
+    if (!r) r = BuiltInType(b, l + 1);
+    if (!r) r = consumeToken(b, IDENTIFIER);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+>>>>>>> origin/main
   }
 
   /* ********************************************************** */
@@ -1180,6 +1220,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+<<<<<<< HEAD
   // StringLit | NumLit | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
   public static boolean Literal(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "Literal")) return false;
@@ -1193,6 +1234,21 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, FALSE_KW);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
+=======
+  // StringLit | NUMBER | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
+  public static boolean Literal(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "Literal")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, LITERAL, "<literal>");
+    r = StringLit(b, l + 1);
+    if (!r) r = consumeToken(b, NUMBER);
+    if (!r) r = consumeToken(b, NULL_KW);
+    if (!r) r = consumeToken(b, THIS_KW);
+    if (!r) r = consumeToken(b, TRUE_KW);
+    if (!r) r = consumeToken(b, FALSE_KW);
+    exit_section_(b, l, m, r, false, null);
+    return r;
+>>>>>>> origin/main
   }
 
   /* ********************************************************** */
@@ -1253,6 +1309,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+<<<<<<< HEAD
   // 'us'|'ms'|'s'|'min'|'hour'|'day'|'f'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'|'time'
   public static boolean NumAppendix(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "NumAppendix")) return false;
@@ -1337,6 +1394,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+=======
+>>>>>>> origin/main
   // TypeIdent? LCURLY ObjectProps? RCURLY
   public static boolean ObjectExpr(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "ObjectExpr")) return false;
