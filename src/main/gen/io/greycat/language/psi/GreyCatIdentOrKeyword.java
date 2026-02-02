@@ -11,6 +11,9 @@ public interface GreyCatIdentOrKeyword extends PsiElement {
   GreyCatBuiltInType getBuiltInType();
 
   @Nullable
+  GreyCatNumAppendix getNumAppendix();
+
+  @Nullable
   PsiElement getIdentifier();
 
 }
