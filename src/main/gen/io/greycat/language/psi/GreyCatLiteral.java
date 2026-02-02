@@ -8,12 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface GreyCatLiteral extends PsiElement {
 
   @Nullable
-  GreyCatNumAppendix getNumAppendix();
+  GreyCatNumLit getNumLit();
 
   @Nullable
   GreyCatStringLit getStringLit();
-
-  @Nullable
-  PsiElement getNumber();
 
 }

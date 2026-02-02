@@ -11,14 +11,14 @@ import static io.greycat.language.psi.GreyCatTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import io.greycat.language.psi.*;
 
-public class GreyCatLiteralImpl extends ASTWrapperPsiElement implements GreyCatLiteral {
+public class GreyCatNumLitImpl extends ASTWrapperPsiElement implements GreyCatNumLit {
 
-  public GreyCatLiteralImpl(@NotNull ASTNode node) {
+  public GreyCatNumLitImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull GreyCatVisitor visitor) {
-    visitor.visitLiteral(this);
+    visitor.visitNumLit(this);
   }
 
   @Override
@@ -28,15 +28,9 @@ public class GreyCatLiteralImpl extends ASTWrapperPsiElement implements GreyCatL
   }
 
   @Override
-  @Nullable
-  public GreyCatNumLit getNumLit() {
-    return findChildByClass(GreyCatNumLit.class);
-  }
-
-  @Override
-  @Nullable
-  public GreyCatStringLit getStringLit() {
-    return findChildByClass(GreyCatStringLit.class);
+  @NotNull
+  public List<GreyCatNumAppendix> getNumAppendixList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, GreyCatNumAppendix.class);
   }
 
 }

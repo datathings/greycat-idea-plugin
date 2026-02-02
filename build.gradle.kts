@@ -2,6 +2,7 @@ plugins {
   id("java")
   id("org.jetbrains.kotlin.jvm") version "2.0.20"
   id("org.jetbrains.intellij.platform") version "2.2.1"
+  id("org.jetbrains.grammarkit") version "2022.3.2.2"
 }
 
 group = "io.greycat"
@@ -46,6 +47,25 @@ dependencies {
 //}
 
 tasks {
+  withType<org.jetbrains.grammarkit.tasks.GenerateLexerTask> {
+    sourceFile.set(file("src/main/grammar/GreyCat.flex"))
+    targetOutputDir.set(file("src/main/gen/io/greycat/language"))
+    purgeOldFiles.set(true)
+  }
+
+  withType<org.jetbrains.grammarkit.tasks.GenerateParserTask> {
+    sourceFile.set(file("src/main/grammar/GreyCat.bnf"))
+    targetRootOutputDir.set(file("src/main/gen"))
+    pathToParser.set("/io/greycat/language/GreyCatParser.java")
+    pathToPsiRoot.set("/io/greycat/language/psi")
+    purgeOldFiles.set(true)
+  }
+
+  // Make sure parser/lexer are generated before compiling
+  compileJava {
+    dependsOn(generateLexer, generateParser)
+  }
+
   // Set the JVM compatibility versions
   withType<JavaCompile> {
     sourceCompatibility = "17"

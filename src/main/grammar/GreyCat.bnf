@@ -103,7 +103,7 @@
         IDENTIFIER                = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
         WHITE_SPACE               = 'regexp:\s+'
         STRING                    = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
-        NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?(us|ms|s|min|hour|day|f)?(\d[_\d]*(us|ms|s|min|hour|day|f))*'
+        NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
         DOC_COMMENT               = 'regexp:///[^\n]*'
         LINE_COMMENT              = 'regexp://[^\n]*'
         BLOCK_COMMENT             ='regexp:/\*(.|\n)*\*/'
@@ -112,6 +112,7 @@
 
 GreyCat ::= ModuleStatement*
 BuiltInType ::= 'bool'|'int'|'float'|'time'|'geo'|'duration'|'t2'|'t2f'|'t3'|'t3f'|'str'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'
+NumAppendix ::= 'us'|'ms'|'s'|'min'|'hour'|'day'|'f'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'|'time'
 ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | VarDecl | EmptyStmt
 
 FnIdent ::= IDENTIFIER
@@ -300,10 +301,12 @@ IdentOrKeyword ::=
     | WHILE_KW
     | WITHOUT_KW
     | BuiltInType
+    | NumAppendix
     | IDENTIFIER
 IdentOrKeywordOrStrLit ::= TemplateString | IdentOrKeyword
 
-Literal ::= StringLit | NUMBER | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
+Literal ::= StringLit | NumLit | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
 StringLit ::= TemplateString | STRING
+NumLit ::= (PLUS|MINUS)? (NUMBER NumAppendix?)+
 TemplateString ::= DQUOTE (RAW_STRING | Interpolation)* DQUOTE
 Interpolation ::= ENTER_INTERPOLATION Expression? EXIT_INTERPOLATION
