@@ -103,7 +103,7 @@
         IDENTIFIER                = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
         WHITE_SPACE               = 'regexp:\s+'
         STRING                    = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
-        NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
+        NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?(us|ms|s|min|hour|day|f)?(\d[_\d]*(us|ms|s|min|hour|day|f))*'
         DOC_COMMENT               = 'regexp:///[^\n]*'
         LINE_COMMENT              = 'regexp://[^\n]*'
         BLOCK_COMMENT             ='regexp:/\*(.|\n)*\*/'
@@ -301,11 +301,10 @@ IdentOrKeyword ::=
     | WHILE_KW
     | WITHOUT_KW
     | BuiltInType
-    | NumAppendix
     | IDENTIFIER
 IdentOrKeywordOrStrLit ::= TemplateString | IdentOrKeyword
 
-Literal ::= StringLit | (PLUS|MINUS)? NUMBER NumAppendix? | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
+Literal ::= StringLit | NUMBER | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
 StringLit ::= TemplateString | STRING
 TemplateString ::= DQUOTE (RAW_STRING | Interpolation)* DQUOTE
 Interpolation ::= ENTER_INTERPOLATION Expression? EXIT_INTERPOLATION
