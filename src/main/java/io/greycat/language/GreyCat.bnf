@@ -112,7 +112,6 @@
 
 GreyCat ::= ModuleStatement*
 BuiltInType ::= 'bool'|'int'|'float'|'time'|'geo'|'duration'|'t2'|'t2f'|'t3'|'t3f'|'str'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'
-NumAppendix ::= 'us'|'ms'|'s'|'min'|'hour'|'day'|'f'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'|'time'
 ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | VarDecl | EmptyStmt
 
 FnIdent ::= IDENTIFIER
@@ -126,7 +125,7 @@ EmptyStmt ::= SEMI
 PragmaStmt ::= Pragma SEMI
 Pragma ::= PragmaIdent PragmaArgs?
 PragmaIdent ::= AT IdentOrKeyword
-PragmaArgs ::= LPAREN Literal (COMMA Literal)* RPAREN
+PragmaArgs ::= LPAREN Expression (COMMA Expression)* RPAREN
 
 UseStmt ::= USE_KW IDENTIFIER SEMI
           | USE_KW IDENTIFIER COLON_COLON IDENTIFIER (AS_KW IDENTIFIER)? SEMI
@@ -150,7 +149,7 @@ TypeField ::= TypeAttr | TypeMethod
 TypeAttr ::= Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
 TypeMethod ::= Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
 
-EnumDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField (SEMI | COMMA))* RCURLY
+EnumDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY EnumField? ((SEMI | COMMA) EnumField)* (SEMI | COMMA)? RCURLY
 EnumField ::= EnumFieldIdent (LPAREN Literal RPAREN)?
 EnumFieldIdent ::= IdentOrKeywordOrStrLit
 
@@ -173,7 +172,7 @@ Statement ::=
     | BlockStmt
     | EmptyStmt
 
-VarDecl ::= DOC_COMMENT* Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
+VarDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
 VarDeclIdent ::= IDENTIFIER
 
 ReturnStmt ::= RETURN_KW Expression? SEMI
@@ -256,7 +255,7 @@ ParenExpr ::= LPAREN Expression RPAREN
 ObjectExpr ::= TypeIdent? LCURLY ObjectProps? RCURLY
 ObjectProps ::= ObjectProp (COMMA ObjectProp)* COMMA?
 ObjectProp ::= ObjectPropIdent COLON Expression
-ObjectPropIdent ::= IdentOrKeyword | STRING
+ObjectPropIdent ::= IdentOrKeywordOrStrLit | STRING
 
 ShortArrayExpr ::= LSQUARE Arguments? COMMA? RSQUARE
 FnExpr ::= FN_KW LPAREN FnParams? RPAREN Block

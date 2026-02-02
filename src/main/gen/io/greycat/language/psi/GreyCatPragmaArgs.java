@@ -8,6 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface GreyCatPragmaArgs extends PsiElement {
 
   @NotNull
-  List<GreyCatLiteral> getLiteralList();
+  List<GreyCatExpression> getExpressionList();
 
 }

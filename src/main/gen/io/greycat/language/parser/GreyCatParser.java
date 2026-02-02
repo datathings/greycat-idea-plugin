@@ -373,7 +373,7 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY (EnumField (SEMI | COMMA))* RCURLY
+  // DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY EnumField? ((SEMI | COMMA) EnumField)* (SEMI | COMMA)? RCURLY
   public static boolean EnumDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumDecl")) return false;
     boolean r;
@@ -385,6 +385,8 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     r = r && EnumIdent(b, l + 1);
     r = r && consumeToken(b, LCURLY);
     r = r && EnumDecl_6(b, l + 1);
+    r = r && EnumDecl_7(b, l + 1);
+    r = r && EnumDecl_8(b, l + 1);
     r = r && consumeToken(b, RCURLY);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -415,31 +417,54 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (EnumField (SEMI | COMMA))*
+  // EnumField?
   private static boolean EnumDecl_6(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "EnumDecl_6")) return false;
+    EnumField(b, l + 1);
+    return true;
+  }
+
+  // ((SEMI | COMMA) EnumField)*
+  private static boolean EnumDecl_7(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_7")) return false;
     while (true) {
       int c = current_position_(b);
-      if (!EnumDecl_6_0(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "EnumDecl_6", c)) break;
+      if (!EnumDecl_7_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "EnumDecl_7", c)) break;
     }
     return true;
   }
 
-  // EnumField (SEMI | COMMA)
-  private static boolean EnumDecl_6_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_6_0")) return false;
+  // (SEMI | COMMA) EnumField
+  private static boolean EnumDecl_7_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_7_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = EnumField(b, l + 1);
-    r = r && EnumDecl_6_0_1(b, l + 1);
+    r = EnumDecl_7_0_0(b, l + 1);
+    r = r && EnumField(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
 
   // SEMI | COMMA
-  private static boolean EnumDecl_6_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "EnumDecl_6_0_1")) return false;
+  private static boolean EnumDecl_7_0_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_7_0_0")) return false;
+    boolean r;
+    r = consumeToken(b, SEMI);
+    if (!r) r = consumeToken(b, COMMA);
+    return r;
+  }
+
+  // (SEMI | COMMA)?
+  private static boolean EnumDecl_8(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_8")) return false;
+    EnumDecl_8_0(b, l + 1);
+    return true;
+  }
+
+  // SEMI | COMMA
+  private static boolean EnumDecl_8_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "EnumDecl_8_0")) return false;
     boolean r;
     r = consumeToken(b, SEMI);
     if (!r) r = consumeToken(b, COMMA);
@@ -1327,12 +1352,12 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // IdentOrKeyword | STRING
+  // IdentOrKeywordOrStrLit | STRING
   public static boolean ObjectPropIdent(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "ObjectPropIdent")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, OBJECT_PROP_IDENT, "<object prop ident>");
-    r = IdentOrKeyword(b, l + 1);
+    r = IdentOrKeywordOrStrLit(b, l + 1);
     if (!r) r = consumeToken(b, STRING);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -1465,21 +1490,21 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // LPAREN Literal (COMMA Literal)* RPAREN
+  // LPAREN Expression (COMMA Expression)* RPAREN
   public static boolean PragmaArgs(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PragmaArgs")) return false;
     if (!nextTokenIs(b, LPAREN)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, LPAREN);
-    r = r && Literal(b, l + 1);
+    r = r && Expression(b, l + 1);
     r = r && PragmaArgs_2(b, l + 1);
     r = r && consumeToken(b, RPAREN);
     exit_section_(b, m, PRAGMA_ARGS, r);
     return r;
   }
 
-  // (COMMA Literal)*
+  // (COMMA Expression)*
   private static boolean PragmaArgs_2(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PragmaArgs_2")) return false;
     while (true) {
@@ -1490,13 +1515,13 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // COMMA Literal
+  // COMMA Expression
   private static boolean PragmaArgs_2_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "PragmaArgs_2_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, COMMA);
-    r = r && Literal(b, l + 1);
+    r = r && Expression(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -2515,17 +2540,18 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // DOC_COMMENT* Pragmas? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
+  // DOC_COMMENT* Pragmas? PRIVATE_KW? VAR_KW VarDeclIdent TypeSpec? Initializer? SEMI
   public static boolean VarDecl(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "VarDecl")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, VAR_DECL, "<var decl>");
     r = VarDecl_0(b, l + 1);
     r = r && VarDecl_1(b, l + 1);
+    r = r && VarDecl_2(b, l + 1);
     r = r && consumeToken(b, VAR_KW);
     r = r && VarDeclIdent(b, l + 1);
-    r = r && VarDecl_4(b, l + 1);
     r = r && VarDecl_5(b, l + 1);
+    r = r && VarDecl_6(b, l + 1);
     r = r && consumeToken(b, SEMI);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -2549,16 +2575,23 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     return true;
   }
 
+  // PRIVATE_KW?
+  private static boolean VarDecl_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_2")) return false;
+    consumeToken(b, PRIVATE_KW);
+    return true;
+  }
+
   // TypeSpec?
-  private static boolean VarDecl_4(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "VarDecl_4")) return false;
+  private static boolean VarDecl_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_5")) return false;
     TypeSpec(b, l + 1);
     return true;
   }
 
   // Initializer?
-  private static boolean VarDecl_5(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "VarDecl_5")) return false;
+  private static boolean VarDecl_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "VarDecl_6")) return false;
     Initializer(b, l + 1);
     return true;
   }
