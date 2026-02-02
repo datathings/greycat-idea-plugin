@@ -1067,7 +1067,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   //     | WHILE_KW
   //     | WITHOUT_KW
   //     | BuiltInType
-  //     | NumAppendix
   //     | IDENTIFIER
   public static boolean IdentOrKeyword(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "IdentOrKeyword")) return false;
@@ -1104,7 +1103,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, WHILE_KW);
     if (!r) r = consumeToken(b, WITHOUT_KW);
     if (!r) r = BuiltInType(b, l + 1);
-    if (!r) r = NumAppendix(b, l + 1);
     if (!r) r = consumeToken(b, IDENTIFIER);
     exit_section_(b, l, m, r, false, null);
     return r;
@@ -1180,54 +1178,19 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // StringLit | (PLUS|MINUS)? NUMBER NumAppendix? | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
+  // StringLit | NUMBER | NULL_KW | THIS_KW | TRUE_KW | FALSE_KW
   public static boolean Literal(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "Literal")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, LITERAL, "<literal>");
     r = StringLit(b, l + 1);
-    if (!r) r = Literal_1(b, l + 1);
+    if (!r) r = consumeToken(b, NUMBER);
     if (!r) r = consumeToken(b, NULL_KW);
     if (!r) r = consumeToken(b, THIS_KW);
     if (!r) r = consumeToken(b, TRUE_KW);
     if (!r) r = consumeToken(b, FALSE_KW);
     exit_section_(b, l, m, r, false, null);
     return r;
-  }
-
-  // (PLUS|MINUS)? NUMBER NumAppendix?
-  private static boolean Literal_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Literal_1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = Literal_1_0(b, l + 1);
-    r = r && consumeToken(b, NUMBER);
-    r = r && Literal_1_2(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // (PLUS|MINUS)?
-  private static boolean Literal_1_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Literal_1_0")) return false;
-    Literal_1_0_0(b, l + 1);
-    return true;
-  }
-
-  // PLUS|MINUS
-  private static boolean Literal_1_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Literal_1_0_0")) return false;
-    boolean r;
-    r = consumeToken(b, PLUS);
-    if (!r) r = consumeToken(b, MINUS);
-    return r;
-  }
-
-  // NumAppendix?
-  private static boolean Literal_1_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "Literal_1_2")) return false;
-    NumAppendix(b, l + 1);
-    return true;
   }
 
   /* ********************************************************** */
@@ -1285,29 +1248,6 @@ public class GreyCatParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "NativeObjExpr_3")) return false;
     consumeToken(b, COMMA);
     return true;
-  }
-
-  /* ********************************************************** */
-  // 'us'|'ms'|'s'|'min'|'hour'|'day'|'f'|'node'|'nodeTime'|'nodeGeo'|'nodeList'|'nodeIndex'|'time'
-  public static boolean NumAppendix(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "NumAppendix")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _NONE_, NUM_APPENDIX, "<num appendix>");
-    r = consumeToken(b, "us");
-    if (!r) r = consumeToken(b, "ms");
-    if (!r) r = consumeToken(b, "s");
-    if (!r) r = consumeToken(b, "min");
-    if (!r) r = consumeToken(b, "hour");
-    if (!r) r = consumeToken(b, "day");
-    if (!r) r = consumeToken(b, "f");
-    if (!r) r = consumeToken(b, "node");
-    if (!r) r = consumeToken(b, "nodeTime");
-    if (!r) r = consumeToken(b, "nodeGeo");
-    if (!r) r = consumeToken(b, "nodeList");
-    if (!r) r = consumeToken(b, "nodeIndex");
-    if (!r) r = consumeToken(b, "time");
-    exit_section_(b, l, m, r, false, null);
-    return r;
   }
 
   /* ********************************************************** */

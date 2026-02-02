@@ -56,7 +56,6 @@ public interface GreyCatTypes {
   IElementType METHOD_IDENT = new GreyCatElementType("METHOD_IDENT");
   IElementType MODULE_STATEMENT = new GreyCatElementType("MODULE_STATEMENT");
   IElementType NATIVE_OBJ_EXPR = new GreyCatElementType("NATIVE_OBJ_EXPR");
-  IElementType NUM_APPENDIX = new GreyCatElementType("NUM_APPENDIX");
   IElementType OBJECT_EXPR = new GreyCatElementType("OBJECT_EXPR");
   IElementType OBJECT_PROP = new GreyCatElementType("OBJECT_PROP");
   IElementType OBJECT_PROPS = new GreyCatElementType("OBJECT_PROPS");
@@ -336,9 +335,6 @@ public interface GreyCatTypes {
       }
       else if (type == NATIVE_OBJ_EXPR) {
         return new GreyCatNativeObjExprImpl(node);
-      }
-      else if (type == NUM_APPENDIX) {
-        return new GreyCatNumAppendixImpl(node);
       }
       else if (type == OBJECT_EXPR) {
         return new GreyCatObjectExprImpl(node);

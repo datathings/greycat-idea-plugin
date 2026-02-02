@@ -199,10 +199,6 @@ public class GreyCatVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitNumAppendix(@NotNull GreyCatNumAppendix o) {
-    visitPsiElement(o);
-  }
-
   public void visitObjectExpr(@NotNull GreyCatObjectExpr o) {
     visitPsiElement(o);
   }

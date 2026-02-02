@@ -29,12 +29,6 @@ public class GreyCatLiteralImpl extends ASTWrapperPsiElement implements GreyCatL
 
   @Override
   @Nullable
-  public GreyCatNumAppendix getNumAppendix() {
-    return findChildByClass(GreyCatNumAppendix.class);
-  }
-
-  @Override
-  @Nullable
   public GreyCatStringLit getStringLit() {
     return findChildByClass(GreyCatStringLit.class);
   }
