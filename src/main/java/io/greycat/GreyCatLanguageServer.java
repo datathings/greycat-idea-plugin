@@ -10,59 +10,35 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.intellij.util.EnvironmentUtil;
-
 import static com.intellij.openapi.util.SystemInfo.isWindows;
 
 public class GreyCatLanguageServer extends OSProcessStreamConnectionProvider {
 
     public GreyCatLanguageServer(@NotNull Project project) {
-        String lsp_path = null;
-        Path lsp = null;
-        String greycatHome = System.getProperty("user.home") + File.separator + ".greycat";
-        String projectBasePath = project.getBasePath();
-        if (projectBasePath != null) {
-            lsp = Paths.get(projectBasePath, "bin", "greycat-lang");
-        }
-        if (lsp == null || !lsp.toFile().exists()) {
-            lsp = Paths.get(greycatHome, "misc", "lang-server.js");
-        }
-        if (!lsp.toFile().exists()) {
-            lsp = Paths.get(greycatHome, "bin", "greycat-lang");
-        }
-        if (lsp.toFile().exists()) {
-            lsp_path = lsp.toAbsolutePath().toString();
-        }
-        if (lsp_path == null) {
-            // missing LSP installation
-            throw new RuntimeException("GreyCat Lang Server not found");
-        }
-        String path_env_var = EnvironmentUtil.getValue("PATH");
-        if (path_env_var == null) {
-            throw new RuntimeException("GreyCat Lang Server unable to find PATH");
-        }
-        String[] paths_bins = path_env_var.split(File.pathSeparator);
-        String node_path = null;
-        for (String pathsBin : paths_bins) {
-            Path node_bin;
-            if (isWindows) {
-                node_bin = Paths.get(pathsBin, "node.exe");
-            } else {
-                node_bin = Paths.get(pathsBin, "node");
-            }
-            if (node_bin.toFile().exists()) {
-                node_path = node_bin.toAbsolutePath().toString();
-                break;
-            }
-        }
-        if (node_path == null) {
-            throw new RuntimeException("GreyCat Lang Server requires a Node.js runtime in PATH");
-        }
-        GeneralCommandLine commandLine = new GeneralCommandLine(node_path, lsp_path, "server", "--stdio");
-        commandLine.withParentEnvironmentType(GeneralCommandLine.ParentEnvironmentType.CONSOLE);
-        commandLine.withCharset(StandardCharsets.UTF_8);
-        commandLine.withWorkDirectory(project.getBasePath());
-        super.setCommandLine(commandLine);
-    }
+        String greycat_bin = null;
+        Path greycat_path = null;
 
+        final String exe_name = isWindows ? "greycat.exe" : "greycat";
+
+        String local_path = project.getBasePath();
+        if (local_path != null) {
+            greycat_path = Paths.get(local_path, "bin", exe_name);
+        }
+        String global_path = System.getProperty("user.home") + File.separator + ".greycat";
+        if (greycat_path == null || !greycat_path.toFile().exists()) {
+            greycat_path = Paths.get(global_path, "bin", exe_name);
+        }
+        if (greycat_path.toFile().exists()) {
+            greycat_bin = greycat_path.toAbsolutePath().toString();
+        }
+        if (greycat_bin == null) {
+            throw new RuntimeException("unable to locate GreyCat (looked-up locations: `./bin/greycat`, `~/.greycat/bin`)");
+        }
+
+        GeneralCommandLine cmd = new GeneralCommandLine(greycat_bin, "lsp");
+        cmd.withParentEnvironmentType(GeneralCommandLine.ParentEnvironmentType.CONSOLE);
+        cmd.withCharset(StandardCharsets.UTF_8);
+        cmd.withWorkDirectory(project.getBasePath());
+        super.setCommandLine(cmd);
+    }
 }
