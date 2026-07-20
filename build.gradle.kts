@@ -50,7 +50,11 @@ tasks {
   withType<org.jetbrains.grammarkit.tasks.GenerateLexerTask> {
     sourceFile.set(file("src/main/grammar/GreyCat.flex"))
     targetOutputDir.set(file("src/main/gen/io/greycat/language"))
-    purgeOldFiles.set(true)
+    // targetOutputDir is the parent of the parser's psi/ and parser/ output dirs, and
+    // purge here deletes the whole tree recursively. With no ordering between the two
+    // tasks, a parser-then-lexer schedule wipes the freshly generated GreyCatTypes and
+    // GreyCatParser. The lexer's only output is GreyCatLexer.java, so it needs no purge.
+    purgeOldFiles.set(false)
   }
 
   withType<org.jetbrains.grammarkit.tasks.GenerateParserTask> {
