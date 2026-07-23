@@ -118,7 +118,7 @@ ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | VarDec
 FnIdent ::= IDENTIFIER
 TypeIdent ::= TYPE_OF_KW? (IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? COLON_COLON)? IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? QUESTION?
 EnumIdent ::= IDENTIFIER
-AttrIdent ::= IdentOrKeywordOrStrLit
+AttrIdent ::= IdentOrKeyword | STRING
 MethodIdent ::= IdentOrKeyword
 
 EmptyStmt ::= SEMI
