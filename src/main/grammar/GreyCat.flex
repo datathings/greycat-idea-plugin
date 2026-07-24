@@ -195,8 +195,9 @@ MULTI_LINE_COMMENT_END        = "*/"
 
 <IN_TEMPLATE>                  \"                         { popState(); return DQUOTE; }
 <IN_TEMPLATE>                  "${"                       { pushState(IN_INTERPOLATION); return ENTER_INTERPOLATION; }
-<IN_TEMPLATE>                  ([^\\\"\n\$] | (\\.))+     { return RAW_STRING; }
+<IN_TEMPLATE>                  ([^\\\"\n] | (\\.))+       { return RAW_STRING; }
 <IN_TEMPLATE>                   \n                        { return WHITE_SPACE; }
+
 
 // If the character sequence does not match any of the above rules, we return BAD_CHARACTER which indicates that
 // there is an error in the character sequence. This is used to highlight errors.

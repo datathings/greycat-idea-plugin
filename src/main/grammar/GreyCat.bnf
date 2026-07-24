@@ -103,10 +103,11 @@
         IDENTIFIER                = 'regexp:[a-zA-Z_][a-zA-Z0-9_]*'
         WHITE_SPACE               = 'regexp:\s+'
         STRING                    = "regexp:'([^'\\]|\\.)*'|\"([^\"\\]|\\\"|\\'|\\)*\""
+        STRING_PROP               = "regexp:\"([^\"\\]|\\\"|\\'|\\)*\""
         NUMBER                    = 'regexp:[+-]?\d[_\d]*(\.\d[_\d]*)?'
         DOC_COMMENT               = 'regexp:///[^\n]*'
         LINE_COMMENT              = 'regexp://[^\n]*'
-        BLOCK_COMMENT             ='regexp:/\*(.|\n)*\*/'
+        BLOCK_COMMENT             ='regexp:/\*([.\n])*\*/'
     ]
 }
 
@@ -118,7 +119,7 @@ ModuleStatement ::= PragmaStmt | UseStmt | FnDecl | TypeDecl | EnumDecl | VarDec
 FnIdent ::= IDENTIFIER
 TypeIdent ::= TYPE_OF_KW? (IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? COLON_COLON)? IdentOrKeyword (LT TypeIdent (COMMA TypeIdent)* GT)? QUESTION?
 EnumIdent ::= IDENTIFIER
-AttrIdent ::= IdentOrKeyword | STRING
+AttrIdent ::= IdentOrKeywordOrStrLit
 MethodIdent ::= IdentOrKeyword
 
 EmptyStmt ::= SEMI
@@ -135,20 +136,18 @@ UseStmt ::= USE_KW IDENTIFIER SEMI
 Pragmas ::= Pragma+
 
 FnOrTask ::= FN_KW | TASK_KW
-FnDecl ::= DOC_COMMENT* Pragmas? Flags* FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+FnDecl ::= DOC_COMMENT* Pragmas? Modifiers* FnOrTask FnIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
 FnParams ::= FnParam (COMMA FnParam)* COMMA?
 FnParam ::= Pragmas? FnParamIdent TypeSpec
 FnParamIdent ::= IdentOrKeyword
-// We accept "more" than what is valid because it will be the role of the analysis
-// to report the errors (if any)
-Flags ::= PRIVATE_KW | ABSTRACT_KW | STATIC_KW | NATIVE_KW
 
-TypeDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? ABSTRACT_KW? NATIVE_KW? TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeField* RCURLY
+TypeDecl ::= DOC_COMMENT* Pragmas? Modifiers* TYPE_KW TypeIdent GenericParams? TypeExtends? LCURLY TypeField* RCURLY
 GenericParams ::= LT TypeSpecifier (COMMA TypeSpecifier)* GT
 TypeExtends ::= EXTENDS_KW TypeSpecifier
-TypeField ::= TypeAttr | TypeMethod
-TypeAttr ::= Pragmas? Flags? AttrIdent TypeSpec Initializer? SEMI
-TypeMethod ::= Pragmas? Flags* FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+TypeField ::= Pragmas? Modifiers* (TypeAttr | TypeMethod)
+TypeAttr ::= AttrIdent TypeSpec Initializer? SEMI
+TypeMethod ::= FnOrTask MethodIdent GenericParams? LPAREN FnParams? RPAREN TypeSpec? (Block | SEMI)
+Modifiers ::= PRIVATE_KW | ABSTRACT_KW | NATIVE_KW | STATIC_KW
 
 EnumDecl ::= DOC_COMMENT* Pragmas? PRIVATE_KW? ENUM_KW EnumIdent LCURLY EnumField? ((SEMI | COMMA) EnumField)* (SEMI | COMMA)? RCURLY
 EnumField ::= EnumFieldIdent (LPAREN Literal RPAREN)?
